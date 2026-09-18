@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeuroScope 3D | La Bussola Semantica dell'Intelligenza Artificiale</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <!-- Three.js da CDN per rendering 3D WebGL fluido e leggero -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <span class="logo-badge">🌌 Simulatore 3D Didattico</span>
+        <h1>La Bussola dei Significati</h1>
+        <p class="subtitle">
+          Come ragiona davvero l'Intelligenza Artificiale: non sentimenti umani, ma <strong>distanze semantiche</strong> e <strong>collegamenti tra idee</strong> nello spazio tridimensionale.
+        </p>
+      </div>
+
+      <nav class="nav-tabs">
+        <button class="nav-btn active" data-tab="tab-3d-neuron">1. Il Neurone 3D: Ingresso, Nucleo e Uscita</button>
+        <button class="nav-btn" data-tab="tab-semantic-map">2. La Mappa dei Concetti & Ponti Cromatici</button>
+        <button class="nav-btn" data-tab="tab-learning">3. L'Addestramento: Il Testo Bucato</button>
+        <button class="nav-btn" data-tab="tab-orchestra">4. L'Orchestra 3D di ChatGPT</button>
+      </nav>
+    </header>
+
+    <!-- =================================================================== -->
+    <!-- SCHEDA 1: IL SINGOLO NEURONE 3D (ESEMPIO UNICO DEL CIBO 🍕)        -->
+    <!-- =================================================================== -->
+    <main class="tab-content active" id="tab-3d-neuron">
+      <div class="layout-3d">
+        <!-- Viewport 3D -->
+        <div class="viewport-card">
+          <div class="viewport-header">
+            <span class="viewport-title">Vista 3D: Anatomia Funzionale</span>
+            <span class="hint-3d">🖱️ Trascina per ruotare la visuale</span>
+          </div>
+          
+          <div id="canvas3d-container"></div>
+          
+          <!-- Indicatori di Flusso 3D a video -->
+          <div class="flow-overlay-labels">
+            <span class="flow-tag left">
+              📥 1. INGRESSI (Dendriti)
+              <span class="info-tip tip-down tip-left" tabindex="0">
+                <span class="info-badge">?</span>
+                <span class="tip-popover">
+                  <span class="tip-header"><span>🌿 Dendriti</span><span class="badge-tag">Ingressi</span></span>
+                  <span class="tip-row"><strong>Nel cervello:</strong> I rami riceventi del neurone che raccolgono gli stimoli esterni.</span>
+                  <span class="tip-row"><strong>Nell'IA:</strong> I canali numerici d'ingresso attraverso cui arrivano i dati da analizzare.</span>
+                </span>
+              </span>
+            </span>
+            <span class="flow-tag center">
+              ⚙️ 2. NUCLEO (Valutazione)
+              <span class="info-tip tip-down" tabindex="0">
+                <span class="info-badge">?</span>
+                <span class="tip-popover">
+                  <span class="tip-header"><span>⚙️ Soma / Nucleo</span><span class="badge-tag">Elaborazione</span></span>
+                  <span class="tip-row"><strong>Nel cervello:</strong> Il centro vitale che accumula gli stimoli e fa il bilancio.</span>
+                  <span class="tip-row"><strong>Nell'IA:</strong> Il processore matematico che calcola la somma pesata degli ingressi.</span>
+                </span>
+              </span>
+            </span>
+            <span class="flow-tag right">
+              📤 3. USCITA (Assone)
+              <span class="info-tip tip-down tip-right" tabindex="0">
+                <span class="info-badge">?</span>
+                <span class="tip-popover">
+                  <span class="tip-header"><span>📤 Assone</span><span class="badge-tag">Output</span></span>
+                  <span class="tip-row"><strong>Nel cervello:</strong> Il cavo biologico che trasporta l'impulso nervoso verso altre cellule.</span>
+                  <span class="tip-row"><strong>Nell'IA:</strong> Il canale d'uscita che trasmette il segnale positivo verso gli strati successivi.</span>
+                </span>
+              </span>
+            </span>
+          </div>
+
+          <div class="hud-status" id="hud-status">
+            <div class="hud-indicator" id="hud-indicator"></div>
+            <span id="hud-text">Stato Neurone: IN ATTESA DI STIMOLO</span>
+          </div>
+        </div>
+
+        <!-- Controlli a 3 Livelli Netti (Neurone del Cibo) -->
+        <div class="card control-card">
+          <!-- Badge di Ruolo del Neurone -->
+          <div class="neuron-focus-badge">
+            <span class="focus-icon">🍕</span>
+            <div>
+              <h3>Neurone Specialista in "Cibo & Cucina"</h3>
+              <p>Questo neurone è sintonizzato per riconoscere se un dato in arrivo appartiene al mondo del mangiare.</p>
+            </div>
+          </div>
+
+          <div class="control-section">
+            <label class="control-label">Metti alla prova i 3 livelli semantici:</label>
+            <div class="three-states-grid" id="three-states-grid">
+              <button class="state-choice-btn active" data-level="total">
+                <div>
+                  <span class="state-badge total">1. Associazione Totale</span>
+                  <div class="state-word-name">Pizza 🍕</div>
+                </div>
+                <span class="arrow-indicator">➔</span>
+              </button>
+
+              <button class="state-choice-btn" data-level="partial">
+                <div>
+                  <span class="state-badge partial">2. Associazione Parziale</span>
+                  <div class="state-word-name">Forchetta 🍴</div>
+                </div>
+                <span class="arrow-indicator">➔</span>
+              </button>
+
+              <button class="state-choice-btn" data-level="none">
+                <div>
+                  <span class="state-badge none">3. Differenza Totale</span>
+                  <div class="state-word-name">Galassia 🌌</div>
+                </div>
+                <span class="arrow-indicator">➔</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Cosa sentono i 3 Canali d'Ingresso (Dendriti) -->
+          <div class="dendrite-sensors-card">
+            <h4>
+              📡 I Canali d'Ingresso (Cosa rilevano i Dendriti):
+              <span class="info-tip tip-down tip-right" tabindex="0">
+                <span class="info-badge">?</span>
+                <span class="tip-popover">
+                  <span class="tip-header"><span>⚖️ Pesi Sinaptici</span><span class="badge-tag">Moltiplicatori</span></span>
+                  <span class="tip-row"><strong>La metafora:</strong> Come la manopola del volume: dà peso agli indizi importanti e silenzia quelli inutili.</span>
+                  <span class="tip-row"><strong>Nell'IA:</strong> Coefficienti moltiplicativi assegnati a ogni canale d'ingresso.</span>
+                </span>
+              </span>
+            </h4>
+            <div class="sensor-row" id="sensor-1">
+              <span>🌿 Canale A: È commestibile?</span>
+              <strong class="sensor-val yes" id="sensor-1-val">SÌ (100%)</strong>
+            </div>
+            <div class="sensor-row" id="sensor-2">
+              <span>🍽️ Canale B: Sta a tavola / in cucina?</span>
+              <strong class="sensor-val yes" id="sensor-2-val">SÌ (100%)</strong>
+            </div>
+            <div class="sensor-row" id="sensor-3">
+              <span>⚡ Canale C: Dona nutrimento ed energia?</span>
+              <strong class="sensor-val yes" id="sensor-3-val">SÌ (100%)</strong>
+            </div>
+          </div>
+
+          <!-- Misuratore di Affinità -->
+          <div class="semantic-meter-box">
+            <div class="meter-top">
+              <span>
+                Vicinanza Semantica al Cibo:
+                <span class="info-tip" tabindex="0">
+                  <span class="info-badge">?</span>
+                  <span class="tip-popover">
+                    <span class="tip-header"><span>🧭 Vicinanza Semantica</span><span class="badge-tag">Spazio 3D</span></span>
+                    <span class="tip-row"><strong>La metafora:</strong> Parole con significato simile abitano nello stesso "quartiere" della mappa ideale.</span>
+                    <span class="tip-row"><strong>Nell'IA:</strong> La distanza matematica tra parole: vicine = alta parentela; lontane = concetti alieni.</span>
+                  </span>
+                </span>
+              </span>
+              <strong id="meter-percent">100%</strong>
+            </div>
+            <div class="meter-track">
+              <div class="meter-fill" id="meter-fill" style="width: 100%;"></div>
+            </div>
+            <div class="meter-scale-labels">
+              <span>0% Estraneo (Spento)</span>
+              <span>50% Parziale (Mezza Luce)</span>
+              <span>100% Totale (Luce Viva)</span>
+            </div>
+          </div>
+
+          <!-- Spiegazione Dettagliata -->
+          <div class="explanation-box" id="explanation-box">
+            <!-- Riempito dinamicamente in JS -->
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- =================================================================== -->
+    <!-- SCHEDA 2: LA SFERA 3D DEI CONCETTI & SCALA CROMATICA DEI PONTI     -->
+    <!-- =================================================================== -->
+    <main class="tab-content" id="tab-semantic-map">
+      <div class="layout-3d">
+        <div class="viewport-card">
+          <div class="viewport-header">
+            <div class="view-mode-pill">
+              <button class="mode-pill-btn active" id="btn-mode-3d">🌐 Sfera 3D</button>
+              <button class="mode-pill-btn" id="btn-mode-reality">⚡ La Realtà</button>
+            </div>
+            <div class="zoom-controls-bar" id="map-zoom-controls">
+              <div class="zoom-btn-group">
+                <button class="zoom-btn active" id="btn-zoom-macro" aria-label="Compattezza d'insieme">🌍 Globale</button>
+                <button class="zoom-btn" id="btn-zoom-micro" aria-label="Dettaglio ramificazioni">🔬 Dettaglio</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Canvas 3D della Sfera dei Concetti -->
+          <div id="canvas-map-container"></div>
+
+          <!-- Barra Zoom Interattiva in basso -->
+          <div class="map-hud-overlay" id="map-hud-overlay">
+            <span class="hint-hud">🖱️ Trascina · Rotellina</span>
+            <div class="zoom-slider-box">
+              <span class="zoom-label">🔍 Zoom:</span>
+              <input type="range" id="map-zoom-slider" class="zoom-slider" min="8" max="22" step="0.2" value="18" aria-label="Controllo Zoom">
+              <span class="zoom-level-text" id="zoom-level-text">🌍 Vista Globale</span>
+            </div>
+          </div>
+
+          <!-- SCHERMO DELLA REALTÀ (Dentro la Macchina) -->
+          <div class="reality-screen" id="reality-screen" style="display: none;">
+            <div class="reality-inner">
+              <div class="reality-badge-header">
+                <span class="reality-live-tag">⚡ DATO REALE</span>
+                <span>Dietro le quinte di ChatGPT, Gemini e Claude: dalla metafora 3D alla verità tecnologica</span>
+              </div>
+
+              <div class="reality-cards-grid">
+                <!-- Sezione 1: Iper-spazio a 4096 Dimensioni -->
+                <div class="reality-card">
+                  <div class="reality-card-header">
+                    <span class="reality-card-tag">📐 Geometria del Significato</span>
+                    <h4>
+                      Dalle 3 Dimensioni (X, Y, Z) all'Iper-Spazio a 4.096D
+                      <span class="info-tip tip-down tip-left" tabindex="0">
+                        <span class="info-badge">?</span>
+                        <span class="tip-popover">
+                          <span class="tip-header"><span>🌌 Iper-Spazio Semantico</span><span class="badge-tag">Geometria</span></span>
+                          <span class="tip-row"><strong>La metafora:</strong> Il nostro mondo ha solo 3 dimensioni; la matematica dell'IA crea migliaia di direzioni indipendenti.</span>
+                          <span class="tip-row"><strong>Nell'IA:</strong> Con 4.096 assi, una parola può avere connessioni simultanee con centinaia di contesti senza mai collidere.</span>
+                        </span>
+                      </span>
+                    </h4>
+                  </div>
+                  <p class="reality-desc">
+                    Nella nostra sfera 3D usiamo 3 coordinate per permetterti di vederla a schermo. Nella realtà, ogni parola è un
+                    <strong>vettore di 4.096 numeri decimali</strong>
+                    <span class="info-tip tip-down tip-left" tabindex="0">
+                      <span class="info-badge">?</span>
+                      <span class="tip-popover">
+                        <span class="tip-header"><span>🧬 Vettore di Embedding</span><span class="badge-tag">Coordinate</span></span>
+                        <span class="tip-row"><strong>La metafora:</strong> L'impronta digitale o codice a barre di una parola: traduce il significato umano in numeri per il silicio.</span>
+                        <span class="tip-row"><strong>Nell'IA:</strong> Una sequenza ordinata di numeri tra -1 e +1. Parole affini hanno vettori che puntano quasi nella stessa direzione.</span>
+                      </span>
+                    </span>:
+                  </p>
+
+                  <div class="word-chips-selector">
+                    <span class="chips-title">Tocca una parola per vedere il suo vettore autentico:</span>
+                    <div class="chips-row">
+                      <button class="word-chip-btn active" data-word="pizza">Pizza 🍕</button>
+                      <button class="word-chip-btn" data-word="cane">Cane 🐶</button>
+                      <button class="word-chip-btn" data-word="computer">Computer 💻</button>
+                      <button class="word-chip-btn" data-word="musica">Musica 🎵</button>
+                    </div>
+                  </div>
+
+                  <div class="terminal-container">
+                    <div class="terminal-top">
+                      <span class="term-dot red"></span><span class="term-dot yellow"></span><span class="term-dot green"></span>
+                      <span class="term-name" id="term-word-name">Vettore di Embedding Reale: Pizza 🍕</span>
+                    </div>
+                    <pre class="terminal-body" id="term-vector-content">
+Pizza = [
+  dim_0001: +0.8412  // Indice: Commestibile / Cibo
+  dim_0002: +0.6520  // Indice: Temperatura elevata / Forno
+  dim_0003: +0.4811  // Indice: Cultura italiana / Tradizione
+  dim_0004: -0.0120  // Indice: Elettronica / Circuiti
+  dim_0005: +0.7203  // Indice: Socialità / Sabato sera
+  dim_0006: -0.9210  // Indice: Geologia / Rocce
+  dim_0007: +0.3341  // Indice: Lievitazione / Farina
+  dim_0008: +0.1504  // Indice: Pomodoro / Salsa
+  ... e altre 4.088 coordinate matematiche!
+]</pre>
+                  </div>
+                  <div class="reality-tip-box">
+                    💡 <strong>Perché servono 4.096 assi?</strong> Con migliaia di dimensioni, la parola <em>Pizza</em> può essere contemporaneamente vicina a <em>Forno</em>, a <em>Napoli</em>, a <em>Lievito</em> e a <em>Festa</em> senza che queste direzioni si intralcino a vicenda!
+                  </div>
+                </div>
+
+                <!-- Sezione 2: Cervello Biologico vs Data Center -->
+                <div class="reality-card">
+                  <div class="reality-card-header">
+                    <span class="reality-card-tag">🖥️ Hardware & Fisica</span>
+                    <h4>
+                      Nessun Neurone Vivente: Solo Silicio, Matrici e Watt
+                      <span class="info-tip tip-down tip-right" tabindex="0">
+                        <span class="info-badge">?</span>
+                        <span class="tip-popover">
+                          <span class="tip-header"><span>⚡ Chip TPU / GPU</span><span class="badge-tag">Hardware</span></span>
+                          <span class="tip-row"><strong>La metafora:</strong> Non un cervello biologico, ma una catena di montaggio con migliaia di micro-calcolatrici sincronizzate.</span>
+                          <span class="tip-row"><strong>Nell'IA:</strong> Processori specializzati (Tensor Processing Unit / GPU) progettati per eseguire trilioni di moltiplicazioni al secondo in parallelo.</span>
+                        </span>
+                      </span>
+                    </h4>
+                  </div>
+                  <p class="reality-desc">
+                    L'IA non prova sentimenti né possiede una mente cosciente: è una gigantesca <strong>fabbrica di calcolo algebrico</strong> alloggiata in server farm di centinaia di metri quadrati.
+                  </p>
+
+                  <div class="hardware-comp-grid">
+                    <div class="comp-box bio-box">
+                      <h5>🧠 Cervello Umano (Biologia)</h5>
+                      <ul>
+                        <li><strong>86 Miliardi</strong> di cellule viventi</li>
+                        <li><strong>Segnali:</strong> Chimica (dopamina, sinapsi)</li>
+                        <li><strong>Consumo:</strong> ~20 Watt (una lampadina LED)</li>
+                        <li><strong>Apprendimento:</strong> Esperienza reale, corpo, sonno</li>
+                      </ul>
+                    </div>
+
+                    <div class="comp-box silicon-box">
+                      <h5>⚡ Intelligenza Artificiale (Silicio)</h5>
+                      <ul>
+                        <li><strong>Centinaia di Miliardi</strong> di pesi decimali</li>
+                        <li><strong>Segnali:</strong> Elettricità su chip TPU / GPU</li>
+                        <li><strong>Consumo:</strong> Megawatt (intere centrali elettriche)</li>
+                        <li>
+                          <strong>Apprendimento:</strong> Moltiplicazioni di matrici
+                          <span class="info-tip tip-down tip-right" tabindex="0">
+                            <span class="info-badge">?</span>
+                            <span class="tip-popover">
+                              <span class="tip-header"><span>🔢 Moltiplicazione di Matrici</span><span class="badge-tag">Algebra</span></span>
+                              <span class="tip-row"><strong>La metafora:</strong> Tabelle giganti simili a fogli Excel a miliardi di celle che si incrociano a velocità folle.</span>
+                              <span class="tip-row"><strong>Nell'IA:</strong> È l'unica vera operazione matematica che l'IA compie: moltiplicare e sommare tabelle numeriche (W · x + b) per calcolare la parola successiva.</span>
+                            </span>
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="reality-tip-box">
+                    💡 <strong>La realtà scientifica:</strong> I nostri "neuroni artificiali" sono semplici operazioni matematiche (Ingresso × Peso). L'IA è straordinaria nel trovare schemi statistici, ma non sa cosa sia il sapore della pizza né l'affetto di un cane.
+                  </div>
+                </div>
+
+                <!-- Sezione 3: Significato Dinamico col Contesto (Self-Attention) -->
+                <div class="reality-card card-full">
+                  <div class="reality-card-header">
+                    <span class="reality-card-tag">🔀 Il Cuore dei Transformer</span>
+                    <h4>
+                      Il Significato è Fluido: Come si sposta la parola "BANCA"
+                      <span class="info-tip tip-down tip-right" tabindex="0">
+                        <span class="info-badge">?</span>
+                        <span class="tip-popover">
+                          <span class="tip-header"><span>🔦 Meccanismo di Attenzione</span><span class="badge-tag">Self-Attention</span></span>
+                          <span class="tip-row"><strong>La metafora:</strong> Come fari teatrali che illuminano simultaneamente le parole collegate sul palco della frase.</span>
+                          <span class="tip-row"><strong>Nell'IA:</strong> L'invenzione dei Transformer (2017): permette a una parola ambigua di farsi trascinare verso il significato giusto dal contesto.</span>
+                        </span>
+                      </span>
+                    </h4>
+                  </div>
+                  <p class="reality-desc">
+                    Nella sfera 3D i punti sono fermi per chiarezza didattica. Nella vera architettura Transformer, <strong>le parole si muovono e cambiano posizione nello spazio in base al resto della frase</strong> (Meccanismo di <em>Self-Attention</em>):
+                  </p>
+
+                  <div class="attention-interactive">
+                    <div class="attention-triggers">
+                      <button class="att-btn active" data-context="finance">
+                        <span>Frase 1:</span> «Ho versato un assegno in <strong>banca</strong>»
+                      </button>
+                      <button class="att-btn" data-context="river">
+                        <span>Frase 2:</span> «Pesco seduto sulla <strong>banca</strong> del fiume»
+                      </button>
+                    </div>
+
+                    <div class="attention-result-box" id="attention-result-box">
+                      <div class="result-row">
+                        <span class="res-lbl">Parola analizzata:</span>
+                        <strong class="res-word">"banca"</strong>
+                      </div>
+                      <div class="result-row">
+                        <span class="res-lbl">Rotta semantica calcolata:</span>
+                        <strong class="res-vector-route" id="res-vector-route">🪙 Settore Finanziario (Denaro, Cassaforte, Economia)</strong>
+                      </div>
+                      <div class="result-row">
+                        <span class="res-lbl">Connessioni d'attenzione attivate nella frase:</span>
+                        <div class="res-tags" id="res-tags">
+                          <span class="r-tag">Assegno 📑</span>
+                          <span class="r-tag">Versare 💶</span>
+                          <span class="r-tag">Conto 🏦</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>
+            La Ragnatela dei Ponti di Significato
+            <span class="info-tip" tabindex="0">
+              <span class="info-badge">?</span>
+              <span class="tip-popover">
+                <span class="tip-header"><span>🌌 Cluster Semantico</span><span class="badge-tag">Costellazione</span></span>
+                <span class="tip-row"><strong>La metafora:</strong> Un arcipelago di concetti affini: ogni isola raggruppa parole della stessa famiglia di significato.</span>
+                <span class="tip-row"><strong>Nell'IA:</strong> Nuvole di dati vicini tra loro, connesse da ponti continui di transizione matematica.</span>
+              </span>
+            </span>
+          </h2>
+          <p class="lead-text">
+            Nel cervello dell'IA non esistono caselle separate né vuoti: <strong>tutti i concetti umani formano una sfera continua</strong> dove ogni parola è legata alle sue vicine da sfumature di colore.
+          </p>
+
+          <div class="chromatic-bridge-controls">
+            <label class="control-label">Esplora i 4 grandi corridoi che uniscono il sapere umano:</label>
+            <div class="bridge-buttons">
+              <button class="bridge-btn active" data-bridge="all">🌐 Tutta la Sfera Interconnessa (360°)</button>
+              <button class="bridge-btn bridge-orange" data-bridge="orange">
+                🟠 Corridoio 1: Cibo 🍕 ➔ Natura & Animali 🐶
+              </button>
+              <button class="bridge-btn bridge-purple" data-bridge="magenta">
+                🟣 Corridoio 2: Natura 🐶 ➔ Cultura & Emozioni 🎭
+              </button>
+              <button class="bridge-btn bridge-blue" data-bridge="indigo">
+                🔵 Corridoio 3: Cultura 🎭 ➔ Scienza & Tecnologia 💻
+              </button>
+              <button class="bridge-btn bridge-green" data-bridge="green">
+                🟢 Corridoio 4: Tecnologia 💻 ➔ Cibo & Cucina 🍕
+              </button>
+            </div>
+          </div>
+
+          <div class="bridge-explanation-card" id="bridge-explanation-card">
+            <h4>🌐 La Sfera Completa del Linguaggio</h4>
+            <p>
+              Tutti i 54 concetti sono distribuiti in modo armonico sulla sfera. Non ci sono punti vuoti: l'Intelligenza Artificiale naviga attraverso questa rete sferica continua per trovare metafore, analogie e risposte coerenti.
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- =================================================================== -->
+    <!-- SCHEDA 3: L'ADDESTRAMENTO CON IL TESTO BUCATO                       -->
+    <!-- =================================================================== -->
+    <main class="tab-content" id="tab-learning">
+      <div class="card card-learning">
+        <h2>
+          Come impara il neurone? (L'Esercizio del Testo Bucato)
+          <span class="info-tip" tabindex="0">
+            <span class="info-badge">?</span>
+            <span class="tip-popover">
+              <span class="tip-header"><span>🎯 Correzione dell'Errore</span><span class="badge-tag">Backpropagation</span></span>
+              <span class="tip-row"><strong>La metafora:</strong> Il gioco "fuochino-fuocherello": il neurone parte alla cieca e riceve correzioni fino al bersaglio.</span>
+              <span class="tip-row"><strong>Nell'IA:</strong> L'algoritmo misura l'errore e ruota l'antenna correggendo i pesi matematici delle connessioni.</span>
+            </span>
+          </span>
+        </h2>
+        <p class="lead-text">
+          L'addestramento non è magia: l'antenna del neurone parte disorientata nello spazio 3D e prova a completare una frase. Ad ogni errore viene corretta, passando da una parola assurda fino alla parola perfetta!
+        </p>
+
+        <!-- Display del Testo Bucato Dinamico -->
+        <div class="cloze-sentence-card">
+          <span class="cloze-label">Frase da completare:</span>
+          <div class="cloze-display">
+            « Oggi a pranzo ho mangiato un gustoso piatto di <span class="cloze-blank" id="cloze-slot">... ?</span> »
+          </div>
+        </div>
+
+        <div class="training-simulation-grid">
+          <div class="sim-viewport" id="canvas-training-container"></div>
+          
+          <div class="sim-controls">
+            <h3>I 3 Passi dell'Apprendimento</h3>
+            
+            <div class="training-steps-list">
+              <div class="train-step-item active" id="step-ui-1">
+                <span class="step-bullet red">1</span>
+                <div>
+                  <strong>🔴 Inizio: Scelta Fuori Tema</strong>
+                  <p>L'antenna punta su <em>"Galassia 🌌"</em> (Zero senso col cibo! Errore totale).</p>
+                </div>
+              </div>
+
+              <div class="train-step-item" id="step-ui-2">
+                <span class="step-bullet yellow">2</span>
+                <div>
+                  <strong>🟡 Correzione: Scelta Astratta</strong>
+                  <p>L'antenna ruota su <em>"Pietanze 🍲"</em> (È cibo, ma nessuno dice "un piatto di pietanze"!).</p>
+                </div>
+              </div>
+
+              <div class="train-step-item" id="step-ui-3">
+                <span class="step-bullet green">3</span>
+                <div>
+                  <strong>🟢 Bersaglio: Scelta Naturale</strong>
+                  <p>L'antenna si aggancia su <em>"Spaghetti 🍝"</em> (Preciso, appetitoso e naturale al 100%).</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="sim-buttons">
+              <button class="btn-train" id="btn-train-single">Passo Successivo di Correzione ➔</button>
+              <button class="btn-train-auto" id="btn-train-full">Mostra Tutto il Percorso 🎯</button>
+              <button class="btn-train-reset" id="btn-train-reset">Ricomincia da Capo</button>
+            </div>
+
+            <div class="training-log" id="training-log">
+              Premi un pulsante per iniziare l'addestramento della frase!
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- =================================================================== -->
+    <!-- SCHEDA 4: L'ORCHESTRA 3D DI CHATGPT (I NEURONI CHE VOTANO INSIEME)   -->
+    <!-- =================================================================== -->
+    <main class="tab-content" id="tab-orchestra">
+      <div class="layout-3d">
+        <div class="viewport-card">
+          <div class="viewport-header">
+            <span class="viewport-title">Orchestra 3D: I Fasci di Luce della Decisione</span>
+            <span class="hint-3d">🖱️ Ruota a 360° per esplorare la convergenza dei fasci</span>
+          </div>
+          <div id="canvas-orchestra-container"></div>
+          
+          <!-- Overlay HUD di stato dell'orchestra -->
+          <div class="orchestra-3d-hud" id="orchestra-3d-hud">
+            <span class="orchestra-hud-dot standby" id="orchestra-hud-dot"></span>
+            <span id="orchestra-hud-status">Stato Orchestra: IN ATTESA (Standby)</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>
+            L'Accordo di Miliardi di Neuroni
+            <span class="info-tip" tabindex="0">
+              <span class="info-badge">?</span>
+              <span class="tip-popover">
+                <span class="tip-header"><span>⚡ Soglia di Consenso</span><span class="badge-tag">Rete Neurale</span></span>
+                <span class="tip-row"><strong>La metafora:</strong> Una giuria all'unanimità: nessun singolo neurone decide da solo, il verdetto finale nasce dall'accordo comune.</span>
+                <span class="tip-row"><strong>Nell'IA:</strong> Più gruppi di neuroni specializzati combinano i loro punteggi matematici per estrarre la parola con la probabilità più alta.</span>
+              </span>
+            </span>
+          </h2>
+          <p class="desc-p">
+            Un singolo neurone da solo può sbagliare. Ma in ChatGPT <strong>miliardi di neuroni specializzati votano contemporaneamente</strong>: solo quando i fasci convergono all'unisono la parola prende vita!
+          </p>
+
+          <!-- Frase da completare -->
+          <div class="orchestra-prompt-box">
+            <span class="cloze-label">Frase in generazione da completare:</span>
+            <div class="orchestra-sentence">
+              « Dopo una giornata di pioggia gelida, che gioia sedersi a tavola e scaldarsi con una bella <span class="orchestra-target standby" id="orchestra-target-word">[ ... ? ]</span> »
+            </div>
+          </div>
+
+          <!-- La Scatola delle Parole -->
+          <div class="word-box-container">
+            <div class="word-box-header">
+              <div class="word-box-title-group">
+                <span class="word-box-icon">📦</span>
+                <div>
+                  <strong>La Scatola delle Parole</strong>
+                  <span class="word-box-sub">Digita liberamente o clicca una tessera per testare i 3 giudici:</span>
+                </div>
+              </div>
+              <button class="btn-standby-reset" id="btn-orchestra-reset" title="Riporta i neuroni allo stato iniziale di attesa">
+                🔄 Standby
+              </button>
+            </div>
+
+            <!-- Campo di digitazione con autocompletamento in tempo reale -->
+            <div class="word-input-wrapper">
+              <span class="input-icon">⌨️</span>
+              <input 
+                type="text" 
+                id="orchestra-input" 
+                class="orchestra-input" 
+                placeholder="Digita una parola (es. zuppa, minestrone, tisana, granita, coperta...)" 
+                autocomplete="off" 
+                spellcheck="false"
+              />
+              <button class="input-clear-btn" id="btn-clear-input" style="display: none;" title="Cancella testo">✖</button>
+            </div>
+            
+            <!-- Suggeritore dinamico mentre digiti -->
+            <div class="word-hints-bar" id="word-hints-bar" style="display: none;"></div>
+
+            <!-- Tessere Rapide suddivise per categoria logica -->
+            <div class="word-box-chips-area">
+              <div class="chips-category-heading">Tessere di Vocabolario Determinato:</div>
+              
+              <div class="chips-group">
+                <span class="chip-group-label green">🟢 Consenso Unanime (Cibi Caldi):</span>
+                <div class="chip-row">
+                  <button class="word-chip chip-green" data-cand="zuppa">🍲 Zuppa</button>
+                  <button class="word-chip chip-green" data-cand="cioccolata">☕ Cioccolata</button>
+                  <button class="word-chip chip-green" data-cand="tisana">🍵 Tisana</button>
+                </div>
+              </div>
+
+              <div class="chips-group">
+                <span class="chip-group-label red">🔴 Veto Grammatica (Falsi Amici Maschili):</span>
+                <div class="chip-row">
+                  <button class="word-chip chip-red" data-cand="minestrone">🥣 Minestrone</button>
+                  <button class="word-chip chip-red" data-cand="brodo">🍲 Brodo</button>
+                  <button class="word-chip chip-red" data-cand="te">🫖 Tè</button>
+                </div>
+              </div>
+
+              <div class="chips-group">
+                <span class="chip-group-label cyan">❄️ Veto Emozione (Freddo Incongruente):</span>
+                <div class="chip-row">
+                  <button class="word-chip chip-cyan" data-cand="granita">🍧 Granita</button>
+                  <button class="word-chip chip-cyan" data-cand="insalata">🥗 Insalata</button>
+                  <button class="word-chip chip-cyan" data-cand="gelato">🍦 Gelato</button>
+                </div>
+              </div>
+
+              <div class="chips-group">
+                <span class="chip-group-label purple">🧣 Veto Cibo (Scalda ma non si serve a tavola):</span>
+                <div class="chip-row">
+                  <button class="word-chip chip-purple" data-cand="coperta">🧣 Coperta</button>
+                  <button class="word-chip chip-purple" data-cand="doccia">🚿 Doccia</button>
+                </div>
+              </div>
+
+              <div class="chips-group">
+                <span class="chip-group-label gray">🌌 Fuori Contesto Totale:</span>
+                <div class="chip-row">
+                  <button class="word-chip chip-gray" data-cand="galassia">🌌 Galassia</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Riquadro dei Voti dei 3 Giudici e Verdetto in Tempo Reale -->
+          <div class="judges-verdict-box" id="judges-verdict-box">
+            <!-- Riempito dinamicamente in JS: stato standby iniziale o telemetria della parola -->
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
