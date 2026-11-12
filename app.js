@@ -23,49 +23,169 @@ document.querySelectorAll('.nav-btn').forEach(btn => {
 
 
 // =========================================================================
-// 1. IL SINGOLO NEURONE 3D: ESEMPIO MASTER "CIBO & CUCINA" 🍕
-//    Centratura ottica perfetta (Y: -0.7) & Canali d'ingresso parlanti
+// 1. I NEURONI DETECTIVE: 3 MESTIERI A CONFRONTO (Cibo, Cuccioli, Spazio)
 // =========================================================================
 
-const foodMasterLevels = {
-  total: {
-    word: 'Pizza 🍕',
-    score: 1.0,
-    sensors: {
-      s1: { text: 'SÌ (100%)', class: 'yes' },
-      s2: { text: 'SÌ (100%)', class: 'yes' },
-      s3: { text: 'SÌ (100%)', class: 'yes' }
+const detectivePresets = {
+  food: {
+    icon: '🍕',
+    title: 'Neurone Specialista in "Cibo & Cucina"',
+    desc: 'Questo neurone è sintonizzato per riconoscere se un dato in arrivo appartiene al mondo del mangiare.',
+    meterLabel: 'Vicinanza Semantica al Cibo',
+    sensorLabels: {
+      s1: '🌿 Canale A: È commestibile?',
+      s2: '🍽️ Canale B: Sta a tavola / in cucina?',
+      s3: '⚡ Canale C: Dona nutrimento ed energia?'
     },
-    activeDendrites: [0, 1, 2, 3], // Tutti i canali attivi
-    reason: 'Alimento gustoso e completo: è commestibile, si trova a tavola e dona nutrimento.',
-    narrative: 'Tutti e 3 i sensori d\'ingresso confermano le caratteristiche del cibo. I canali azzurri pompano carica, il nucleo dorato raggiunge il 100% e <strong>il tubo di uscita a destra spara una scarica verde smeraldo viva</strong>: decisione positiva trasmessa!'
+    levels: {
+      total: {
+        word: 'Pizza 🍕',
+        badge: '1. Associazione Totale',
+        score: 1.0,
+        sensors: {
+          s1: { text: 'SÌ (100%)', class: 'yes' },
+          s2: { text: 'SÌ (100%)', class: 'yes' },
+          s3: { text: 'SÌ (100%)', class: 'yes' }
+        },
+        activeDendrites: [0, 1, 2, 3],
+        reason: 'Alimento gustoso e completo: è commestibile, si trova a tavola e dona nutrimento.',
+        narrative: 'Tutti e 3 i sensori d\'ingresso confermano le caratteristiche del cibo. I canali azzurri pompano carica, il nucleo dorato raggiunge il 100% e <strong>il tubo di uscita a destra spara una scarica verde smeraldo viva</strong>: decisione positiva trasmessa!'
+      },
+      partial: {
+        word: 'Forchetta 🍴',
+        badge: '2. Associazione Parziale',
+        score: 0.55,
+        sensors: {
+          s1: { text: 'NO (0%)', class: 'no' },
+          s2: { text: 'SÌ (100%)', class: 'yes' },
+          s3: { text: 'NO (0%)', class: 'no' }
+        },
+        activeDendrites: [1],
+        reason: 'Sta sul tavolo e serve per mangiare, ma non è cibo e non nutre!',
+        narrative: '<strong>Un solo canale d\'ingresso su tre si accende</strong> (la forchetta sta a tavola, ma non è commestibile né nutre). Il nucleo riceve mezza carica (Oro tiepido) e <strong>il tubo di uscita a destra si accende solo a metà potenza</strong>, segnalando un legame parziale di contesto.'
+      },
+      none: {
+        word: 'Galassia 🌌',
+        badge: '3. Differenza Totale',
+        score: 0.0,
+        sensors: {
+          s1: { text: 'NO (0%)', class: 'no' },
+          s2: { text: 'NO (0%)', class: 'no' },
+          s3: { text: 'NO (0%)', class: 'no' }
+        },
+        activeDendrites: [],
+        reason: 'Il cosmo profondo non ha alcuna parentela con l\'alimentazione.',
+        narrative: 'Nessun sensore d\'ingresso rileva caratteristiche del cibo: tutti i canali azzurri restano spenti. Il nucleo non riceve energia e <strong>il tubo di uscita a destra diventa TOTALMENTE NERO e opaco</strong>. Zero corrente: circuito interrotto!'
+      }
+    }
   },
-  partial: {
-    word: 'Forchetta 🍴',
-    score: 0.55,
-    sensors: {
-      s1: { text: 'NO (0%)', class: 'no' },
-      s2: { text: 'SÌ (100%)', class: 'yes' },
-      s3: { text: 'NO (0%)', class: 'no' }
+  animals: {
+    icon: '🐶',
+    title: 'Neurone Specialista in "Cuccioli & Animali"',
+    desc: 'Questo neurone è addestrato per scoprire se ciò che incontra è un fedele animale a quattro zampe o un essere vivente.',
+    meterLabel: 'Vicinanza Semantica agli Animali',
+    sensorLabels: {
+      s1: '🐾 Canale A: È un essere vivente che respira?',
+      s2: '🦮 Canale B: Ha pelo, zampe e si muove da solo?',
+      s3: '❤️ Canale C: Ha bisogno di cibo e affetto?'
     },
-    activeDendrites: [1], // Solo il canale 2 ("sta a tavola") riceve stimolo!
-    reason: 'Sta sul tavolo e serve per mangiare, ma non è cibo e non nutre!',
-    narrative: '<strong>Un solo canale d\'ingresso su tre si accende</strong> (la forchetta sta a tavola, ma non è commestibile né nutre). Il nucleo riceve mezza carica (Oro tiepido) e <strong>il tubo di uscita a destra si accende solo a metà potenza</strong>, segnalando un legame parziale di contesto.'
+    levels: {
+      total: {
+        word: 'Cane 🐶',
+        badge: '1. Associazione Totale',
+        score: 1.0,
+        sensors: {
+          s1: { text: 'SÌ (100%)', class: 'yes' },
+          s2: { text: 'SÌ (100%)', class: 'yes' },
+          s3: { text: 'SÌ (100%)', class: 'yes' }
+        },
+        activeDendrites: [0, 1, 2, 3],
+        reason: 'Un vero cucciolo: respira, cammina su quattro zampe e cerca coccole!',
+        narrative: 'Tutti i dendriti d\'ingresso si illuminano! Il nucleo si riempie di luce dorata ed emette una forte scarica verde: <strong>«Questo è un animale al 100%!»</strong>'
+      },
+      partial: {
+        word: 'Peluche 🧸',
+        badge: '2. Associazione Parziale',
+        score: 0.50,
+        sensors: {
+          s1: { text: 'NO (0%)', class: 'no' },
+          s2: { text: 'SÌ (100%)', class: 'yes' },
+          s3: { text: 'NO (0%)', class: 'no' }
+        },
+        activeDendrites: [1],
+        reason: 'Ha il pelo morbido e la forma di un orsetto, ma è un giocattolo: non è vivo né mangia!',
+        narrative: 'Solo il sensore dell\'aspetto si accende. Il neurone capisce che è una somiglianza solo esteriore: l\'uscita si illumina solo a metà (luce ambrata).'
+      },
+      none: {
+        word: 'Bicicletta 🚲',
+        badge: '3. Differenza Totale',
+        score: 0.0,
+        sensors: {
+          s1: { text: 'NO (0%)', class: 'no' },
+          s2: { text: 'NO (0%)', class: 'no' },
+          s3: { text: 'NO (0%)', class: 'no' }
+        },
+        activeDendrites: [],
+        reason: 'Un veicolo a due ruote di metallo non ha alcuna caratteristica animale.',
+        narrative: 'Nessun indizio vivente! I canali d\'ingresso restano spenti e il tubo d\'uscita diventa completamente nero: zero parentela col regno animale.'
+      }
+    }
   },
-  none: {
-    word: 'Galassia 🌌',
-    score: 0.0,
-    sensors: {
-      s1: { text: 'NO (0%)', class: 'no' },
-      s2: { text: 'NO (0%)', class: 'no' },
-      s3: { text: 'NO (0%)', class: 'no' }
+  space: {
+    icon: '🚀',
+    title: 'Neurone Specialista in "Esplorazione Spaziale"',
+    desc: 'Questo neurone cerca veicoli e tecnologie capaci di volare oltre l\'atmosfera della Terra verso le stelle.',
+    meterLabel: 'Vicinanza Semantica allo Spazio',
+    sensorLabels: {
+      s1: '🌌 Canale A: Viaggia nello spazio profondo?',
+      s2: '🔥 Canale B: Ha motori potenti per vincere la gravità?',
+      s3: '👨‍🚀 Canale C: Trasporta astronauti o satelliti?'
     },
-    activeDendrites: [], // Nessun canale attivo
-    reason: 'Il cosmo profondo non ha alcuna parentela con l\'alimentazione.',
-    narrative: 'Nessun sensore d\'ingresso rileva caratteristiche del cibo: tutti i canali azzurri restano spenti. Il nucleo non riceve energia e <strong>il tubo di uscita a destra diventa TOTALMENTE NERO e opaco</strong>. Zero corrente: circuito interrotto!'
+    levels: {
+      total: {
+        word: 'Razzo 🚀',
+        badge: '1. Associazione Totale',
+        score: 1.0,
+        sensors: {
+          s1: { text: 'SÌ (100%)', class: 'yes' },
+          s2: { text: 'SÌ (100%)', class: 'yes' },
+          s3: { text: 'SÌ (100%)', class: 'yes' }
+        },
+        activeDendrites: [0, 1, 2, 3],
+        reason: 'Veicolo spaziale per eccellenza: motori a razzo fiammeggianti e rotta interplanetaria!',
+        narrative: 'Tripla conferma da tutti i dendriti! Il nucleo si carica al massimo e spara un fascio verde splendente: rotta per le stelle agganciata!'
+      },
+      partial: {
+        word: 'Aquilone 🪁',
+        badge: '2. Associazione Parziale',
+        score: 0.50,
+        sensors: {
+          s1: { text: 'NO (0%)', class: 'no' },
+          s2: { text: 'NO (0%)', class: 'no' },
+          s3: { text: 'SÌ (100%)', class: 'yes' }
+        },
+        activeDendrites: [2],
+        reason: 'Vola alto nell\'aria grazie al vento, ma non può uscire dall\'atmosfera né ha motori!',
+        narrative: 'L\'aquilone vola nel cielo terrestre ma non può arrivare nello spazio. Il neurone riconosce il volo ma capisce il limite: uscita a mezza luce.'
+      },
+      none: {
+        word: 'Mela 🍏',
+        badge: '3. Differenza Totale',
+        score: 0.0,
+        sensors: {
+          s1: { text: 'NO (0%)', class: 'no' },
+          s2: { text: 'NO (0%)', class: 'no' },
+          s3: { text: 'NO (0%)', class: 'no' }
+        },
+        activeDendrites: [],
+        reason: 'Un frutto della terra saporito, senza alcuna parentela con l\'astronautica.',
+        narrative: 'Nessun segnale di propulsione né di orbita: il neurone spegne tutti i canali, il nucleo resta al buio e l\'assone è totalmente spento.'
+      }
+    }
   }
 };
 
+let currentDetectiveKey = 'food';
 let currentFoodLevel = 'total'; // 'total' | 'partial' | 'none'
 
 let nScene, nCamera, nRenderer;
@@ -218,7 +338,8 @@ function initNeuron3D() {
   });
 
   animateNeuron();
-  applyFoodLevel('total');
+  applyDetectiveState('total');
+  initDetectiveEvents();
 }
 
 function animateNeuron() {
@@ -251,10 +372,11 @@ function animateNeuron() {
   nRenderer.render(nScene, nCamera);
 }
 
-// Applica uno dei 3 stati del Neurone del Cibo
-function applyFoodLevel(levelKey) {
+// Applica uno dei 3 stati del Neurone Detective selezionato
+function applyDetectiveState(levelKey) {
   currentFoodLevel = levelKey;
-  const data = foodMasterLevels[levelKey];
+  const preset = detectivePresets[currentDetectiveKey] || detectivePresets.food;
+  const data = preset.levels[levelKey];
   neuronCurrentEnergy = data.score;
 
   // Aggiorna bottoni attivi nella UI
@@ -266,48 +388,56 @@ function applyFoodLevel(levelKey) {
   ['1', '2', '3'].forEach(num => {
     const sEl = document.getElementById(`sensor-${num}-val`);
     const sData = data.sensors[`s${num}`];
-    sEl.textContent = sData.text;
-    sEl.className = `sensor-val ${sData.class}`;
+    if (sEl && sData) {
+      sEl.textContent = sData.text;
+      sEl.className = `sensor-val ${sData.class}`;
+    }
   });
 
   // Misuratore percentuale
   const pct = Math.round(data.score * 100);
-  document.getElementById('meter-percent').textContent = `${pct}%`;
-  document.getElementById('meter-fill').style.width = `${pct}%`;
+  const meterPctEl = document.getElementById('meter-percent');
+  const meterFillEl = document.getElementById('meter-fill');
+  if (meterPctEl) meterPctEl.textContent = `${pct}%`;
+  if (meterFillEl) meterFillEl.style.width = `${pct}%`;
 
   const hudIndicator = document.getElementById('hud-indicator');
   const hudText = document.getElementById('hud-text');
   const expBox = document.getElementById('explanation-box');
 
   if (levelKey === 'total') {
-    // 1. TOTALE (100% Affinità - Pizza)
-    // Tutti i dendriti accesi
+    // 1. TOTALE (100% Affinità)
     dendriteMeshes.forEach(d => {
       d.mesh.material.emissive.setHex(0x38bdf8);
       d.mesh.material.emissiveIntensity = 0.8;
     });
-    particlesMesh.visible = true;
+    if (particlesMesh) particlesMesh.visible = true;
 
     // Nucleo: Oro splendente
-    neuronCore.material.color.setHex(0x271e05);
-    neuronCore.material.emissive.setHex(0xfbbf24);
-    neuronCore.material.emissiveIntensity = 1.8;
-    coreGlowMesh.material.color.setHex(0xfbbf24);
-    coreGlowMesh.visible = true;
+    if (neuronCore) {
+      neuronCore.material.color.setHex(0x271e05);
+      neuronCore.material.emissive.setHex(0xfbbf24);
+      neuronCore.material.emissiveIntensity = 1.8;
+    }
+    if (coreGlowMesh) {
+      coreGlowMesh.material.color.setHex(0xfbbf24);
+      coreGlowMesh.visible = true;
+    }
 
     // Tubo di uscita: VERDE SMERALDO BRILLANTE ACCESO AL 100%!
-    axonMesh.material.color.setHex(0x34d399);
-    axonMesh.material.emissive.setHex(0x34d399);
-    axonMesh.material.emissiveIntensity = 1.9;
+    if (axonMesh) {
+      axonMesh.material.color.setHex(0x34d399);
+      axonMesh.material.emissive.setHex(0x34d399);
+      axonMesh.material.emissiveIntensity = 1.9;
+    }
 
-    hudIndicator.className = 'hud-indicator active';
-    hudText.textContent = `Uscita: ACCESA AL 100% (Verde Smeraldo)! Segnale trasmesso.`;
+    if (hudIndicator) hudIndicator.className = 'hud-indicator active';
+    if (hudText) hudText.textContent = `Uscita: ACCESA AL 100% (Verde Smeraldo)! Segnale approvato.`;
 
   } else if (levelKey === 'partial') {
-    // 2. PARZIALE (~50% Affinità - Forchetta)
-    // Solo il dendrite 1 (canale tavola) emette luce, gli altri sono spenti!
+    // 2. PARZIALE (~50% Affinità)
     dendriteMeshes.forEach((d, idx) => {
-      if (idx === 1) {
+      if (data.activeDendrites && data.activeDendrites.includes(idx)) {
         d.mesh.material.emissive.setHex(0x38bdf8);
         d.mesh.material.emissiveIntensity = 0.7;
       } else {
@@ -315,61 +445,121 @@ function applyFoodLevel(levelKey) {
         d.mesh.material.emissiveIntensity = 0.0;
       }
     });
-    particlesMesh.visible = true;
+    if (particlesMesh) particlesMesh.visible = true;
 
     // Nucleo: Oro a mezza potenza
-    neuronCore.material.color.setHex(0x1a1403);
-    neuronCore.material.emissive.setHex(0xfbbf24);
-    neuronCore.material.emissiveIntensity = 0.7;
-    coreGlowMesh.material.color.setHex(0xfbbf24);
-    coreGlowMesh.visible = true;
+    if (neuronCore) {
+      neuronCore.material.color.setHex(0x1a1403);
+      neuronCore.material.emissive.setHex(0xfbbf24);
+      neuronCore.material.emissiveIntensity = 0.7;
+    }
+    if (coreGlowMesh) {
+      coreGlowMesh.material.color.setHex(0xfbbf24);
+      coreGlowMesh.visible = true;
+    }
 
-    // Tubo di uscita: Verde tenue a mezza luce
-    axonMesh.material.color.setHex(0x064e3b);
-    axonMesh.material.emissive.setHex(0x10b981);
-    axonMesh.material.emissiveIntensity = 0.4;
+    // Tubo di uscita: Verde tenue / ambra a mezza luce
+    if (axonMesh) {
+      axonMesh.material.color.setHex(0x064e3b);
+      axonMesh.material.emissive.setHex(0x10b981);
+      axonMesh.material.emissiveIntensity = 0.4;
+    }
 
-    hudIndicator.className = 'hud-indicator partial';
-    hudText.textContent = `Uscita: MEZZA POTENZA (~50%). Passa solo un segnale attenuato.`;
+    if (hudIndicator) hudIndicator.className = 'hud-indicator partial';
+    if (hudText) hudText.textContent = `Uscita: MEZZA POTENZA (~50%). Passa solo un segnale parziale.`;
 
   } else {
-    // 3. ESTRANEO (0% Affinità - Galassia)
-    // Tutti i dendriti spenti
+    // 3. ESTRANEO (0% Affinità)
     dendriteMeshes.forEach(d => {
       d.mesh.material.emissive.setHex(0x000000);
       d.mesh.material.emissiveIntensity = 0.0;
     });
-    particlesMesh.visible = false;
+    if (particlesMesh) particlesMesh.visible = false;
 
     // Nucleo: Nero carbone opaco
-    neuronCore.material.color.setHex(0x090d16);
-    neuronCore.material.emissive.setHex(0x000000);
-    neuronCore.material.emissiveIntensity = 0.0;
-    coreGlowMesh.visible = false;
+    if (neuronCore) {
+      neuronCore.material.color.setHex(0x090d16);
+      neuronCore.material.emissive.setHex(0x000000);
+      neuronCore.material.emissiveIntensity = 0.0;
+    }
+    if (coreGlowMesh) coreGlowMesh.visible = false;
 
-    // TUBO D'USCITA TOTALMENTE NERO OPACO E SPENTO!
-    axonMesh.material.color.setHex(0x090d16);
-    axonMesh.material.emissive.setHex(0x000000);
-    axonMesh.material.emissiveIntensity = 0.0;
+    // Tubo d'uscita: totalmente nero opaco e spento
+    if (axonMesh) {
+      axonMesh.material.color.setHex(0x090d16);
+      axonMesh.material.emissive.setHex(0x000000);
+      axonMesh.material.emissiveIntensity = 0.0;
+    }
 
-    hudIndicator.className = 'hud-indicator inactive';
-    hudText.textContent = `Uscita: TOTALMENTE SPENTA (0%). Circuito interrotto.`;
+    if (hudIndicator) hudIndicator.className = 'hud-indicator inactive';
+    if (hudText) hudText.textContent = `Uscita: TOTALMENTE SPENTA (0%). Circuito interrotto.`;
   }
 
   // Spiegazione didattica aggiornata
-  expBox.innerHTML = `
-    <strong>Parola testata: "${data.word}" (${pct}% Affinità)</strong><br>
-    ${data.reason}<br><br>
-    <em>Cosa vedi nel 3D:</em> ${data.narrative}
-  `;
+  if (expBox) {
+    expBox.innerHTML = `
+      <strong>Parola testata: "${data.word}" (${pct}% Affinità)</strong><br>
+      ${data.reason}<br><br>
+      <em>Cosa vedi nel 3D:</em> ${data.narrative}
+    `;
+  }
 }
 
-// Listener per i 3 bottoni livello
-document.querySelectorAll('.state-choice-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    applyFoodLevel(btn.dataset.level);
+// Cambio mestiere neurone detective
+function switchDetective(detectiveKey) {
+  currentDetectiveKey = detectiveKey;
+  const p = detectivePresets[detectiveKey];
+  if (!p) return;
+
+  // Aggiorna pill attiva
+  document.querySelectorAll('.detective-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.detective === detectiveKey);
   });
-});
+
+  // Aggiorna badge e testi
+  const iconEl = document.getElementById('neuron-focus-icon');
+  const titleEl = document.getElementById('neuron-focus-title');
+  const descEl = document.getElementById('neuron-focus-desc');
+  const meterLbl = document.getElementById('meter-category-label');
+
+  if (iconEl) iconEl.textContent = p.icon;
+  if (titleEl) titleEl.textContent = p.title;
+  if (descEl) descEl.textContent = p.desc;
+  if (meterLbl) meterLbl.textContent = p.meterLabel;
+
+  // Aggiorna testi sensori
+  ['1', '2', '3'].forEach(num => {
+    const lbl = document.getElementById(`sensor-${num}-label`);
+    if (lbl && p.sensorLabels[`s${num}`]) {
+      lbl.textContent = p.sensorLabels[`s${num}`];
+    }
+  });
+
+  // Aggiorna etichette dei 3 pulsanti
+  const wTotal = document.getElementById('state-word-total');
+  const wPartial = document.getElementById('state-word-partial');
+  const wNone = document.getElementById('state-word-none');
+
+  if (wTotal) wTotal.textContent = p.levels.total.word;
+  if (wPartial) wPartial.textContent = p.levels.partial.word;
+  if (wNone) wNone.textContent = p.levels.none.word;
+
+  applyDetectiveState('total');
+}
+
+function initDetectiveEvents() {
+  document.querySelectorAll('.detective-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      switchDetective(btn.dataset.detective);
+    });
+  });
+
+  document.querySelectorAll('.state-choice-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      applyDetectiveState(btn.dataset.level);
+    });
+  });
+}
 
 
 // =========================================================================
@@ -622,8 +812,18 @@ function initMapScene() {
   document.querySelectorAll('.bridge-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.bridge-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.route-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       highlightBridge(btn.dataset.bridge);
+      const infoBox = document.getElementById('route-info-box');
+      if (infoBox) infoBox.style.display = 'none';
+    });
+  });
+
+  // Pulsanti Rotte Segrete (Caccia al Tesoro dei Significati per Ragazzi)
+  document.querySelectorAll('.route-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activateSecretRoute(btn.dataset.route);
     });
   });
 
@@ -1056,6 +1256,70 @@ function highlightBridge(type) {
 }
 
 // -------------------------------------------------------------------------
+// 2A-bis. ROTTE SEGRETE (Caccia al Tesoro dei Significati per Ragazzi)
+// -------------------------------------------------------------------------
+
+const secretRoutes = {
+  farm: {
+    title: '🍕 Rotta 1: Dalla Fattoria alla Pizza',
+    sequence: ['Pascolo 🐄', 'Latte 🥛', 'Ciotola 🥣', 'Farina 🥣', 'Pizza 🍕'],
+    targetRotY: 0.1,
+    targetRotX: 0.25,
+    zoom: 14.2,
+    bridge: 'orange',
+    desc: '🐄 ➔ 🥛 ➔ 🥣 ➔ 🍕<br><strong>Come pensa l\'IA:</strong> La mucca vive nel <em>Pascolo</em> e produce il <em>Latte</em>; il latte si versa nella <em>Ciotola</em> accanto alla <em>Farina</em> con cui il cuoco impasta la <em>Pizza</em>! L\'IA usa questi ponti per comprendere la cucina e gli alimenti.'
+  },
+  fable: {
+    title: '🎬 Rotta 2: Dal Lupo delle Fiabe al Cinema',
+    sequence: ['Lupo 🐺', 'Favola 📖', 'Emozione ✨', 'Poesia 🖋️', 'Musica 🎵', 'Cinema 🎬'],
+    targetRotY: 2.3,
+    targetRotX: 0.15,
+    zoom: 14.2,
+    bridge: 'magenta',
+    desc: '🐺 ➔ 📖 ➔ ✨ ➔ 🖋️ ➔ 🎵 ➔ 🎬<br><strong>Come pensa l\'IA:</strong> La natura selvaggia del <em>Lupo</em> ispira le <em>Favole</em> e l\'<em>Emozione</em>, che diventano <em>Poesia</em> e melodia per la <em>Musica</em> delle grandi colonne sonore del <em>Cinema</em>!'
+  },
+  cyborg: {
+    title: '🦾 Rotta 3: Dal Microchip al Cane Robot',
+    sequence: ['Chip ⚡', 'Software 💾', 'Robot 🤖', 'Cane Robot 🦾🐕'],
+    targetRotY: 4.6,
+    targetRotX: -0.1,
+    zoom: 14.2,
+    bridge: 'green',
+    desc: '⚡ ➔ 💾 ➔ 🤖 ➔ 🦾🐕<br><strong>Come pensa l\'IA:</strong> Dal silicio microscopico del <em>Chip</em> si programma il <em>Software</em> che governa i motori del <em>Robot</em>, fino a creare un vero cucciolo bionico: il <em>Cane Robot</em>!'
+  }
+};
+
+function activateSecretRoute(routeKey) {
+  const route = secretRoutes[routeKey];
+  if (!route) return;
+
+  // Aggiorna bottoni attivi
+  document.querySelectorAll('.route-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.route === routeKey);
+  });
+  document.querySelectorAll('.bridge-btn').forEach(b => b.classList.remove('active'));
+
+  // Mostra box info dedicato
+  const infoBox = document.getElementById('route-info-box');
+  if (infoBox) {
+    infoBox.style.display = 'block';
+    infoBox.innerHTML = `
+      <strong style="color: #fbbf24; font-size: 0.95rem;">${route.title}</strong><br>
+      <div style="margin: 0.45rem 0; font-size: 0.84rem; color: #38bdf8; font-weight: 700;">${route.sequence.join(' ➔ ')}</div>
+      <div style="font-size: 0.86rem; color: #f1f5f9; line-height: 1.45;">${route.desc}</div>
+    `;
+  }
+
+  // Ruota e zooma la sfera sul percorso
+  highlightBridge(route.bridge);
+  mapTargetRotY = route.targetRotY;
+  mapTargetRotX = route.targetRotX;
+  targetCameraZ = route.zoom;
+  const slider = document.getElementById('map-zoom-slider');
+  if (slider) slider.value = route.zoom;
+}
+
+// -------------------------------------------------------------------------
 // 2B. GESTIONE DELLO SWITCH DI REALTÀ: DENTRO LA MACCHINA
 //     Confronto tra Sfera 3D, Vettori a 4.096D e Meccanismo di Attenzione
 // -------------------------------------------------------------------------
@@ -1213,32 +1477,112 @@ let currentTrainStep = 1; // 1 | 2 | 3
 
 const baseNeuronPos = new THREE.Vector3(-0.5, -1.2, 0);
 
-const trainingStepsData = {
-  1: {
-    targetKey: 'galassia',
-    word: 'GALASSIA 🌌',
-    colorClass: 'red',
-    pos: new THREE.Vector3(-4.5, -2.5, 0),
-    colorHex: 0xf43f5e,
-    log: '❌ <strong>Passo 1 (Errore di Dominio):</strong> «Ho mangiato un piatto di GALASSIA». Il neurone punta a caso nello spazio! Errore madornale (-100 punti). L\'antenna inizia a correggere la rotta.'
+const trainingStories = {
+  pasta: {
+    id: 'pasta',
+    title: '🍝 1. A Tavola con la Pasta',
+    sentence: '« Oggi a pranzo ho mangiato un gustoso piatto di <span class="cloze-blank" id="cloze-slot">... ?</span> »',
+    steps: {
+      1: {
+        word: 'GALASSIA 🌌',
+        colorClass: 'red',
+        pos: new THREE.Vector3(-4.5, -2.5, 0),
+        colorHex: 0xf43f5e,
+        title: '🔴 Inizio: Scelta Fuori Tema',
+        desc: 'L\'antenna punta su "Galassia 🌌" (Zero senso col cibo! Errore totale).',
+        log: '❌ <strong>Passo 1 (Errore buffo!):</strong> «Ho mangiato un piatto di GALASSIA». Il neurone punta a caso nello spazio! Errore madornale (-100 punti). L\'antenna riceve una correzione e ruota verso il cibo.'
+      },
+      2: {
+        word: 'PIETANZE 🍲',
+        colorClass: 'yellow',
+        pos: new THREE.Vector3(0.5, 2.8, 0),
+        colorHex: 0xfbbf24,
+        title: '🟡 Correzione: Scelta Astratta',
+        desc: 'L\'antenna ruota su "Pietanze 🍲" (È cibo, ma nessuno dice "un piatto di pietanze"!).',
+        log: '⚠️ <strong>Passo 2 (Fuocherello!):</strong> «Ho mangiato un piatto di PIETANZE». Più vicino! È cibo, ma è una parola generica e robotica. Nessun umano direbbe così: serve un\'altra correzione.'
+      },
+      3: {
+        word: 'SPAGHETTI 🍝',
+        colorClass: 'green',
+        pos: new THREE.Vector3(4.8, 2.0, 0),
+        colorHex: 0x34d399,
+        title: '🟢 Bersaglio: Scelta Naturale',
+        desc: 'L\'antenna si aggancia su "Spaghetti 🍝" (Preciso, appetitoso e naturale al 100%).',
+        log: '🎯 <strong>Passo 3 (Bersaglio Centrato al 100%!):</strong> «Ho mangiato un gustoso piatto di SPAGHETTI». Perfetto, naturale e appetitoso! Errore azzerato: l\'addestramento è completato con successo!'
+      }
+    }
   },
-  2: {
-    targetKey: 'pietanze',
-    word: 'PIETANZE 🍲',
-    colorClass: 'yellow',
-    pos: new THREE.Vector3(0.5, 2.8, 0), // Alzata in alto: zero accavallamenti!
-    colorHex: 0xfbbf24,
-    log: '⚠️ <strong>Passo 2 (Categoria Giusta, ma Astratta):</strong> «Ho mangiato un piatto di PIETANZE». Più vicino! È cibo, ma è una parola generica e robotica. Nessun umano direbbe così: serve un\'altra correzione.'
+  dragon: {
+    id: 'dragon',
+    title: '🐉 2. La Sfida del Drago',
+    sentence: '« Il valoroso cavaliere estrasse la spada per affrontare il <span class="cloze-blank" id="cloze-slot">... ?</span> »',
+    steps: {
+      1: {
+        word: 'TIRAMISÙ 🍰',
+        colorClass: 'red',
+        pos: new THREE.Vector3(-4.5, -2.5, 0),
+        colorHex: 0xf43f5e,
+        title: '🔴 Inizio: Scelta Buffa',
+        desc: 'L\'antenna punta su "Tiramisù 🍰" (La spada non serve per il dolce!).',
+        log: '❌ <strong>Passo 1 (Errore buffo!):</strong> «Estrarre la spada per affrontare il TIRAMISÙ». Nessun cavaliere combatte un dolce! Il neurone era confuso tra armi e forchette.'
+      },
+      2: {
+        word: 'ANIMALE 🐾',
+        colorClass: 'yellow',
+        pos: new THREE.Vector3(0.5, 2.8, 0),
+        colorHex: 0xfbbf24,
+        title: '🟡 Correzione: Scelta Generica',
+        desc: 'L\'antenna ruota su "Animale 🐾" (È un essere vivente, ma poco fiabesco!).',
+        log: '⚠️ <strong>Passo 2 (Fuocherello!):</strong> «Per affrontare l\'ANIMALE». Categoria giusta (è un essere vivente), ma è generico: non crea suspence in una fiaba medievale!'
+      },
+      3: {
+        word: 'DRAGO 🐉',
+        colorClass: 'green',
+        pos: new THREE.Vector3(4.8, 2.0, 0),
+        colorHex: 0x34d399,
+        title: '🟢 Bersaglio: Scelta Epica',
+        desc: 'L\'antenna si aggancia su "Drago 🐉" (Perfetto, leggendario e sputafuoco!).',
+        log: '🎯 <strong>Passo 3 (Bersaglio Centrato al 100%!):</strong> «Per affrontare il DRAGO». Epico, maestoso e perfettamente adatto al contesto cavalleresco!'
+      }
+    }
   },
-  3: {
-    targetKey: 'spaghetti',
-    word: 'SPAGHETTI 🍝',
-    colorClass: 'green',
-    pos: new THREE.Vector3(4.8, 2.0, 0),
-    colorHex: 0x34d399,
-    log: '🎯 <strong>Passo 3 (Bersaglio Centrato al 100%!):</strong> «Ho mangiato un gustoso piatto di SPAGHETTI». Perfetto, naturale e appetitoso! Errore azzerato: l\'addestramento è completato con successo!'
+  space: {
+    id: 'space',
+    title: '🔴 3. Destinazione Marte',
+    sentence: '« L\'astronauta salì a bordo del razzo diretto verso <span class="cloze-blank" id="cloze-slot">... ?</span> »',
+    steps: {
+      1: {
+        word: 'FORCHETTA 🍴',
+        colorClass: 'red',
+        pos: new THREE.Vector3(-4.5, -2.5, 0),
+        colorHex: 0xf43f5e,
+        title: '🔴 Inizio: Rotta Sbagliata',
+        desc: 'L\'antenna punta su "Forchetta 🍴" (Cosa c\'entra nello spazio siderale?!).',
+        log: '❌ <strong>Passo 1 (Errore buffo!):</strong> «Un razzo diretto verso FORCHETTA». Una posata nello spazio profondo? Errore di rotta totale!'
+      },
+      2: {
+        word: 'SASSO 🪨',
+        colorClass: 'yellow',
+        pos: new THREE.Vector3(0.5, 2.8, 0),
+        colorHex: 0xfbbf24,
+        title: '🟡 Correzione: Oggetto Spaziale Astratto',
+        desc: 'L\'antenna ruota su "Sasso 🪨" (Gli asteroidi sono rocce, ma non una meta!).',
+        log: '⚠️ <strong>Passo 2 (Fuocherello!):</strong> «Diretto verso SASSO». Nello spazio ci sono asteroidi rocciosi, ma non sono una meta ambita per una missione con equipaggio!'
+      },
+      3: {
+        word: 'MARTE 🔴',
+        colorClass: 'green',
+        pos: new THREE.Vector3(4.8, 2.0, 0),
+        colorHex: 0x34d399,
+        title: '🟢 Bersaglio: Pianeta Rosso',
+        desc: 'L\'antenna si aggancia su "Marte 🔴" (Precisione astronomica al 100%).',
+        log: '🎯 <strong>Passo 3 (Bersaglio Centrato al 100%!):</strong> «Diretto verso MARTE». Il Pianeta Rosso! Precisione astronomica, rotta memorizzata nel neurone con successo!'
+      }
+    }
   }
 };
+
+let currentTrainingStory = 'pasta';
 
 function initTrainingScene() {
   const container = document.getElementById('canvas-training-container');
@@ -1275,13 +1619,21 @@ function initTrainingScene() {
   baseMesh.position.copy(baseNeuronPos);
   tScene.add(baseMesh);
 
-  const initDir = trainingStepsData[1].pos.clone().sub(baseNeuronPos).normalize();
+  const story = trainingStories[currentTrainingStory];
+  const initDir = story.steps[1].pos.clone().sub(baseNeuronPos).normalize();
   trainingAntenna = new THREE.ArrowHelper(initDir, baseNeuronPos, 3.6, 0xf43f5e, 0.8, 0.4);
   tScene.add(trainingAntenna);
 
-  targetSpheres.galassia = createLabeledTargetSphere(trainingStepsData[1].pos, 0xf43f5e, 0.75);
-  targetSpheres.pietanze = createLabeledTargetSphere(trainingStepsData[2].pos, 0xfbbf24, 0.85);
-  targetSpheres.spaghetti = createLabeledTargetSphere(trainingStepsData[3].pos, 0x34d399, 1.1);
+  targetSpheres.galassia = createLabeledTargetSphere(story.steps[1].pos, 0xf43f5e, 0.75);
+  targetSpheres.pietanze = createLabeledTargetSphere(story.steps[2].pos, 0xfbbf24, 0.85);
+  targetSpheres.spaghetti = createLabeledTargetSphere(story.steps[3].pos, 0x34d399, 1.1);
+
+  // Inizializza selettore storie
+  document.querySelectorAll('.story-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      switchTrainingStory(btn.dataset.story);
+    });
+  });
 
   animateTraining();
   goToTrainingStep(1);
@@ -1320,21 +1672,53 @@ function animateTraining() {
 
 function goToTrainingStep(stepNum) {
   currentTrainStep = stepNum;
-  const sData = trainingStepsData[stepNum];
+  const story = trainingStories[currentTrainingStory] || trainingStories.pasta;
+  const sData = story.steps[stepNum];
 
-  const newDir = sData.pos.clone().sub(baseNeuronPos).normalize();
-  trainingAntenna.setDirection(newDir);
-  trainingAntenna.setColor(sData.colorHex);
+  if (trainingAntenna) {
+    const newDir = sData.pos.clone().sub(baseNeuronPos).normalize();
+    trainingAntenna.setDirection(newDir);
+    trainingAntenna.setColor(sData.colorHex);
+  }
 
   const slot = document.getElementById('cloze-slot');
-  slot.textContent = sData.word;
-  slot.className = `cloze-blank ${sData.colorClass}`;
+  if (slot) {
+    slot.textContent = sData.word;
+    slot.className = `cloze-blank ${sData.colorClass}`;
+  }
 
   [1, 2, 3].forEach(i => {
     document.getElementById(`step-ui-${i}`)?.classList.toggle('active', i === stepNum);
   });
 
-  document.getElementById('training-log').innerHTML = sData.log;
+  const logEl = document.getElementById('training-log');
+  if (logEl) logEl.innerHTML = sData.log;
+}
+
+function switchTrainingStory(storyKey) {
+  currentTrainingStory = storyKey;
+  const story = trainingStories[storyKey];
+  if (!story) return;
+
+  // Aggiorna bottoni pill attivi
+  document.querySelectorAll('.story-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.story === storyKey);
+  });
+
+  // Aggiorna frase mostrata
+  const display = document.getElementById('cloze-display');
+  if (display) display.innerHTML = story.sentence;
+
+  // Aggiorna titoli e descrizioni dei 3 passi
+  [1, 2, 3].forEach(i => {
+    const s = story.steps[i];
+    const tEl = document.getElementById(`step-${i}-title`);
+    const dEl = document.getElementById(`step-${i}-desc`);
+    if (tEl) tEl.textContent = s.title;
+    if (dEl) dEl.textContent = s.desc;
+  });
+
+  goToTrainingStep(1);
 }
 
 document.getElementById('btn-train-single')?.addEventListener('click', () => {
@@ -1381,165 +1765,455 @@ let energyBeams = [];
 let orchestraTimeouts = [];
 let currentOrchestraCandKey = null;
 
-// Vocabolario Determinato della Scatola delle Parole
-const orchestraVocabulary = {
-  zuppa: {
-    word: 'Zuppa 🍲',
-    label: 'ZUPPA 🍲',
-    category: 'Consenso Pieno',
-    score: '+30',
-    totalScoreNum: 30,
-    statusType: 'consensus',
-    verdictTitle: '🟢 CONSENSO UNANIME! (+30 Punti)',
-    ciboVote: { val: '+10', pass: true, text: 'Pietanza commestibile calda e gustosa' },
-    emoVote: { val: '+10', pass: true, text: 'Confortante e perfetta contro il gelo' },
-    gramVote: { val: '+10', pass: true, text: 'Femminile singolare: «una bella zuppa»' },
-    narrative: 'Tutti e 3 i fasci laser 3D convergono all\'unisono sulla sfera! Il modello ha trovato la parola perfetta: calore semantico, accordo emotivo e concordanza grammaticale impeccabile.'
+// Vocabolario e Scenari Determinato della Scatola delle Parole (Per Ragazzi)
+const orchestraScenarios = {
+  winter: {
+    id: 'winter',
+    name: '🍲 Inverno Gelido',
+    sentence: '« Dopo una giornata di pioggia gelida, che gioia sedersi a tavola e scaldarsi con una bella <span class="orchestra-target standby" id="orchestra-target-word">[ ... ? ]</span> »',
+    judges: {
+      cibo: { name: 'Giudice Cibo (Giallo)', label: '🟡 CIBO', color: 0xfbbf24, role: 'Pietanza commestibile adatta alla tavola' },
+      emo: { name: 'Giudice Emozione (Rosso)', label: '🔴 EMOZIONE', color: 0xf43f5e, role: 'Scalda e toglie il gelo' },
+      gram: { name: 'Giudice Grammatica (Blu)', label: '🔵 GRAMMATICA', color: 0x38bdf8, role: 'Femminile singolare ("una bella")' }
+    },
+    chipGroups: [
+      {
+        label: '🟢 Consenso Unanime (Cibi Caldi):',
+        color: 'green',
+        words: [
+          { key: 'zuppa', label: '🍲 Zuppa' },
+          { key: 'cioccolata', label: '☕ Cioccolata' },
+          { key: 'tisana', label: '🍵 Tisana' }
+        ]
+      },
+      {
+        label: '🔴 Veto Grammatica (Falsi Amici Maschili):',
+        color: 'red',
+        words: [
+          { key: 'minestrone', label: '🥣 Minestrone' },
+          { key: 'brodo', label: '🍲 Brodo' },
+          { key: 'te', label: '🫖 Tè' }
+        ]
+      },
+      {
+        label: '❄️ Veto Emozione (Freddo Incongruente):',
+        color: 'cyan',
+        words: [
+          { key: 'granita', label: '🍧 Granita' },
+          { key: 'insalata', label: '🥗 Insalata' },
+          { key: 'gelato', label: '🍦 Gelato' }
+        ]
+      },
+      {
+        label: '🧣 Veto Cibo (Scalda ma non si mangia a tavola):',
+        color: 'purple',
+        words: [
+          { key: 'coperta', label: '🧣 Coperta' },
+          { key: 'doccia', label: '🚿 Doccia' }
+        ]
+      },
+      {
+        label: '🌌 Fuori Contesto Totale:',
+        color: 'gray',
+        words: [
+          { key: 'galassia', label: '🌌 Galassia' }
+        ]
+      }
+    ],
+    vocabulary: {
+      zuppa: {
+        word: 'Zuppa 🍲', label: 'ZUPPA 🍲', score: '+30', totalScoreNum: 30, statusType: 'consensus',
+        verdictTitle: '🟢 CONSENSO UNANIME! (+30 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'Pietanza commestibile calda e gustosa' },
+        emoVote: { val: '+10', pass: true, text: 'Confortante e perfetta contro il gelo' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile singolare: «una bella zuppa»' },
+        narrative: 'Tutti e 3 i fasci laser 3D convergono all\'unisono sulla sfera! Parola perfetta: calore semantico, accordo emotivo e concordanza grammaticale impeccabile.'
+      },
+      cioccolata: {
+        word: 'Cioccolata ☕', label: 'CIOCCOLATA ☕', score: '+30', totalScoreNum: 30, statusType: 'consensus',
+        verdictTitle: '🟢 CONSENSO UNANIME! (+30 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'Bevanda densa dolce ed energetica' },
+        emoVote: { val: '+10', pass: true, text: 'Calda e corroborante dopo il freddo' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile singolare: «una bella cioccolata»' },
+        narrative: 'Consenso pieno dei 3 giudici: il piacere del gusto, la risposta al freddo e la concordanza femminile creano una scarica di probabilità massima!'
+      },
+      tisana: {
+        word: 'Tisana 🍵', label: 'TISANA 🍵', score: '+30', totalScoreNum: 30, statusType: 'consensus',
+        verdictTitle: '🟢 CONSENSO UNANIME! (+30 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'Infuso caldo commestibile' },
+        emoVote: { val: '+10', pass: true, text: 'Bollente e ideale per scaldarsi' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile singolare: «una bella tisana»' },
+        narrative: 'Fasci convergenti senza ostacoli! Anche per «tisana» tutti e 3 i giudici votano a favore: la parola viene approvata all\'unanimità.'
+      },
+      minestrone: {
+        word: 'Minestrone 🥣', label: 'MINESTRONE 🥣', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '🔴 BOCCIATO DAL VETO GRAMMATICALE! (+10 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'Ottimo cibo caldo per scaldarsi' },
+        emoVote: { val: '+10', pass: true, text: 'Dona calore immediato contro la pioggia' },
+        gramVote: { val: '-10', pass: false, text: 'VETO: È MASCHILE! («una bella minestrone» è errore)' },
+        narrative: 'I fasci del Cibo (Giallo) e dell\'Emozione (Rosso) arrivano a destinazione, ma il fascio del Giudice Grammatica (Blu) si spezza a metà in una barriera di sbarramento rossa! In italiano è «un bel minestrone», non «una bella»: parola scartata!'
+      },
+      brodo: {
+        word: 'Brodo 🍲', label: 'BRODO 🍲', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '🔴 BOCCIATO DAL VETO GRAMMATICALE! (+10 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'Piatto caldo fumante della tradizione' },
+        emoVote: { val: '+10', pass: true, text: 'Scalda a fondo corpo e spirito' },
+        gramVote: { val: '-10', pass: false, text: 'VETO: È MASCHILE! («una bella brodo» è errato)' },
+        narrative: 'Ideale contro la pioggia gelida, ma la concordanza morfosintattica dell\'articolo «una bella» fallisce. Il neurone della grammatica blocca l\'attivazione.'
+      },
+      te: {
+        word: 'Tè 🫖', label: 'TÈ 🫖', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '🔴 BOCCIATO DAL VETO GRAMMATICALE! (+10 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'Bevanda corroborante calda' },
+        emoVote: { val: '+10', pass: true, text: 'Confortevole e rilassante nel freddo' },
+        gramVote: { val: '-10', pass: false, text: 'VETO: È MASCHILE! («un bel tè», non «una bella»)' },
+        narrative: 'Il fascio della Grammatica non raggiunge la sfera: l\'accordo al femminile viene violato, impedendo a ChatGPT di generare questa scelta.'
+      },
+      granita: {
+        word: 'Granita 🍧', label: 'GRANITA 🍧', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '❄️ BOCCIATO PER CONTRADDIZIONE EMOTIVA! (+10 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'È un dolce/alimento commestibile' },
+        emoVote: { val: '-10', pass: false, text: 'VETO: È GHIACCIATA! Contrasto totale con pioggia e freddo' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile singolare: «una bella granita»' },
+        narrative: 'Grammatica e Cibo approvano, ma il fascio del Giudice Emozione si spezza in un muro di ghiaccio: dopo una pioggia gelida, proporre una granita è un contrasto semantico inaccettabile!'
+      },
+      insalata: {
+        word: 'Insalata 🥗', label: 'INSALATA 🥗', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '❄️ BOCCIATO PER MANCANZA DI CALORE! (+10 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'Alimento fresco e commestibile' },
+        emoVote: { val: '-10', pass: false, text: 'VETO: È FREDDA! Non serve a scaldarsi' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile singolare: «una bella insalata»' },
+        narrative: 'L\'insalata è femminile ed è cibo, ma il testo richiede esplicitamente l\'azione di «scaldarsi». Il Giudice Emozione rifiuta di accendersi.'
+      },
+      gelato: {
+        word: 'Gelato 🍦', label: 'GELATO 🍦', score: '-12', totalScoreNum: -12, statusType: 'veto',
+        verdictTitle: '⛔ DOPPIO VETO (EMOZIONE + GRAMMATICA)! (-12 Punti)',
+        ciboVote: { val: '+8', pass: true, text: 'È un alimento dolce commestibile' },
+        emoVote: { val: '-10', pass: false, text: 'VETO: È FREDDO CONGELATO!' },
+        gramVote: { val: '-10', pass: false, text: 'VETO: È MASCHILE! («un bel gelato»)' },
+        narrative: 'Solo il Giudice Cibo lancia un flebile raggio. Gli altri due giudici alzano un doppio sbarramento: è ghiacciato ed è maschile. Punteggio negativo, la parola rimane spenta!'
+      },
+      coperta: {
+        word: 'Coperta 🧣', label: 'COPERTA 🧣', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '🧣 BOCCIATO DAL GIUDICE CIBO! (+10 Punti)',
+        ciboVote: { val: '-10', pass: false, text: 'VETO: NON È CIBO! Non si consuma a tavola' },
+        emoVote: { val: '+10', pass: true, text: 'Dona calore e sollievo immediato' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile singolare: «una bella coperta»' },
+        narrative: '«Una bella coperta» è ottima contro il freddo ed è grammaticalmente corretta, ma il fascio del Giudice Cibo si spezza: il contesto specifica «sedersi a tavola», quindi l\'attenzione semantica esige una pietanza o bevanda commestibile!'
+      },
+      doccia: {
+        word: 'Doccia 🚿', label: 'DOCCIA 🚿', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '🚿 BOCCIATO DAL GIUDICE CIBO! (+10 Punti)',
+        ciboVote: { val: '-10', pass: false, text: 'VETO: NON È CIBO! Non è una portata da tavola' },
+        emoVote: { val: '+10', pass: true, text: 'Bollente e perfetta per togliere il freddo' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile singolare: «una bella doccia»' },
+        narrative: 'Una doccia calda toglie il gelo, ma non si consuma a tavola: il neurone culinario alza immediatamente il suo sbarramento di veto.'
+      },
+      galassia: {
+        word: 'Galassia 🌌', label: 'GALASSIA 🌌', score: '0', totalScoreNum: 0, statusType: 'neutral',
+        verdictTitle: '🌌 ZERO RISONANZA (FUORI TEMA)! (0 Punti)',
+        ciboVote: { val: '0', pass: false, text: 'Nessuna relazione culinaria' },
+        emoVote: { val: '0', pass: false, text: 'Nessuna relazione col calore' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile singolare' },
+        narrative: 'Nessuna affinità semantica o termica con la frase. Solo la concordanza morfologica è valida, ma la frase non riceve carica: l\'orchestra tace.'
+      }
+    }
   },
-  cioccolata: {
-    word: 'Cioccolata ☕',
-    label: 'CIOCCOLATA ☕',
-    category: 'Consenso Pieno',
-    score: '+30',
-    totalScoreNum: 30,
-    statusType: 'consensus',
-    verdictTitle: '🟢 CONSENSO UNANIME! (+30 Punti)',
-    ciboVote: { val: '+10', pass: true, text: 'Bevanda densa dolce ed energetica' },
-    emoVote: { val: '+10', pass: true, text: 'Calda e corroborante dopo il freddo' },
-    gramVote: { val: '+10', pass: true, text: 'Femminile singolare: «una bella cioccolata»' },
-    narrative: 'Consenso pieno dei 3 giudici: il piacere del gusto, la risposta al freddo e la concordanza femminile creano una scarica di probabilità massima!'
+  wizard: {
+    id: 'wizard',
+    name: '🧙 La Torre del Mago',
+    sentence: '« Nella torre antica il vecchio mago preparò con cura una potente <span class="orchestra-target standby" id="orchestra-target-word">[ ... ? ]</span> »',
+    judges: {
+      cibo: { name: 'Giudice Magia (Viola)', label: '🔮 MONDO MAGICO', color: 0xc084fc, role: 'Alchimia, incantesimi e arti magiche' },
+      emo: { name: 'Giudice Mistero (Rosso)', label: '🌙 MISTERO', color: 0xf43f5e, role: 'Tono epico, solenne e antico' },
+      gram: { name: 'Giudice Grammatica (Blu)', label: '🔵 GRAMMATICA', color: 0x38bdf8, role: 'Femminile singolare ("una potente")' }
+    },
+    chipGroups: [
+      {
+        label: '🟢 Consenso Unanime (Magie Femminili):',
+        color: 'green',
+        words: [
+          { key: 'pozione', label: '🧪 Pozione' },
+          { key: 'formula', label: '📜 Formula' },
+          { key: 'pergamena', label: '📜 Pergamena' }
+        ]
+      },
+      {
+        label: '🔴 Veto Grammatica (Magie Maschili):',
+        color: 'red',
+        words: [
+          { key: 'incantesimo', label: '🪄 Incantesimo' },
+          { key: 'sortilegio', label: '🔮 Sortilegio' },
+          { key: 'rituale', label: '🕯️ Rituale' }
+        ]
+      },
+      {
+        label: '☕ Veto Magia (Troppo Banali per uno Stregone):',
+        color: 'cyan',
+        words: [
+          { key: 'tisana', label: '🍵 Tisana' },
+          { key: 'zuppa', label: '🍲 Zuppa' }
+        ]
+      },
+      {
+        label: '🗡️ Veto Oggetto (Un Mago non è un Fabbro):',
+        color: 'purple',
+        words: [
+          { key: 'spada', label: '🗡️ Spada' },
+          { key: 'corazza', label: '🛡️ Corazza' }
+        ]
+      },
+      {
+        label: '🌌 Fuori Contesto Totale:',
+        color: 'gray',
+        words: [
+          { key: 'galassia', label: '🌌 Galassia' }
+        ]
+      }
+    ],
+    vocabulary: {
+      pozione: {
+        word: 'Pozione 🧪', label: 'POZIONE 🧪', score: '+30', totalScoreNum: 30, statusType: 'consensus',
+        verdictTitle: '🟢 CONSENSO UNANIME! (+30 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'Preparato alchemico magico autentico' },
+        emoVote: { val: '+10', pass: true, text: 'Misteriosa e adatta al vecchio mago' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile: «una potente pozione»' },
+        narrative: 'Tutti e 3 i fasci laser convergono sul bersaglio! È magica, epica e grammaticalmente perfetta: ChatGPT la sceglie al 99%!'
+      },
+      formula: {
+        word: 'Formula 📜', label: 'FORMULA 📜', score: '+30', totalScoreNum: 30, statusType: 'consensus',
+        verdictTitle: '🟢 CONSENSO UNANIME! (+30 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'Parole arcane e misteriose' },
+        emoVote: { val: '+10', pass: true, text: 'Potente e sapiente' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile: «una potente formula»' },
+        narrative: 'Consenso pieno! Preparare una potente formula magica rispetta tutti i vincoli dell\'orchestra neurale.'
+      },
+      pergamena: {
+        word: 'Pergamena 📜', label: 'PERGAMENA 📜', score: '+30', totalScoreNum: 30, statusType: 'consensus',
+        verdictTitle: '🟢 CONSENSO UNANIME! (+30 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'Supporto antico per incantesimi' },
+        emoVote: { val: '+10', pass: true, text: 'Atmosfera antica e solenne' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile: «una potente pergamena»' },
+        narrative: 'Tutti i 3 giudici concordano: la pergamena si prepara con cura e si adatta alla torre antica.'
+      },
+      incantesimo: {
+        word: 'Incantesimo 🪄', label: 'INCANTESIMO 🪄', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '🔴 BOCCIATO DAL VETO GRAMMATICALE! (+10 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'Magia purissima da stregone' },
+        emoVote: { val: '+10', pass: true, text: 'Perfetto per il tono della frase' },
+        gramVote: { val: '-10', pass: false, text: 'VETO: È MASCHILE! («un potente incantesimo»)' },
+        narrative: 'Il significato è ottimo, ma in italiano diciamo «un potente incantesimo», non «una potente»! Il Giudice Grammatica alza la barriera di sbarramento!'
+      },
+      sortilegio: {
+        word: 'Sortilegio 🔮', label: 'SORTILEGIO 🔮', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '🔴 BOCCIATO DAL VETO GRAMMATICALE! (+10 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'Atto magico potente' },
+        emoVote: { val: '+10', pass: true, text: 'Misterioso e oscuro' },
+        gramVote: { val: '-10', pass: false, text: 'VETO: È MASCHILE! («un potente sortilegio»)' },
+        narrative: 'Parola fantastica ma grammaticalmente incompatibile: il fascio blu si spezza a metà tragitto!'
+      },
+      rituale: {
+        word: 'Rituale 🕯️', label: 'RITUALE 🕯️', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '🔴 BOCCIATO DAL VETO GRAMMATICALE! (+10 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'Azione magica e solenne' },
+        emoVote: { val: '+10', pass: true, text: 'Atmosfera di mistero nella torre' },
+        gramVote: { val: '-10', pass: false, text: 'VETO: È MASCHILE! («un potente rituale»)' },
+        narrative: 'Anche qui la grammatica impone il veto maschile: parola scartata dalla selezione.'
+      },
+      tisana: {
+        word: 'Tisana 🍵', label: 'TISANA 🍵', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '🍵 BOCCIATO DAL GIUDICE MAGIA! (+10 Punti)',
+        ciboVote: { val: '-10', pass: false, text: 'VETO: NON È MAGIA! È un rimedio casalingo per la gola' },
+        emoVote: { val: '+10', pass: true, text: 'Scalda e rilassa' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile: «una potente tisana»' },
+        narrative: 'Una tisana farà bene contro l\'influenza, ma nella torre di un mago antico non evoca incantesimi: il Giudice del Mondo Magico alza il veto!'
+      },
+      zuppa: {
+        word: 'Zuppa 🍲', label: 'ZUPPA 🍲', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '🍲 BOCCIATO DAL GIUDICE MAGIA! (+10 Punti)',
+        ciboVote: { val: '-10', pass: false, text: 'VETO: È CIBO, NON MAGIA!' },
+        emoVote: { val: '+10', pass: true, text: 'Calda e sostanziosa' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile singolare' },
+        narrative: 'Il mago forse avrà fame, ma una «potente zuppa» è un controsenso in una storia fantasy epica!'
+      },
+      spada: {
+        word: 'Spada 🗡️', label: 'SPADA 🗡️', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '🗡️ BOCCIATO: IL MAGO NON È UN FABBRO! (+10 Punti)',
+        ciboVote: { val: '-10', pass: false, text: 'VETO: ARMA METALLICA! Si forgia nell\'armeria, non si prepara con cura alchemica' },
+        emoVote: { val: '+10', pass: true, text: 'Epica e potente' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile: «una potente spada»' },
+        narrative: 'Le spade le usano i cavalieri e le battono i fabbri. L\'azione «preparò con cura nella torre» richiede alchimia o magia spirituale!'
+      },
+      corazza: {
+        word: 'Corazza 🛡️', label: 'CORAZZA 🛡️', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '🛡️ BOCCIATO: NON ADATTO AD UN MAGO! (+10 Punti)',
+        ciboVote: { val: '-10', pass: false, text: 'VETO: ARMATURA DIFENSIVA! Non è arte magica' },
+        emoVote: { val: '+10', pass: true, text: 'Resistente e forte' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile singolare' },
+        narrative: 'Un mago indossa tuniche e usa bastoni magici: la corazza appartiene al mondo dei guerrieri.'
+      },
+      galassia: {
+        word: 'Galassia 🌌', label: 'GALASSIA 🌌', score: '0', totalScoreNum: 0, statusType: 'neutral',
+        verdictTitle: '🌌 ZERO RISONANZA (0 Punti)',
+        ciboVote: { val: '0', pass: false, text: 'Nessuna relazione con la pozione del mago' },
+        emoVote: { val: '0', pass: false, text: 'Troppo distante' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile singolare' },
+        narrative: 'Nessun legame logico o semantico: silenzio totale.'
+      }
+    }
   },
-  tisana: {
-    word: 'Tisana 🍵',
-    label: 'TISANA 🍵',
-    category: 'Consenso Pieno',
-    score: '+30',
-    totalScoreNum: 30,
-    statusType: 'consensus',
-    verdictTitle: '🟢 CONSENSO UNANIME! (+30 Punti)',
-    ciboVote: { val: '+10', pass: true, text: 'Infuso caldo commestibile' },
-    emoVote: { val: '+10', pass: true, text: 'Bollente e ideale per scaldarsi' },
-    gramVote: { val: '+10', pass: true, text: 'Femminile singolare: «una bella tisana»' },
-    narrative: 'Fasci convergenti senza ostacoli! Anche per «tisana» tutti e 3 i giudici votano a favore: la parola viene approvata all\'unanimità.'
-  },
-  minestrone: {
-    word: 'Minestrone 🥣',
-    label: 'MINESTRONE 🥣',
-    category: 'Veto Grammatica',
-    score: '+10',
-    totalScoreNum: 10,
-    statusType: 'veto',
-    verdictTitle: '🔴 BOCCIATO DAL VETO GRAMMATICALE! (+10 Punti)',
-    ciboVote: { val: '+10', pass: true, text: 'Ottimo cibo caldo per scaldarsi' },
-    emoVote: { val: '+10', pass: true, text: 'Dona calore immediato contro la pioggia' },
-    gramVote: { val: '-10', pass: false, text: 'VETO: È MASCHILE! («una bella minestrone» è errore)' },
-    narrative: 'I fasci del Cibo (Giallo) e dell\'Emozione (Rosso) arrivano a destinazione, ma <strong>il fascio del Giudice Grammatica (Blu) si spezza a metà in una barriera di sbarramento rossa</strong>! In italiano è «un bel minestrone», non «una bella»: parola scartata!'
-  },
-  brodo: {
-    word: 'Brodo 🍲',
-    label: 'BRODO 🍲',
-    category: 'Veto Grammatica',
-    score: '+10',
-    totalScoreNum: 10,
-    statusType: 'veto',
-    verdictTitle: '🔴 BOCCIATO DAL VETO GRAMMATICALE! (+10 Punti)',
-    ciboVote: { val: '+10', pass: true, text: 'Piatto caldo fumante della tradizione' },
-    emoVote: { val: '+10', pass: true, text: 'Scalda a fondo corpo e spirito' },
-    gramVote: { val: '-10', pass: false, text: 'VETO: È MASCHILE! («una bella brodo» è errato)' },
-    narrative: 'Ideale contro la pioggia gelida, ma la concordanza morfosintattica dell\'articolo «una bella» fallisce. Il neurone della grammatica blocca l\'attivazione.'
-  },
-  te: {
-    word: 'Tè 🫖',
-    label: 'TÈ 🫖',
-    category: 'Veto Grammatica',
-    score: '+10',
-    totalScoreNum: 10,
-    statusType: 'veto',
-    verdictTitle: '🔴 BOCCIATO DAL VETO GRAMMATICALE! (+10 Punti)',
-    ciboVote: { val: '+10', pass: true, text: 'Bevanda corroborante calda' },
-    emoVote: { val: '+10', pass: true, text: 'Confortevole e rilassante nel freddo' },
-    gramVote: { val: '-10', pass: false, text: 'VETO: È MASCHILE! («un bel tè», non «una bella»)' },
-    narrative: 'Il fascio della Grammatica non raggiunge la sfera: l\'accordo al femminile viene violato, impedendo a ChatGPT di generare questa scelta.'
-  },
-  granita: {
-    word: 'Granita 🍧',
-    label: 'GRANITA 🍧',
-    category: 'Veto Emozione',
-    score: '+10',
-    totalScoreNum: 10,
-    statusType: 'veto',
-    verdictTitle: '❄️ BOCCIATO PER CONTRADDIZIONE EMOTIVA! (+10 Punti)',
-    ciboVote: { val: '+10', pass: true, text: 'È un dolce/alimento commestibile' },
-    emoVote: { val: '-10', pass: false, text: 'VETO: È GHIACCIATA! Contrasto totale con pioggia e freddo' },
-    gramVote: { val: '+10', pass: true, text: 'Femminile singolare: «una bella granita»' },
-    narrative: 'Grammatica e Cibo approvano, ma <strong>il fascio del Giudice Emozione si spezza in un muro di ghiaccio</strong>: dopo una pioggia gelida, proporre una granita è un contrasto semantico inaccettabile!'
-  },
-  insalata: {
-    word: 'Insalata 🥗',
-    label: 'INSALATA 🥗',
-    category: 'Veto Emozione',
-    score: '+10',
-    totalScoreNum: 10,
-    statusType: 'veto',
-    verdictTitle: '❄️ BOCCIATO PER MANCANZA DI CALORE! (+10 Punti)',
-    ciboVote: { val: '+10', pass: true, text: 'Alimento fresco e commestibile' },
-    emoVote: { val: '-10', pass: false, text: 'VETO: È FREDDA! Non serve a scaldarsi' },
-    gramVote: { val: '+10', pass: true, text: 'Femminile singolare: «una bella insalata»' },
-    narrative: 'L\'insalata è femminile ed è cibo, ma il testo richiede esplicitamente l\'azione di «scaldarsi». Il Giudice Emozione rifiuta di accendersi.'
-  },
-  gelato: {
-    word: 'Gelato 🍦',
-    label: 'GELATO 🍦',
-    category: 'Doppio Veto',
-    score: '-12',
-    totalScoreNum: -12,
-    statusType: 'veto',
-    verdictTitle: '⛔ DOPPIO VETO (EMOZIONE + GRAMMATICA)! (-12 Punti)',
-    ciboVote: { val: '+8', pass: true, text: 'È un alimento dolce commestibile' },
-    emoVote: { val: '-10', pass: false, text: 'VETO: È FREDDO CONGELATO!' },
-    gramVote: { val: '-10', pass: false, text: 'VETO: È MASCHILE! («un bel gelato»)' },
-    narrative: 'Solo il Giudice Cibo lancia un flebile raggio. Gli altri due giudici alzano un doppio sbarramento: è ghiacciato ed è maschile. Punteggio negativo, la parola rimane spenta!'
-  },
-  coperta: {
-    word: 'Coperta 🧣',
-    label: 'COPERTA 🧣',
-    category: 'Veto Cibo',
-    score: '+10',
-    totalScoreNum: 10,
-    statusType: 'veto',
-    verdictTitle: '🧣 BOCCIATO DAL GIUDICE CIBO! (+10 Punti)',
-    ciboVote: { val: '-10', pass: false, text: 'VETO: NON È CIBO! Non si consuma a tavola' },
-    emoVote: { val: '+10', pass: true, text: 'Dona calore e sollievo immediato' },
-    gramVote: { val: '+10', pass: true, text: 'Femminile singolare: «una bella coperta»' },
-    narrative: '«Una bella coperta» è ottima contro il freddo ed è grammaticalmente corretta, ma <strong>il fascio del Giudice Cibo si spezza</strong>: il contesto specifica <em>«sedersi a tavola»</em>, quindi l\'attenzione semantica esige una pietanza o bevanda commestibile!'
-  },
-  doccia: {
-    word: 'Doccia 🚿',
-    label: 'DOCCIA 🚿',
-    category: 'Veto Cibo',
-    score: '+10',
-    totalScoreNum: 10,
-    statusType: 'veto',
-    verdictTitle: '🚿 BOCCIATO DAL GIUDICE CIBO! (+10 Punti)',
-    ciboVote: { val: '-10', pass: false, text: 'VETO: NON È CIBO! Non è una portata da tavola' },
-    emoVote: { val: '+10', pass: true, text: 'Bollente e perfetta per togliere il freddo' },
-    gramVote: { val: '+10', pass: true, text: 'Femminile singolare: «una bella doccia»' },
-    narrative: 'Una doccia calda toglie il gelo, ma non si consuma a tavola: il neurone culinario alza immediatamente il suo sbarramento di veto.'
-  },
-  galassia: {
-    word: 'Galassia 🌌',
-    label: 'GALASSIA 🌌',
-    category: 'Fuori Contesto',
-    score: '0',
-    totalScoreNum: 0,
-    statusType: 'neutral',
-    verdictTitle: '🌌 ZERO RISONANZA (FUORI TEMA)! (0 Punti)',
-    ciboVote: { val: '0', pass: false, text: 'Nessuna relazione culinaria' },
-    emoVote: { val: '0', pass: false, text: 'Nessuna relazione col calore' },
-    gramVote: { val: '+10', pass: true, text: 'Femminile singolare' },
-    narrative: 'Nessuna affinità semantica o termica con la frase. Solo la concordanza morfologica è valida, ma la frase non riceve carica: l\'orchestra tace.'
+  soccer: {
+    id: 'soccer',
+    name: '⚽ La Partita Decisiva',
+    sentence: '« Al novantesimo minuto il capitano calciò forte segnando una splendida <span class="orchestra-target standby" id="orchestra-target-word">[ ... ? ]</span> »',
+    judges: {
+      cibo: { name: 'Giudice Azione Sportiva (Verde)', label: '⚽ AZIONE GOL', color: 0x10b981, role: 'Calcio, tiri e azioni da rete' },
+      emo: { name: 'Giudice Vittoria (Ambra)', label: '🏆 VITTORIA', color: 0xf59e0b, role: 'Trionfo, entusiasmo e gioia allo stadio' },
+      gram: { name: 'Giudice Grammatica (Blu)', label: '🔵 GRAMMATICA', color: 0x38bdf8, role: 'Femminile singolare ("una splendida")' }
+    },
+    chipGroups: [
+      {
+        label: '🟢 Consenso Unanime (Termini di Gol Femminili):',
+        color: 'green',
+        words: [
+          { key: 'rete', label: '🥅 Rete' },
+          { key: 'doppietta', label: '⚽ Doppietta' },
+          { key: 'marcatura', label: '🎯 Marcatura' }
+        ]
+      },
+      {
+        label: '🔴 Veto Grammatica (Falsi Amici Maschili nel Calcio):',
+        color: 'red',
+        words: [
+          { key: 'gol', label: '⚽ Gol' },
+          { key: 'rigore', label: '🥅 Rigore' },
+          { key: 'tiro', label: '👟 Tiro' }
+        ]
+      },
+      {
+        label: '🧤 Veto Azione (Ruoli Sbagliati in Partita):',
+        color: 'cyan',
+        words: [
+          { key: 'parata', label: '🧤 Parata' },
+          { key: 'ammonizione', label: '🟨 Ammonizione' }
+        ]
+      },
+      {
+        label: '🍕 Veto Calcio (Cose che non si segnano in porta):',
+        color: 'purple',
+        words: [
+          { key: 'pizza', label: '🍕 Pizza' },
+          { key: 'macchina', label: '🚗 Macchina' }
+        ]
+      },
+      {
+        label: '🌌 Fuori Contesto Totale:',
+        color: 'gray',
+        words: [
+          { key: 'galassia', label: '🌌 Galassia' }
+        ]
+      }
+    ],
+    vocabulary: {
+      rete: {
+        word: 'Rete 🥅', label: 'RETE 🥅', score: '+30', totalScoreNum: 30, statusType: 'consensus',
+        verdictTitle: '🟢 CONSENSO UNANIME! (+30 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'Segnare a rete è il culmine del calcio!' },
+        emoVote: { val: '+10', pass: true, text: 'Apoteosi di gioia al 90° minuto' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile: «una splendida rete»' },
+        narrative: 'Tutti e 3 i fasci convergono al massimo splendore! «Segnare una splendida rete» è l\'espressione perfetta e più usata dai telecronisti!'
+      },
+      doppietta: {
+        word: 'Doppietta ⚽', label: 'DOPPIETTA ⚽', score: '+30', totalScoreNum: 30, statusType: 'consensus',
+        verdictTitle: '🟢 CONSENSO UNANIME! (+30 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'Due gol segnati dallo stesso giocatore!' },
+        emoVote: { val: '+10', pass: true, text: 'Trionfo epico al novantesimo minuto' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile: «una splendida doppietta»' },
+        narrative: 'Punteggio pieno (+30)! L\'accordo sportivo ed emotivo è al 100%.'
+      },
+      marcatura: {
+        word: 'Marcatura 🎯', label: 'MARCATURA 🎯', score: '+30', totalScoreNum: 30, statusType: 'consensus',
+        verdictTitle: '🟢 CONSENSO UNANIME! (+30 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'Termine tecnico per il gol segnato' },
+        emoVote: { val: '+10', pass: true, text: 'Decisivo per vincere la partita' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile: «una splendida marcatura»' },
+        narrative: 'L\'orchestra approva: termine calcistico corretto e grammaticalmente perfetto.'
+      },
+      gol: {
+        word: 'Gol ⚽', label: 'GOL ⚽', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '🔴 BOCCIATO DAL VETO GRAMMATICALE! (+10 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'È il gol decisivo al 90°!' },
+        emoVote: { val: '+10', pass: true, text: 'Tripudio allo stadio' },
+        gramVote: { val: '-10', pass: false, text: 'VETO: È MASCHILE! («uno splendido gol», non «una splendida»)' },
+        narrative: 'La parola più ovvia nel calcio viene bocciata dalla grammatica! In italiano «gol» è maschile: dire «una splendida gol» è un errore marchiano. Il Giudice Blu spezza il fascio!'
+      },
+      rigore: {
+        word: 'Rigore 🥅', label: 'RIGORE 🥅', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '🔴 BOCCIATO DAL VETO GRAMMATICALE! (+10 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'Tiro dagli undici metri' },
+        emoVote: { val: '+10', pass: true, text: 'Tensione al novantesimo minuto' },
+        gramVote: { val: '-10', pass: false, text: 'VETO: È MASCHILE! («un rigore»)' },
+        narrative: 'Il rigore è maschile, quindi la concordanza con «una splendida» fallisce irrimediabilmente.'
+      },
+      tiro: {
+        word: 'Tiro 👟', label: 'TIRO 👟', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '🔴 BOCCIATO DAL VETO GRAMMATICALE! (+10 Punti)',
+        ciboVote: { val: '+10', pass: true, text: 'Azione di calciare il pallone' },
+        emoVote: { val: '+10', pass: true, text: 'Forza e decisione' },
+        gramVote: { val: '-10', pass: false, text: 'VETO: È MASCHILE! («un tiro»)' },
+        narrative: 'Incompatibile con l\'articolo femminile «una bella / splendida». Parola scartata.'
+      },
+      parata: {
+        word: 'Parata 🧤', label: 'PARATA 🧤', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '🧤 BOCCIATO: IL CAPITANO HA SEGNATO, NON PARATO! (+10 Punti)',
+        ciboVote: { val: '-10', pass: false, text: 'VETO: AZIONE DEL PORTIERE! Chi calcia in attacco non può "segnare una parata"' },
+        emoVote: { val: '+10', pass: true, text: 'Momento spettacolare' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile singolare' },
+        narrative: 'La parata la fa il portiere avversario! Il testo dice «calciò segnando...», quindi un giocatore non può "segnare una parata": il Giudice dell\'Azione Sportiva blocca il laser!'
+      },
+      ammonizione: {
+        word: 'Ammonizione 🟨', label: 'AMMONIZIONE 🟨', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '🟨 BOCCIATO: NON SI SEGNA UN CARTELLINO! (+10 Punti)',
+        ciboVote: { val: '-10', pass: false, text: 'VETO: SANZIONE DELL\'ARBITRO! Non è un gol' },
+        emoVote: { val: '-10', pass: false, text: 'Fallo o protesta negativa' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile singolare' },
+        narrative: 'L\'ammonizione è un cartellino dell\'arbitro, non un gol da esultare al novantesimo: l\'orchestra alza doppio veto.'
+      },
+      pizza: {
+        word: 'Pizza 🍕', label: 'PIZZA 🍕', score: '+10', totalScoreNum: 10, statusType: 'veto',
+        verdictTitle: '🍕 BOCCIATO DAL GIUDICE DELLO SPORT! (+10 Punti)',
+        ciboVote: { val: '-10', pass: false, text: 'VETO: NON È UN\'AZIONE DA GOL! Non si segna una pizza' },
+        emoVote: { val: '+10', pass: true, text: 'Buona dopo la partita tra amici' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile singolare' },
+        narrative: 'La pizza è squisita dopo il match con i compagni di squadra, ma non si calcia dentro la porta da calcio!'
+      },
+      macchina: {
+        word: 'Macchina 🚗', label: 'MACCHINA 🚗', score: '0', totalScoreNum: 0, statusType: 'neutral',
+        verdictTitle: '🚗 ZERO RISONANZA NEL CALCIO (0 Punti)',
+        ciboVote: { val: '0', pass: false, text: 'Nessun legame con la rete di calcio' },
+        emoVote: { val: '0', pass: false, text: 'Fuori contesto sportivo' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile singolare' },
+        narrative: 'Un veicolo non ha alcuna parentela con l\'azione di gioco: l\'orchestra non si attiva.'
+      },
+      galassia: {
+        word: 'Galassia 🌌', label: 'GALASSIA 🌌', score: '0', totalScoreNum: 0, statusType: 'neutral',
+        verdictTitle: '🌌 ZERO RISONANZA (0 Punti)',
+        ciboVote: { val: '0', pass: false, text: 'Spazio profondo' },
+        emoVote: { val: '0', pass: false, text: 'Nessun legame con lo stadio' },
+        gramVote: { val: '+10', pass: true, text: 'Femminile singolare' },
+        narrative: 'Le stelle non giocano a calcio: zero probabilità.'
+      }
+    }
   }
 };
+
+let currentScenarioKey = 'winter';
+let currentTemperature = 0.7;
+
+function getCurrentVocabulary() {
+  const scen = orchestraScenarios[currentScenarioKey] || orchestraScenarios.winter;
+  return scen.vocabulary;
+}
 
 // Fallback per parole libere digitate non presenti nel vocabolario
 function getCustomWordData(customWord) {
@@ -1904,6 +2578,7 @@ function setOrchestraStandby() {
   if (hintsBar) hintsBar.style.display = 'none';
 
   // Renderizza la Card di Standby nel verdetto
+  const scen = orchestraScenarios[currentScenarioKey] || orchestraScenarios.winter;
   const vBox = document.getElementById('judges-verdict-box');
   if (vBox) {
     vBox.innerHTML = `
@@ -1911,7 +2586,7 @@ function setOrchestraStandby() {
         <div class="standby-badge">⚡ MACCHINA IN ASCOLTO (STANDBY)</div>
         <h4>I 3 neuroni giudici sono pronti a votare</h4>
         <p>
-          L'orchestra di ChatGPT è in attesa di un segnale. I 3 neuroni in alto (<strong>Giudice Cibo 🟡</strong>, <strong>Giudice Emozione 🔴</strong>, <strong>Giudice Grammatica 🔵</strong>) sono pronti a sparare i loro fasci di luce per valutare ogni parola candidata.
+          L'orchestra di ChatGPT è in attesa di un segnale. I 3 neuroni in alto (<strong>${scen.judges.cibo.label}</strong>, <strong>${scen.judges.emo.label}</strong>, <strong>${scen.judges.gram.label}</strong>) sono pronti a sparare i loro fasci di luce per valutare ogni parola candidata.
         </p>
         <div class="standby-call-to-action">
           👉 <strong>Digita una parola</strong> nella casella qui sopra oppure <strong>clicca una delle tessere colorate</strong> per osservare la convergenza dei laser in tempo reale!
@@ -1929,7 +2604,8 @@ function selectOrchestraCandidate(candKey, customData = null) {
   clearOrchestraBeams();
   currentOrchestraCandKey = candKey;
 
-  const data = customData || orchestraVocabulary[candKey] || getCustomWordData(candKey);
+  const vocab = getCurrentVocabulary();
+  const data = customData || vocab[candKey] || getCustomWordData(candKey);
 
   // Aggiorna stato attivo chip
   document.querySelectorAll('.word-chip').forEach(c => {
@@ -1957,27 +2633,28 @@ function selectOrchestraCandidate(candKey, customData = null) {
   updateTargetSprite(data.label, 0xfbbf24);
 
   const tPos = oTargetMesh.position;
+  const scen = orchestraScenarios[currentScenarioKey] || orchestraScenarios.winter;
 
   // ANIMAZIONE SEQUENZIALE DEI 3 FASCI
-  // 1. Fascio Giudice Cibo (Giallo 🟡) - Subito a t = 0ms
+  // 1. Fascio Giudice 1 - Subito a t = 0ms
   const t1 = setTimeout(() => {
-    const beamCibo = createLaserBeam(judgeMeshes.cibo.position, tPos, 0xfbbf24, data.ciboVote.pass);
+    const beamCibo = createLaserBeam(judgeMeshes.cibo.position, tPos, scen.judges.cibo.color, data.ciboVote.pass);
     oGroup.add(beamCibo);
     energyBeams.push(beamCibo);
   }, 40);
   orchestraTimeouts.push(t1);
 
-  // 2. Fascio Giudice Emozione (Rosso 🔴) - t = 180ms
+  // 2. Fascio Giudice 2 - t = 180ms
   const t2 = setTimeout(() => {
-    const beamEmo = createLaserBeam(judgeMeshes.emo.position, tPos, 0xf43f5e, data.emoVote.pass);
+    const beamEmo = createLaserBeam(judgeMeshes.emo.position, tPos, scen.judges.emo.color, data.emoVote.pass);
     oGroup.add(beamEmo);
     energyBeams.push(beamEmo);
   }, 180);
   orchestraTimeouts.push(t2);
 
-  // 3. Fascio Giudice Grammatica (Blu 🔵) - t = 320ms
+  // 3. Fascio Giudice 3 (Grammatica) - t = 320ms
   const t3 = setTimeout(() => {
-    const beamGram = createLaserBeam(judgeMeshes.gram.position, tPos, 0x38bdf8, data.gramVote.pass);
+    const beamGram = createLaserBeam(judgeMeshes.gram.position, tPos, scen.judges.gram.color, data.gramVote.pass);
     oGroup.add(beamGram);
     energyBeams.push(beamGram);
   }, 320);
@@ -1993,6 +2670,7 @@ function selectOrchestraCandidate(candKey, customData = null) {
 function renderOrchestraVerdict(data) {
   const isConsensus = data.statusType === 'consensus';
   const isVeto = data.statusType === 'veto';
+  const scen = orchestraScenarios[currentScenarioKey] || orchestraScenarios.winter;
 
   // Colora la sfera bersaglio 3D in base all'esito
   if (oTargetMesh && oTargetAura) {
@@ -2038,6 +2716,23 @@ function renderOrchestraVerdict(data) {
     targetWordSpan.className = `orchestra-target ${data.statusType}`;
   }
 
+  // Calcolo probabilità stimata influenzata dalla temperatura
+  let probText = '99.8%';
+  if (isConsensus) {
+    if (currentTemperature <= 0.3) probText = '99.9% (Scelta sicura al 100%)';
+    else if (currentTemperature <= 0.8) probText = '99.2% (Scelta ideale e naturale)';
+    else if (currentTemperature <= 1.2) probText = '85.4% (Più spazio ad alternative)';
+    else probText = '55.0% (Probabilità appiattita: alto rischio di allucinazione!)';
+  } else if (isVeto) {
+    if (currentTemperature >= 1.3) {
+      probText = '12.5% (ATTENZIONE: con la temperatura così alta, l\'IA potrebbe sbagliare e sceglierla!)';
+    } else {
+      probText = '< 0.1% (Scartata)';
+    }
+  } else {
+    probText = '0.0%';
+  }
+
   // Renderizza pannello verdetto dettagliato
   const vBox = document.getElementById('judges-verdict-box');
   if (vBox) {
@@ -2047,35 +2742,171 @@ function renderOrchestraVerdict(data) {
         <span class="info-tip tip-down tip-right" tabindex="0">
           <span class="info-badge">?</span>
           <span class="tip-popover">
-            <span class="tip-header"><span>⚡ Dal Punteggio (+30) alla Percentuale (99.8%)</span><span class="badge-tag">Logit ➔ Softmax</span></span>
-            <span class="tip-row"><strong>Perché i Punti (+10 / -10)?</strong> I neuroni non calcolano subito percentuali: assegnano prima voti numerici grezzi (chiamati <em>Logit</em>). Ogni approvazione aggiunge punti (+10), ogni veto ne toglie (-10).</span>
-            <span class="tip-row"><strong>Il collegamento con la Percentuale:</strong> La formula matematica <em>Softmax</em> trasforma la somma dei punti in probabilità: <strong>+30 Punti</strong> diventa il <strong>99.8%</strong> di certezza (parola scelta e generata da ChatGPT), mentre un veto (+10 pt o meno) fa crollare la percentuale a meno dello <strong>0.1%</strong> (parola scartata).</span>
+            <span class="tip-header"><span>⚡ Dal Punteggio (+30) alla Percentuale (${probText})</span><span class="badge-tag">Logit ➔ Softmax</span></span>
+            <span class="tip-row"><strong>Perché i Punti (+10 / -10)?</strong> I neuroni assegnano prima voti numerici grezzi (chiamati <em>Logit</em>).</span>
+            <span class="tip-row"><strong>La Softmax e la Temperatura:</strong> La formula matematica Softmax trasforma i voti in probabilità. Con la manopola della temperatura puoi vedere come l'IA diventa più rigida o più fantasiosa!</span>
           </span>
         </span>
       </div>
       <div class="judge-votes-list">
         <div class="judge-vote-row">
           <span class="judge-name-col yellow">
-            <span class="color-dot yellow"></span> Giudice Cibo (Giallo):
+            <span class="color-dot" style="background: #${scen.judges.cibo.color.toString(16).padStart(6, '0')};"></span> ${scen.judges.cibo.name}:
           </span>
           <span class="vote-badge ${data.ciboVote.pass ? 'yes' : 'no'}">${data.ciboVote.val} (${data.ciboVote.text})</span>
         </div>
         <div class="judge-vote-row">
           <span class="judge-name-col red">
-            <span class="color-dot red"></span> Giudice Emozione (Rosso):
+            <span class="color-dot" style="background: #${scen.judges.emo.color.toString(16).padStart(6, '0')};"></span> ${scen.judges.emo.name}:
           </span>
           <span class="vote-badge ${data.emoVote.pass ? 'yes' : 'no'}">${data.emoVote.val} (${data.emoVote.text})</span>
         </div>
         <div class="judge-vote-row">
           <span class="judge-name-col blue">
-            <span class="color-dot blue"></span> Giudice Grammatica (Blu):
+            <span class="color-dot" style="background: #${scen.judges.gram.color.toString(16).padStart(6, '0')};"></span> ${scen.judges.gram.name}:
           </span>
           <span class="vote-badge ${data.gramVote.pass ? 'yes' : 'no'}">${data.gramVote.val} (${data.gramVote.text})</span>
         </div>
       </div>
       <div class="verdict-narrative ${data.statusType}">${data.narrative}</div>
+      <div style="margin-top: 0.65rem; padding: 0.55rem 0.85rem; background: rgba(168, 85, 247, 0.12); border-left: 3px solid #c084fc; border-radius: 6px; font-size: 0.82rem; color: #f1f5f9; line-height: 1.45;">
+        🎛️ <strong>Probabilità Calcolata (Softmax): ${probText}</strong><br>
+        <em>Effetto Manopola Fantasia (${currentTemperature.toFixed(1)}):</em> ${
+          currentTemperature <= 0.3 ? 'Temperatura bassissima: il modello sceglie rigidamente la parola più ovvia.' :
+          currentTemperature <= 0.8 ? 'Temperatura ideale: risposte equilibrate, corrette e fluide.' :
+          currentTemperature <= 1.2 ? 'Temperatura creativa: maggiore libertà lessicale.' :
+          'Temperatura folle: le probabilità sono quasi uguali, ChatGPT rischia di dire parole a caso!'
+        }
+      </div>
     `;
   }
+}
+
+// Aggiorna sprite fluttuante di un giudice
+function updateJudgeSprite(key, text, colorHex) {
+  if (oJudgeSprites[key]) {
+    const pos = oJudgeSprites[key].position.clone();
+    oGroup.remove(oJudgeSprites[key]);
+    if (oJudgeSprites[key].material.map) oJudgeSprites[key].material.map.dispose();
+    if (oJudgeSprites[key].material) oJudgeSprites[key].material.dispose();
+    oJudgeSprites[key] = createOrchestraSprite(text, colorHex, 3.2);
+    oJudgeSprites[key].position.copy(pos);
+    oGroup.add(oJudgeSprites[key]);
+  }
+}
+
+// Renderizza dinamicamente le tessere del vocabolario dello scenario corrente
+function renderOrchestraChips(scenarioKey) {
+  const scen = orchestraScenarios[scenarioKey];
+  const area = document.getElementById('word-box-chips-area');
+  if (!area || !scen) return;
+
+  let html = `<div class="chips-category-heading">Tessere di Vocabolario Determinato:</div>`;
+  scen.chipGroups.forEach(grp => {
+    html += `
+      <div class="chips-group">
+        <span class="chip-group-label ${grp.color}">${grp.label}</span>
+        <div class="chip-row">
+          ${grp.words.map(w => `<button class="word-chip chip-${grp.color}" data-cand="${w.key}">${w.label}</button>`).join('')}
+        </div>
+      </div>
+    `;
+  });
+  area.innerHTML = html;
+
+  // Collega listener sui chip
+  area.querySelectorAll('.word-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const candKey = chip.dataset.cand;
+      const vocab = getCurrentVocabulary();
+      if (vocab[candKey]) {
+        const input = document.getElementById('orchestra-input');
+        const btnClear = document.getElementById('btn-clear-input');
+        if (input) {
+          input.value = vocab[candKey].word;
+          if (btnClear) btnClear.style.display = 'block';
+        }
+        selectOrchestraCandidate(candKey);
+      }
+    });
+  });
+}
+
+// Cambio scenario narrativo dell'orchestra
+function switchScenario(scenarioKey) {
+  currentScenarioKey = scenarioKey;
+  const scen = orchestraScenarios[scenarioKey];
+  if (!scen) return;
+
+  // Aggiorna bottoni pill attivi
+  document.querySelectorAll('.scenario-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.scenario === scenarioKey);
+  });
+
+  // Aggiorna frase mostrata
+  const sentEl = document.getElementById('orchestra-sentence');
+  if (sentEl) sentEl.innerHTML = scen.sentence;
+
+  // Aggiorna colori e sprite dei 3 giudici 3D
+  if (judgeMeshes.cibo && scen.judges.cibo) {
+    judgeMeshes.cibo.material.color.setHex(scen.judges.cibo.color);
+    judgeMeshes.cibo.material.emissive.setHex(scen.judges.cibo.color);
+    updateJudgeSprite('cibo', scen.judges.cibo.label, scen.judges.cibo.color);
+  }
+  if (judgeMeshes.emo && scen.judges.emo) {
+    judgeMeshes.emo.material.color.setHex(scen.judges.emo.color);
+    judgeMeshes.emo.material.emissive.setHex(scen.judges.emo.color);
+    updateJudgeSprite('emo', scen.judges.emo.label, scen.judges.emo.color);
+  }
+  if (judgeMeshes.gram && scen.judges.gram) {
+    judgeMeshes.gram.material.color.setHex(scen.judges.gram.color);
+    judgeMeshes.gram.material.emissive.setHex(scen.judges.gram.color);
+    updateJudgeSprite('gram', scen.judges.gram.label, scen.judges.gram.color);
+  }
+
+  // Renderizza nuove tessere chip
+  renderOrchestraChips(scenarioKey);
+
+  // Riporta in standby
+  setOrchestraStandby();
+}
+
+// Inizializzazione Slider Temperatura / Fantasia
+function initTemperatureSlider() {
+  const slider = document.getElementById('temp-slider');
+  const badge = document.getElementById('temp-val-badge');
+  const hint = document.getElementById('temp-hint-text');
+  if (!slider) return;
+
+  slider.addEventListener('input', (e) => {
+    currentTemperature = parseFloat(e.target.value);
+    let statusText = '';
+    let hintText = '';
+
+    if (currentTemperature <= 0.3) {
+      statusText = `${currentTemperature.toFixed(1)} (Robot Rigido 🤖)`;
+      hintText = 'A bassissima temperatura l\'IA non rischia mai: sceglie solo la parola più scontata in assoluto, quasi robotica!';
+    } else if (currentTemperature <= 0.8) {
+      statusText = `${currentTemperature.toFixed(1)} (Naturale ✨)`;
+      hintText = 'Temperatura bilanciata tipica di ChatGPT: l\'IA è fluida, naturale ed espressiva senza commettere errori.';
+    } else if (currentTemperature <= 1.2) {
+      statusText = `${currentTemperature.toFixed(1)} (Fantasioso 🎨)`;
+      hintText = 'Temperatura medio-alta: l\'IA inizia a sperimentare con parole meno comuni e più creative!';
+    } else {
+      statusText = `${currentTemperature.toFixed(1)} (Testa fra le Nuvole 🤪)`;
+      hintText = 'Attenzione! Temperatura molto alta: la Softmax appiattisce le probabilità e l\'IA può allucinare o dire sciocchezze!';
+    }
+
+    if (badge) badge.textContent = statusText;
+    if (hint) hint.textContent = hintText;
+
+    if (currentOrchestraCandKey) {
+      const vocab = getCurrentVocabulary();
+      if (vocab[currentOrchestraCandKey]) {
+        renderOrchestraVerdict(vocab[currentOrchestraCandKey]);
+      }
+    }
+  });
 }
 
 // =========================================================================
@@ -2089,6 +2920,16 @@ function setupWordBoxEvents() {
   const btnClear = document.getElementById('btn-clear-input');
   const hintsBar = document.getElementById('word-hints-bar');
   const btnReset = document.getElementById('btn-orchestra-reset');
+
+  // Listener Selettore Scenari Orchestra
+  document.querySelectorAll('.scenario-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      switchScenario(btn.dataset.scenario);
+    });
+  });
+
+  // Renderizza le tessere iniziali dello scenario predefinito
+  renderOrchestraChips('winter');
 
   if (btnReset) {
     btnReset.addEventListener('click', () => {
@@ -2106,31 +2947,18 @@ function setupWordBoxEvents() {
     });
   }
 
-  // Click sulle tessere veloci (Chip)
-  document.querySelectorAll('.word-chip').forEach(chip => {
-    chip.addEventListener('click', () => {
-      const candKey = chip.dataset.cand;
-      if (orchestraVocabulary[candKey]) {
-        if (input) {
-          input.value = orchestraVocabulary[candKey].word;
-          if (btnClear) btnClear.style.display = 'block';
-        }
-        if (hintsBar) hintsBar.style.display = 'none';
-        selectOrchestraCandidate(candKey);
-      }
-    });
-  });
-
   // Digitazione in tempo reale nel campo di testo
   if (input) {
     input.addEventListener('input', () => {
       const rawVal = input.value;
       if (btnClear) btnClear.style.display = rawVal.length > 0 ? 'block' : 'none';
 
-      // Normalizzazione stringa (rimuove accenti e caratteri speciali per confronto elastico)
+      // Normalizzazione stringa
       const cleanVal = rawVal.trim().toLowerCase()
         .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
         .replace(/[^a-z0-9]/g, '');
+
+      const vocab = getCurrentVocabulary();
 
       if (!cleanVal) {
         if (hintsBar) hintsBar.style.display = 'none';
@@ -2139,29 +2967,27 @@ function setupWordBoxEvents() {
       }
 
       // 1. Cerca corrispondenza esatta nel vocabolario
-      if (orchestraVocabulary[cleanVal]) {
+      if (vocab[cleanVal]) {
         if (hintsBar) hintsBar.style.display = 'none';
         selectOrchestraCandidate(cleanVal);
         return;
       }
 
-      // 2. Cerca suggerimenti / prefissi nel vocabolario
-      const matches = Object.keys(orchestraVocabulary).filter(k => k.startsWith(cleanVal) || k.includes(cleanVal));
+      // 2. Cerca suggerimenti nel vocabolario
+      const matches = Object.keys(vocab).filter(k => k.startsWith(cleanVal) || k.includes(cleanVal));
       if (matches.length > 0 && hintsBar) {
         hintsBar.innerHTML = `<span>💡 Trovate nel vocabolario:</span>` +
-          matches.map(m => `<button class="word-chip chip-green" style="padding:0.2rem 0.5rem; font-size:0.8rem;" data-cand="${m}">${orchestraVocabulary[m].word}</button>`).join(' ');
+          matches.map(m => `<button class="word-chip chip-green" style="padding:0.2rem 0.5rem; font-size:0.8rem;" data-cand="${m}">${vocab[m].word}</button>`).join(' ');
         hintsBar.style.display = 'flex';
 
-        // Attacca listener sui chip dinamici del suggeritore
         hintsBar.querySelectorAll('.word-chip').forEach(btn => {
           btn.addEventListener('click', () => {
-            input.value = orchestraVocabulary[btn.dataset.cand].word;
+            input.value = vocab[btn.dataset.cand].word;
             hintsBar.style.display = 'none';
             selectOrchestraCandidate(btn.dataset.cand);
           });
         });
 
-        // Se il prefisso è già molto indicativo (es. primi caratteri), possiamo attivare la parola migliore
         if (matches.length === 1 && cleanVal.length >= 3) {
           selectOrchestraCandidate(matches[0]);
           return;
@@ -2173,14 +2999,14 @@ function setupWordBoxEvents() {
       // 3. Debounce per parola personalizzata fuori vocabolario
       clearTimeout(typeDebounceTimer);
       typeDebounceTimer = setTimeout(() => {
-        if (cleanVal.length >= 2 && !orchestraVocabulary[cleanVal]) {
+        if (cleanVal.length >= 2 && !vocab[cleanVal]) {
           const custom = getCustomWordData(rawVal);
           selectOrchestraCandidate(cleanVal, custom);
         }
       }, 350);
     });
 
-    // Se l'utente preme Invio, valuta istantaneamente
+    // Se l'utente preme Invio
     input.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         clearTimeout(typeDebounceTimer);
@@ -2189,7 +3015,8 @@ function setupWordBoxEvents() {
           .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
           .replace(/[^a-z0-9]/g, '');
 
-        if (orchestraVocabulary[cleanVal]) {
+        const vocab = getCurrentVocabulary();
+        if (vocab[cleanVal]) {
           selectOrchestraCandidate(cleanVal);
         } else if (rawVal) {
           const custom = getCustomWordData(rawVal);
@@ -2200,6 +3027,192 @@ function setupWordBoxEvents() {
   }
 }
 
+// =========================================================================
+// SFIDA QUIZ DIDATTICO PER RAGAZZI ("SEI UN CAMPIONE DEI NEURONI?")
+// =========================================================================
+
+const kidsQuizData = [
+  {
+    q: '1. Nel neurone artificiale, quale parte fa da "antenna ricevente" per raccogliere gli indizi dall\'esterno?',
+    options: [
+      { text: 'I Dendriti (Canali di Ingresso) 🌿', correct: true },
+      { text: 'L\'Assone (Canale di Uscita) 📤', correct: false },
+      { text: 'Il Cavo di Alimentazione del Computer 🔌', correct: false },
+      { text: 'La Tastiera del Pc ⌨️', correct: false }
+    ],
+    feedback: 'Esatto! I dendriti sono proprio come le antenne o i rami del neurone che captano i dati in arrivo!'
+  },
+  {
+    q: '2. Perché nella frase «scaldarsi con una bella...» i neuroni scartano la parola "Minestrone"?',
+    options: [
+      { text: 'Perché il minestrone è un piatto freddo ❄️', correct: false },
+      { text: 'Perché è MASCHILE ("un bel minestrone") e non concorda con "una bella" ✍️', correct: true },
+      { text: 'Perché all\'Intelligenza Artificiale non piacciono le verdure 🥦', correct: false },
+      { text: 'Perché non è un cibo 🍽️', correct: false }
+    ],
+    feedback: 'Bravissimo! In italiano si dice "un bel minestrone" (maschile). Il Giudice della Grammatica alza un veto rosso!'
+  },
+  {
+    q: '3. Cosa sono davvero i "neuroni" di un\'Intelligenza Artificiale come ChatGPT?',
+    options: [
+      { text: 'Piccole cellule viventi prese da cervelli umani 🧠', correct: false },
+      { text: 'Miliardi di calcoli matematici e moltiplicazioni su chip di silicio ⚡', correct: true },
+      { text: 'Minuscoli robot invisibili dentro il monitor 🤖', correct: false },
+      { text: 'Magia aliena venuta dallo spazio 🛸', correct: false }
+    ],
+    feedback: 'Centro! Non c\'è nulla di vivente: sono velocissime moltiplicazioni di numeri decimali (W · x + b) su chip di silicio!'
+  },
+  {
+    q: '4. Nella sfera 3D dei concetti, perché "Cane" e "Lupo" sono vicinissimi tra loro?',
+    options: [
+      { text: 'Perché iniziano entrambi con lettere simili 🔤', correct: false },
+      { text: 'Perché condividono caratteristiche simili ed appartengono alla stessa famiglia animale 🐾', correct: true },
+      { text: 'È un errore casuale del programmatore 💻', correct: false },
+      { text: 'Perché sono stati scritti lo stesso giorno 📅', correct: false }
+    ],
+    feedback: 'Proprio così! Nello spazio semantico (embedding), parole con significato affine abitano nello stesso quartiere!'
+  },
+  {
+    q: '5. Cosa fa un modello di Intelligenza Artificiale durante l\'"Addestramento"?',
+    options: [
+      { text: 'Fa ginnastica e corre in pista 🏃', correct: false },
+      { text: 'Prova a indovinare, misura l\'errore e corregge le connessioni finché non impara 🎯', correct: true },
+      { text: 'Cancella tutti i dati ogni 10 minuti 🗑️', correct: false },
+      { text: 'Dorme per riposarsi 😴', correct: false }
+    ],
+    feedback: 'Grandioso! L\'IA impara per tentativi ed errori (backpropagation): ad ogni sbaglio corregge le sue antenne!'
+  }
+];
+
+let quizCurrentIndex = 0;
+let quizScore = 0;
+let quizAnswered = false;
+
+function initQuizModal() {
+  const modal = document.getElementById('quiz-modal');
+  const btnOpen = document.getElementById('btn-open-quiz');
+  const btnClose = document.getElementById('btn-close-quiz');
+
+  if (btnOpen && modal) {
+    btnOpen.addEventListener('click', () => {
+      quizCurrentIndex = 0;
+      quizScore = 0;
+      modal.style.display = 'flex';
+      renderQuizQuestion();
+    });
+  }
+
+  if (btnClose && modal) {
+    btnClose.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+  }
+
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) modal.style.display = 'none';
+  });
+}
+
+function renderQuizQuestion() {
+  const container = document.getElementById('quiz-body');
+  if (!container) return;
+
+  if (quizCurrentIndex >= kidsQuizData.length) {
+    renderQuizFinalScreen();
+    return;
+  }
+
+  quizAnswered = false;
+  const qData = kidsQuizData[quizCurrentIndex];
+  const progressPct = ((quizCurrentIndex) / kidsQuizData.length) * 100;
+
+  container.innerHTML = `
+    <div class="quiz-progress-bar">
+      <div class="quiz-progress-fill" style="width: ${progressPct}%;"></div>
+    </div>
+    <div class="quiz-q-num">Domanda ${quizCurrentIndex + 1} di ${kidsQuizData.length}</div>
+    <div class="quiz-q-title">${qData.q}</div>
+    <div class="quiz-options-list" id="quiz-opt-list">
+      ${qData.options.map((opt, idx) => `
+        <button class="quiz-opt-btn" data-opt-idx="${idx}">${opt.text}</button>
+      `).join('')}
+    </div>
+    <div id="quiz-feedback-area"></div>
+  `;
+
+  container.querySelectorAll('.quiz-opt-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (quizAnswered) return;
+      quizAnswered = true;
+      const idx = parseInt(btn.dataset.optIdx);
+      const isCorrect = qData.options[idx].correct;
+
+      if (isCorrect) quizScore++;
+
+      container.querySelectorAll('.quiz-opt-btn').forEach((b, i) => {
+        b.disabled = true;
+        if (qData.options[i].correct) {
+          b.classList.add('correct');
+        } else if (i === idx) {
+          b.classList.add('wrong');
+        }
+      });
+
+      const fbArea = document.getElementById('quiz-feedback-area');
+      if (fbArea) {
+        fbArea.innerHTML = `
+          <div class="quiz-feedback-box ${isCorrect ? 'correct' : 'wrong'}">
+            <strong>${isCorrect ? '🎉 Risposta Esatta!' : '❌ Ops, non proprio!'}</strong><br>
+            ${qData.feedback}
+          </div>
+          <button class="quiz-next-btn" id="btn-quiz-next">
+            ${quizCurrentIndex + 1 < kidsQuizData.length ? 'Domanda Successiva ➔' : 'Vedi Risultato Finale 🏆'}
+          </button>
+        `;
+
+        document.getElementById('btn-quiz-next')?.addEventListener('click', () => {
+          quizCurrentIndex++;
+          renderQuizQuestion();
+        });
+      }
+    });
+  });
+}
+
+function renderQuizFinalScreen() {
+  const container = document.getElementById('quiz-body');
+  if (!container) return;
+
+  let medal = '🥇';
+  let badgeTitle = 'Maestro Supremo dei Neuroni!';
+  let praise = 'Incredibile! Hai capito alla perfezione come ragiona l\'Intelligenza Artificiale, dai singoli neuroni fino all\'orchestra di ChatGPT!';
+
+  if (quizScore <= 2) {
+    medal = '🥉';
+    badgeTitle = 'Apprendista Esploratore dell\'IA';
+    praise = 'Buon inizio! Rivedi le schede 3D e riprova il quiz per conquistare la medaglia d\'oro!';
+  } else if (quizScore <= 4) {
+    medal = '🥈';
+    badgeTitle = 'Tecnico dei Neuroni Digitali!';
+    praise = 'Ottimo punteggio! Conosci molto bene i segreti dell\'IA e dei modelli di linguaggio!';
+  }
+
+  container.innerHTML = `
+    <div class="quiz-final-score">
+      <div class="quiz-medal">${medal}</div>
+      <div class="quiz-score-num">${quizScore} su ${kidsQuizData.length} Corrette!</div>
+      <div class="quiz-badge-title">${badgeTitle}</div>
+      <p class="quiz-praise-text">${praise}</p>
+      <button class="quiz-restart-btn" id="btn-restart-quiz">🔄 Gioca di Nuovo</button>
+    </div>
+  `;
+
+  document.getElementById('btn-restart-quiz')?.addEventListener('click', () => {
+    quizCurrentIndex = 0;
+    quizScore = 0;
+    renderQuizQuestion();
+  });
+}
 
 // =========================================================================
 // GESTIONE RESIZE AUTOMATICA PER TUTTE LE SCENE 3D
@@ -2274,5 +3287,7 @@ window.addEventListener('DOMContentLoaded', () => {
   initNeuron3D();
   initGlossaryTips();
   initRealityScreen();
+  initTemperatureSlider();
+  initQuizModal();
   setTimeout(onWindowResize, 120);
 });

@@ -1,37 +1,66 @@
-# 🌌 NeuroScope 3D — La Bussola Semantica dell'Intelligenza Artificiale
+# 🚀 NeuroScope Kids — Come Pensa l'Intelligenza Artificiale (Edizione Ragazzi & Scuole)
 
 <div align="center">
 
+![Badge Edizione](https://img.shields.io/badge/Edizione-Kids%20%26%20Scuole-ff69b4)
+![Badge Target](https://img.shields.io/badge/Target-Primaria%20%26%20Medie%20(8--14%20anni)-purple)
+![Badge Branch](https://img.shields.io/badge/Branch-neuroscope--kids-brightgreen)
 ![Badge Tecnologia](https://img.shields.io/badge/Three.js-r128-blue?logo=threedotjs)
-![Badge Licenza](https://img.shields.io/badge/Licenza-MIT-green)
-![Badge Linguaggio](https://img.shields.io/badge/Linguaggio-HTML%20%2F%20CSS%20%2F%20JS-orange)
 ![Badge Dipendenze](https://img.shields.io/badge/Dipendenze-Zero-brightgreen)
-![Badge Target](https://img.shields.io/badge/Target-Non%20tecnico-purple)
 
-**Un simulatore 3D interattivo in WebGL per comprendere le reti neurali artificiali e ChatGPT — senza formule, senza codice, senza laurea.**
+**Il simulatore 3D interattivo progettato per bambine, bambini e ragazzi della scuola primaria e secondaria di primo grado.**  
+*Metti alla prova i neuroni detective, viaggia tra le costellazioni delle parole, allena il cucciolo robot e scopri come fa ChatGPT a indovinare cosa vuoi dire!*
 
-[▶ Demo Live](https://megamike80.github.io/Neuroscope-3D/) · [📖 Documentazione](#documentazione) · [🚀 Avvia in locale](#avvio-rapido)
+[▶ Demo Live](https://megamike80.github.io/Neuroscope-3D/) · [📖 Guida Didattica](#le-4-missioni-didattiche) · [🏆 Sfida Quiz](#sfida-quiz-per-ragazzi)
 
 </div>
 
 ---
 
-## 🎯 Cos'è NeuroScope 3D?
+## 🎒 Perché NeuroScope Kids?
 
-NeuroScope 3D è un'applicazione didattica interattiva costruita con **Three.js** (WebGL) che visualizza in tempo reale i meccanismi fondamentali dell'Intelligenza Artificiale moderna: dai singoli neuroni artificiali fino all'architettura Transformer che alimenta ChatGPT, Gemini e Claude.
+Questo branch (**`neuroscope-kids`**) nasce per rendere l'esplorazione dell'Intelligenza Artificiale accessibile, coinvolgente e memorabile per gli studenti tra gli **8 e i 14 anni** e per i docenti che vogliono spiegare l'IA in classe (alla LIM o in laboratorio informatico):
 
-**Obiettivo:** spiegare a chiunque — studenti, insegnanti, curiosi, professionisti non tecnici — come ragiona davvero un sistema di IA, non attraverso metafore emotive o promesse fantascientifiche, ma attraverso la visualizzazione concreta delle **distanze semantiche** e dei **collegamenti tra idee** nello spazio tridimensionale.
+- 🔍 **Nessuna noia, solo intuizione:** al posto di formule ostiche, i concetti prendono forma attraverso metafore visive, colori fluorescenti e fasci di luce 3D.
+- 🎮 **Esperienza attiva e variegata:** non più un solo esempio rigido, ma scenari interscambiabili a tema (fiabe con draghi, missioni su Marte, cuccioli di cane e partite di calcio al 90° minuto).
+- 🏆 **Gamification integrata:** mini-quiz interattivo a 5 quesiti con correzione immediata e diploma finale con medaglie (Apprendista, Tecnico, Maestro Supremo dei Neuroni).
 
 ---
 
-## ✨ Caratteristiche principali
+## ✨ Cosa C'è di Nuovo in questa Edizione?
 
-- 🌐 **Rendering 3D WebGL** con Three.js — ruota, zooma e naviga la sfera dei concetti a 360°
-- 🎓 **4 schermate didattiche progressive** che coprono l'intero ciclo: neurone → spazio semantico → addestramento → inferenza
-- 📡 **Glossario tecnico progressivo** con micro-badge `?` non invasivi: chi non vuole approfondire non è disturbato, chi vuole capire ottiene la definizione tecnica corretta
-- ⚡ **"Schermo della Realtà"** — interruttore che passa dalla metafora 3D alla realtà tecnologica (vettori a 4096 dimensioni, chip TPU/GPU, Self-Attention)
-- 📱 **Responsive e multi-dispositivo** — funziona su desktop, tablet e smartphone; supporta touch, pinch-zoom e drag
-- 🚫 **Zero installazione, zero dipendenze locali** — un solo doppio clic su `index.html` e il simulatore è operativo
+### 1. 🔍 I Neuroni Detective (3 Mestieri del Neurone)
+Non solo cibo! I ragazzi possono scegliere il mestiere del neurone:
+- 🍕 **Specialista del Cibo:** Pizza 🍕 (100%), Forchetta 🍴 (55%), Galassia 🌌 (0%)
+- 🐶 **Specialista dei Cuccioli:** Cane 🐶 (100%), Peluche 🧸 (50% - ha pelo e forma ma non respira né mangia!), Bicicletta 🚲 (0%)
+- 🚀 **Specialista dello Spazio:** Razzo 🚀 (100%), Aquilone 🪁 (50% - vola nel cielo ma non nello spazio!), Mela 🍏 (0%)
+
+### 2. 🧭 Rotte Segrete (Caccia al Tesoro Semantica nella Sfera 3D)
+Oltre alla libera esplorazione della sfera a 360°, i ragazzi possono attivare 3 rotte guidate:
+- 🍕 **Dalla Fattoria alla Pizza:** Pascolo 🐄 ➔ Latte 🥛 ➔ Ciotola 🥣 ➔ Farina 🥣 ➔ Pizza 🍕
+- 🎬 **Dal Lupo delle Fiabe al Cinema:** Lupo 🐺 ➔ Favola 📖 ➔ Emozione ✨ ➔ Poesia 🖋️ ➔ Musica 🎵 ➔ Cinema 🎬
+- 🦾 **Dal Microchip al Cane Robot:** Chip ⚡ ➔ Software 💾 ➔ Robot 🤖 ➔ Cane Robot 🦾🐕
+
+### 3. 📚 L'Allenamento dell'IA (3 Avventure a Scelta)
+I ragazzi vedono come il neurone impara dai propri errori in 3 tappe (da errore buffo fino al 100%):
+- 🍝 **A Tavola con la Pasta:** Galassia 🌌 ➔ Pietanze 🍲 ➔ Spaghetti 🍝
+- 🐉 **La Sfida del Drago:** Tiramisù 🍰 (non si combatte un dolce!) ➔ Animale 🐾 ➔ Drago 🐉
+- 🔴 **Destinazione Marte:** Forchetta 🍴 (nello spazio?!) ➔ Sasso 🪨 ➔ Marte 🔴
+
+### 4. 🎭 L'Orchestra di ChatGPT con 3 Scenari & Manopola della Fantasia
+I 3 Super-Giudici valutano in diretta le parole attraverso laser 3D sequenziali:
+- 🍲 **Inverno Gelido:** «...scaldarsi con una bella [ ... ]» (Giudice Cibo 🟡, Emozione 🔴, Grammatica 🔵)
+- 🧙 **La Torre del Mago:** «Nella torre antica il vecchio mago preparò con cura una potente [ ... ]» (Giudice Magia 🔮, Mistero 🌙, Grammatica 🔵)
+- ⚽ **La Partita Decisiva:** «Al novantesimo minuto il capitano calciò forte segnando una splendida [ ... ]» (Giudice Azione Gol ⚽, Vittoria 🏆, Grammatica 🔵)
+- 🎛️ **Manopola della Fantasia (Temperatura dell'IA):** da Robot Rigido (0.1) a Naturale (0.7) fino a Testa fra le Nuvole / Allucinazioni (1.6)!
+
+### 5. 🏆 Sfida Quiz per Ragazzi ("Sei un Campione dei Neuroni?")
+Un mini-quiz interattivo a schede con 5 domande a risposta multipla, spiegazione didattica dopo ogni click e verdetto finale con trofei virtuali:
+- 🥇 *Maestro Supremo dei Neuroni* (5/5)
+- 🥈 *Tecnico dei Neuroni Digitali* (3-4/5)
+- 🥉 *Apprendista Esploratore dell'IA* (1-2/5)
+
+---
 
 ---
 

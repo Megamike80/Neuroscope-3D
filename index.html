@@ -15,19 +15,25 @@
   <div class="app-container">
     <!-- Header -->
     <header class="app-header">
-      <div class="logo-area">
-        <span class="logo-badge">🌌 Simulatore 3D Didattico</span>
-        <h1>La Bussola dei Significati</h1>
-        <p class="subtitle">
-          Come ragiona davvero l'Intelligenza Artificiale: non sentimenti umani, ma <strong>distanze semantiche</strong> e <strong>collegamenti tra idee</strong> nello spazio tridimensionale.
-        </p>
+      <div class="app-header-top">
+        <div class="logo-area">
+          <span class="logo-badge">🚀 Edizione Ragazzi & Scuole (Primaria e Medie)</span>
+          <h1>NeuroScope Kids: Come Pensa l'Intelligenza Artificiale</h1>
+          <p class="subtitle">
+            Esplora il cervello elettronico: metti alla prova i <strong>neuroni detective</strong>, viaggia tra le <strong>costellazioni delle parole</strong> e scopri come fa ChatGPT a indovinare cosa vuoi dire!
+          </p>
+        </div>
+        <button class="quiz-trigger-btn" id="btn-open-quiz">
+          <span>🏆</span>
+          <span>Sfida Quiz: Diventa Detective dell'IA!</span>
+        </button>
       </div>
 
       <nav class="nav-tabs">
-        <button class="nav-btn active" data-tab="tab-3d-neuron">1. Il Neurone 3D: Ingresso, Nucleo e Uscita</button>
-        <button class="nav-btn" data-tab="tab-semantic-map">2. La Mappa dei Concetti & Ponti Cromatici</button>
-        <button class="nav-btn" data-tab="tab-learning">3. L'Addestramento: Il Testo Bucato</button>
-        <button class="nav-btn" data-tab="tab-orchestra">4. L'Orchestra 3D di ChatGPT</button>
+        <button class="nav-btn active" data-tab="tab-3d-neuron">1. I Neuroni Detective</button>
+        <button class="nav-btn" data-tab="tab-semantic-map">2. La Mappa dei Concetti & Rotte Segrete</button>
+        <button class="nav-btn" data-tab="tab-learning">3. L'Allenamento dell'IA</button>
+        <button class="nav-btn" data-tab="tab-orchestra">4. L'Orchestra dei 3 Super-Giudici</button>
       </nav>
     </header>
 
@@ -88,14 +94,24 @@
           </div>
         </div>
 
-        <!-- Controlli a 3 Livelli Netti (Neurone del Cibo) -->
+        <!-- Controlli a 3 Livelli Netti (Neuroni Detective) -->
         <div class="card control-card">
+          <!-- Selettore del Mestiere del Neurone Detective -->
+          <div class="detective-selector-container">
+            <span class="detective-label">🔍 Scegli il Mestiere del Neurone Detective:</span>
+            <div class="detective-pills">
+              <button class="detective-btn active" data-detective="food">🍕 Specialista del Cibo</button>
+              <button class="detective-btn" data-detective="animals">🐶 Specialista dei Cuccioli</button>
+              <button class="detective-btn" data-detective="space">🚀 Specialista dello Spazio</button>
+            </div>
+          </div>
+
           <!-- Badge di Ruolo del Neurone -->
           <div class="neuron-focus-badge">
-            <span class="focus-icon">🍕</span>
+            <span class="focus-icon" id="neuron-focus-icon">🍕</span>
             <div>
-              <h3>Neurone Specialista in "Cibo & Cucina"</h3>
-              <p>Questo neurone è sintonizzato per riconoscere se un dato in arrivo appartiene al mondo del mangiare.</p>
+              <h3 id="neuron-focus-title">Neurone Specialista in "Cibo & Cucina"</h3>
+              <p id="neuron-focus-desc">Questo neurone è sintonizzato per riconoscere se un dato in arrivo appartiene al mondo del mangiare.</p>
             </div>
           </div>
 
@@ -104,24 +120,24 @@
             <div class="three-states-grid" id="three-states-grid">
               <button class="state-choice-btn active" data-level="total">
                 <div>
-                  <span class="state-badge total">1. Associazione Totale</span>
-                  <div class="state-word-name">Pizza 🍕</div>
+                  <span class="state-badge total" id="state-badge-total">1. Associazione Totale</span>
+                  <div class="state-word-name" id="state-word-total">Pizza 🍕</div>
                 </div>
                 <span class="arrow-indicator">➔</span>
               </button>
 
               <button class="state-choice-btn" data-level="partial">
                 <div>
-                  <span class="state-badge partial">2. Associazione Parziale</span>
-                  <div class="state-word-name">Forchetta 🍴</div>
+                  <span class="state-badge partial" id="state-badge-partial">2. Associazione Parziale</span>
+                  <div class="state-word-name" id="state-word-partial">Forchetta 🍴</div>
                 </div>
                 <span class="arrow-indicator">➔</span>
               </button>
 
               <button class="state-choice-btn" data-level="none">
                 <div>
-                  <span class="state-badge none">3. Differenza Totale</span>
-                  <div class="state-word-name">Galassia 🌌</div>
+                  <span class="state-badge none" id="state-badge-none">3. Differenza Totale</span>
+                  <div class="state-word-name" id="state-word-none">Galassia 🌌</div>
                 </div>
                 <span class="arrow-indicator">➔</span>
               </button>
@@ -142,15 +158,15 @@
               </span>
             </h4>
             <div class="sensor-row" id="sensor-1">
-              <span>🌿 Canale A: È commestibile?</span>
+              <span id="sensor-1-label">🌿 Canale A: È commestibile?</span>
               <strong class="sensor-val yes" id="sensor-1-val">SÌ (100%)</strong>
             </div>
             <div class="sensor-row" id="sensor-2">
-              <span>🍽️ Canale B: Sta a tavola / in cucina?</span>
+              <span id="sensor-2-label">🍽️ Canale B: Sta a tavola / in cucina?</span>
               <strong class="sensor-val yes" id="sensor-2-val">SÌ (100%)</strong>
             </div>
             <div class="sensor-row" id="sensor-3">
-              <span>⚡ Canale C: Dona nutrimento ed energia?</span>
+              <span id="sensor-3-label">⚡ Canale C: Dona nutrimento ed energia?</span>
               <strong class="sensor-val yes" id="sensor-3-val">SÌ (100%)</strong>
             </div>
           </div>
@@ -159,7 +175,7 @@
           <div class="semantic-meter-box">
             <div class="meter-top">
               <span>
-                Vicinanza Semantica al Cibo:
+                <span id="meter-category-label">Vicinanza Semantica al Cibo</span>:
                 <span class="info-tip" tabindex="0">
                   <span class="info-badge">?</span>
                   <span class="tip-popover">
@@ -445,6 +461,23 @@ Pizza = [
               Tutti i 54 concetti sono distribuiti in modo armonico sulla sfera. Non ci sono punti vuoti: l'Intelligenza Artificiale naviga attraverso questa rete sferica continua per trovare metafore, analogie e risposte coerenti.
             </p>
           </div>
+
+          <!-- Caccia al Tesoro / Rotte Segrete per Ragazzi -->
+          <div class="secret-routes-container">
+            <div class="secret-routes-header">
+              <span class="routes-badge">🧭 Caccia al Tesoro dei Significati</span>
+              <h3>Rotte Segrete: Collega mondi lontani!</h3>
+            </div>
+            <p class="routes-desc">
+              Tocca una missione per far ruotare la sfera e scoprire come il cervello dell'IA unisce le parole con ponti logici invisibili:
+            </p>
+            <div class="routes-pills">
+              <button class="route-btn" data-route="farm">🍕 Rotta 1: Dalla Fattoria alla Pizza</button>
+              <button class="route-btn" data-route="fable">🎬 Rotta 2: Dal Lupo delle Fiabe al Cinema</button>
+              <button class="route-btn" data-route="cyborg">🦾 Rotta 3: Dal Microchip al Cane Robot</button>
+            </div>
+            <div class="route-info-box" id="route-info-box" style="display: none;"></div>
+          </div>
         </div>
       </div>
     </main>
@@ -469,10 +502,20 @@ Pizza = [
           L'addestramento non è magia: l'antenna del neurone parte disorientata nello spazio 3D e prova a completare una frase. Ad ogni errore viene corretta, passando da una parola assurda fino alla parola perfetta!
         </p>
 
+        <!-- Selettore della Frase da Addestrare -->
+        <div class="story-selector-container">
+          <span class="story-label">📚 Scegli l'Avventura da Addestrare:</span>
+          <div class="story-pills">
+            <button class="story-btn active" data-story="pasta">🍝 1. A Tavola con la Pasta</button>
+            <button class="story-btn" data-story="dragon">🐉 2. La Sfida del Drago</button>
+            <button class="story-btn" data-story="space">🔴 3. Destinazione Marte</button>
+          </div>
+        </div>
+
         <!-- Display del Testo Bucato Dinamico -->
         <div class="cloze-sentence-card">
           <span class="cloze-label">Frase da completare:</span>
-          <div class="cloze-display">
+          <div class="cloze-display" id="cloze-display">
             « Oggi a pranzo ho mangiato un gustoso piatto di <span class="cloze-blank" id="cloze-slot">... ?</span> »
           </div>
         </div>
@@ -487,24 +530,24 @@ Pizza = [
               <div class="train-step-item active" id="step-ui-1">
                 <span class="step-bullet red">1</span>
                 <div>
-                  <strong>🔴 Inizio: Scelta Fuori Tema</strong>
-                  <p>L'antenna punta su <em>"Galassia 🌌"</em> (Zero senso col cibo! Errore totale).</p>
+                  <strong id="step-1-title">🔴 Inizio: Scelta Fuori Tema</strong>
+                  <p id="step-1-desc">L'antenna punta su <em>"Galassia 🌌"</em> (Zero senso col cibo! Errore totale).</p>
                 </div>
               </div>
 
               <div class="train-step-item" id="step-ui-2">
                 <span class="step-bullet yellow">2</span>
                 <div>
-                  <strong>🟡 Correzione: Scelta Astratta</strong>
-                  <p>L'antenna ruota su <em>"Pietanze 🍲"</em> (È cibo, ma nessuno dice "un piatto di pietanze"!).</p>
+                  <strong id="step-2-title">🟡 Correzione: Scelta Astratta</strong>
+                  <p id="step-2-desc">L'antenna ruota su <em>"Pietanze 🍲"</em> (È cibo, ma nessuno dice "un piatto di pietanze"!).</p>
                 </div>
               </div>
 
               <div class="train-step-item" id="step-ui-3">
                 <span class="step-bullet green">3</span>
                 <div>
-                  <strong>🟢 Bersaglio: Scelta Naturale</strong>
-                  <p>L'antenna si aggancia su <em>"Spaghetti 🍝"</em> (Preciso, appetitoso e naturale al 100%).</p>
+                  <strong id="step-3-title">🟢 Bersaglio: Scelta Naturale</strong>
+                  <p id="step-3-desc">L'antenna si aggancia su <em>"Spaghetti 🍝"</em> (Preciso, appetitoso e naturale al 100%).</p>
                 </div>
               </div>
             </div>
@@ -558,10 +601,20 @@ Pizza = [
             Un singolo neurone da solo può sbagliare. Ma in ChatGPT <strong>miliardi di neuroni specializzati votano contemporaneamente</strong>: solo quando i fasci convergono all'unisono la parola prende vita!
           </p>
 
+          <!-- Selettore della Scena per l'Orchestra -->
+          <div class="scenario-selector-container">
+            <span class="scenario-label">🎭 Scegli la Scena per l'Orchestra:</span>
+            <div class="scenario-pills">
+              <button class="scenario-btn active" data-scenario="winter">🍲 Inverno Gelido</button>
+              <button class="scenario-btn" data-scenario="wizard">🧙 La Torre del Mago</button>
+              <button class="scenario-btn" data-scenario="soccer">⚽ La Partita Decisiva</button>
+            </div>
+          </div>
+
           <!-- Frase da completare -->
           <div class="orchestra-prompt-box">
             <span class="cloze-label">Frase in generazione da completare:</span>
-            <div class="orchestra-sentence">
+            <div class="orchestra-sentence" id="orchestra-sentence">
               « Dopo una giornata di pioggia gelida, che gioia sedersi a tavola e scaldarsi con una bella <span class="orchestra-target standby" id="orchestra-target-word">[ ... ? ]</span> »
             </div>
           </div>
@@ -588,7 +641,7 @@ Pizza = [
                 type="text" 
                 id="orchestra-input" 
                 class="orchestra-input" 
-                placeholder="Digita una parola (es. zuppa, minestrone, tisana, granita, coperta...)" 
+                placeholder="Digita una parola..." 
                 autocomplete="off" 
                 spellcheck="false"
               />
@@ -598,51 +651,9 @@ Pizza = [
             <!-- Suggeritore dinamico mentre digiti -->
             <div class="word-hints-bar" id="word-hints-bar" style="display: none;"></div>
 
-            <!-- Tessere Rapide suddivise per categoria logica -->
-            <div class="word-box-chips-area">
-              <div class="chips-category-heading">Tessere di Vocabolario Determinato:</div>
-              
-              <div class="chips-group">
-                <span class="chip-group-label green">🟢 Consenso Unanime (Cibi Caldi):</span>
-                <div class="chip-row">
-                  <button class="word-chip chip-green" data-cand="zuppa">🍲 Zuppa</button>
-                  <button class="word-chip chip-green" data-cand="cioccolata">☕ Cioccolata</button>
-                  <button class="word-chip chip-green" data-cand="tisana">🍵 Tisana</button>
-                </div>
-              </div>
-
-              <div class="chips-group">
-                <span class="chip-group-label red">🔴 Veto Grammatica (Falsi Amici Maschili):</span>
-                <div class="chip-row">
-                  <button class="word-chip chip-red" data-cand="minestrone">🥣 Minestrone</button>
-                  <button class="word-chip chip-red" data-cand="brodo">🍲 Brodo</button>
-                  <button class="word-chip chip-red" data-cand="te">🫖 Tè</button>
-                </div>
-              </div>
-
-              <div class="chips-group">
-                <span class="chip-group-label cyan">❄️ Veto Emozione (Freddo Incongruente):</span>
-                <div class="chip-row">
-                  <button class="word-chip chip-cyan" data-cand="granita">🍧 Granita</button>
-                  <button class="word-chip chip-cyan" data-cand="insalata">🥗 Insalata</button>
-                  <button class="word-chip chip-cyan" data-cand="gelato">🍦 Gelato</button>
-                </div>
-              </div>
-
-              <div class="chips-group">
-                <span class="chip-group-label purple">🧣 Veto Cibo (Scalda ma non si serve a tavola):</span>
-                <div class="chip-row">
-                  <button class="word-chip chip-purple" data-cand="coperta">🧣 Coperta</button>
-                  <button class="word-chip chip-purple" data-cand="doccia">🚿 Doccia</button>
-                </div>
-              </div>
-
-              <div class="chips-group">
-                <span class="chip-group-label gray">🌌 Fuori Contesto Totale:</span>
-                <div class="chip-row">
-                  <button class="word-chip chip-gray" data-cand="galassia">🌌 Galassia</button>
-                </div>
-              </div>
+            <!-- Tessere Rapide suddivise per categoria logica (renderizzate dinamicamente) -->
+            <div class="word-box-chips-area" id="word-box-chips-area">
+              <!-- Riempito dinamicamente in JS a seconda dello scenario scelto -->
             </div>
           </div>
 
@@ -650,9 +661,42 @@ Pizza = [
           <div class="judges-verdict-box" id="judges-verdict-box">
             <!-- Riempito dinamicamente in JS: stato standby iniziale o telemetria della parola -->
           </div>
+
+          <!-- Slider Manopola della Fantasia (Temperatura dell'IA) -->
+          <div class="creativity-slider-card">
+            <div class="slider-head">
+              <span class="slider-title">🎛️ Manopola della Fantasia (Temperatura di ChatGPT)</span>
+              <span class="slider-val-badge" id="temp-val-badge">0.7 (Naturale ✨)</span>
+            </div>
+            <div class="slider-row">
+              <span class="slider-limit">🤖 Freddo e Rigido (0.1)</span>
+              <input type="range" id="temp-slider" min="0.1" max="1.6" step="0.1" value="0.7" class="kids-slider">
+              <span class="slider-limit">🤪 Testa fra le Nuvole (1.6)</span>
+            </div>
+            <p class="slider-hint" id="temp-hint-text">
+              A temperatura 0.7 ChatGPT è bilanciato e naturale. Se abbassi la manopola a 0.1 sceglierà solo la risposta più noiosa ed evidente; se la alzi oltre 1.2 inizierà a fantasticare e dire sciocchezze!
+            </p>
+          </div>
         </div>
       </div>
     </main>
+  </div>
+
+  <!-- Modal Quiz per Ragazzi -->
+  <div class="quiz-modal-backdrop" id="quiz-modal" style="display: none;">
+    <div class="quiz-modal-card">
+      <div class="quiz-modal-header">
+        <div class="quiz-title-group">
+          <span class="quiz-badge">🏆 Sfida Ragazzi</span>
+          <h3>Sei un Campione dei Neuroni?</h3>
+        </div>
+        <button class="quiz-close-btn" id="btn-close-quiz" aria-label="Chiudi Quiz">✖</button>
+      </div>
+      
+      <div class="quiz-body" id="quiz-body">
+        <!-- Generato dinamicamente in app.js -->
+      </div>
+    </div>
   </div>
 
   <script src="app.js"></script>
