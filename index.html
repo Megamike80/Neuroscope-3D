@@ -89,8 +89,8 @@
           </div>
 
           <div class="hud-status" id="hud-status">
-            <div class="hud-indicator" id="hud-indicator"></div>
-            <span id="hud-text">Stato Neurone: IN ATTESA DI STIMOLO</span>
+            <div class="hud-indicator standby" id="hud-indicator"></div>
+            <span id="hud-text">Stato Neurone: A RIPOSO — Scegli uno stimolo per iniziare l'indagine!</span>
           </div>
         </div>
 
@@ -116,9 +116,12 @@
           </div>
 
           <div class="control-section">
-            <label class="control-label">Metti alla prova i 3 livelli semantici:</label>
+            <div class="control-header-row">
+              <label class="control-label">👉 Clicca su un elemento per inviare lo stimolo:</label>
+              <button type="button" class="btn-standby-reset" id="btn-standby-reset" title="Riporta il neurone a riposo">🔄 Riposo</button>
+            </div>
             <div class="three-states-grid" id="three-states-grid">
-              <button class="state-choice-btn active" data-level="total">
+              <button class="state-choice-btn" data-level="total">
                 <div>
                   <span class="state-badge total" id="state-badge-total">1. Associazione Totale</span>
                   <div class="state-word-name" id="state-word-total">Pizza 🍕</div>
@@ -159,15 +162,15 @@
             </h4>
             <div class="sensor-row" id="sensor-1">
               <span id="sensor-1-label">🌿 Canale A: È commestibile?</span>
-              <strong class="sensor-val yes" id="sensor-1-val">SÌ (100%)</strong>
+              <strong class="sensor-val waiting" id="sensor-1-val">In attesa... (—)</strong>
             </div>
             <div class="sensor-row" id="sensor-2">
               <span id="sensor-2-label">🍽️ Canale B: Sta a tavola / in cucina?</span>
-              <strong class="sensor-val yes" id="sensor-2-val">SÌ (100%)</strong>
+              <strong class="sensor-val waiting" id="sensor-2-val">In attesa... (—)</strong>
             </div>
             <div class="sensor-row" id="sensor-3">
               <span id="sensor-3-label">⚡ Canale C: Dona nutrimento ed energia?</span>
-              <strong class="sensor-val yes" id="sensor-3-val">SÌ (100%)</strong>
+              <strong class="sensor-val waiting" id="sensor-3-val">In attesa... (—)</strong>
             </div>
           </div>
 
@@ -185,10 +188,10 @@
                   </span>
                 </span>
               </span>
-              <strong id="meter-percent">100%</strong>
+              <strong id="meter-percent">0%</strong>
             </div>
             <div class="meter-track">
-              <div class="meter-fill" id="meter-fill" style="width: 100%;"></div>
+              <div class="meter-fill" id="meter-fill" style="width: 0%;"></div>
             </div>
             <div class="meter-scale-labels">
               <span>0% Estraneo (Spento)</span>
@@ -199,7 +202,13 @@
 
           <!-- Spiegazione Dettagliata -->
           <div class="explanation-box" id="explanation-box">
-            <!-- Riempito dinamicamente in JS -->
+            <div class="discovery-invite">
+              <div class="discovery-icon">🔬</div>
+              <div class="discovery-content">
+                <strong>Il Neurone Detective è pronto e a riposo!</strong>
+                <p>In questo momento il neurone è in attesa di stimoli. <strong>Clicca su una delle 3 parole</strong> qui sopra per inviargli un dato ed esplorare come reagiscono i suoi dendriti e cosa decide l'assone!</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

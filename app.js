@@ -338,7 +338,7 @@ function initNeuron3D() {
   });
 
   animateNeuron();
-  applyDetectiveState('total');
+  setDetectiveStandby();
   initDetectiveEvents();
 }
 
@@ -505,6 +505,76 @@ function applyDetectiveState(levelKey) {
   }
 }
 
+// Riporta il Neurone Detective allo stato di riposo neutrale (Standby di scoperta)
+function setDetectiveStandby() {
+  currentFoodLevel = null;
+  neuronCurrentEnergy = 0.0;
+
+  // Rimuovi lo stato attivo da tutti i pulsanti delle 3 opzioni
+  document.querySelectorAll('.state-choice-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+
+  // Metti i sensori dendritici in stato di attesa
+  ['1', '2', '3'].forEach(num => {
+    const sEl = document.getElementById(`sensor-${num}-val`);
+    if (sEl) {
+      sEl.textContent = 'In attesa... (—)';
+      sEl.className = 'sensor-val waiting';
+    }
+  });
+
+  // Misuratore a 0%
+  const meterPctEl = document.getElementById('meter-percent');
+  const meterFillEl = document.getElementById('meter-fill');
+  if (meterPctEl) meterPctEl.textContent = '0%';
+  if (meterFillEl) meterFillEl.style.width = '0%';
+
+  // Stato 3D: Neurone a riposo (calmo, niente particelle eccitate, nucleo blu notte con alone soffuso, assone spento)
+  dendriteMeshes.forEach(d => {
+    d.mesh.material.emissive.setHex(0x1e293b);
+    d.mesh.material.emissiveIntensity = 0.2;
+  });
+  if (particlesMesh) particlesMesh.visible = false;
+
+  if (neuronCore) {
+    neuronCore.material.color.setHex(0x0f172a);
+    neuronCore.material.emissive.setHex(0x38bdf8);
+    neuronCore.material.emissiveIntensity = 0.35;
+  }
+  if (coreGlowMesh) {
+    coreGlowMesh.material.color.setHex(0x38bdf8);
+    coreGlowMesh.visible = true;
+    coreGlowMesh.scale.set(1.0, 1.0, 1.0);
+  }
+
+  if (axonMesh) {
+    axonMesh.material.color.setHex(0x0a0f1d);
+    axonMesh.material.emissive.setHex(0x000000);
+    axonMesh.material.emissiveIntensity = 0.0;
+  }
+
+  const hudIndicator = document.getElementById('hud-indicator');
+  const hudText = document.getElementById('hud-text');
+  if (hudIndicator) hudIndicator.className = 'hud-indicator standby';
+  if (hudText) hudText.textContent = 'Stato Neurone: A RIPOSO — Scegli uno stimolo per iniziare!';
+
+  // Invito didattico alla scoperta autonoma
+  const expBox = document.getElementById('explanation-box');
+  const p = detectivePresets[currentDetectiveKey] || detectivePresets.food;
+  if (expBox) {
+    expBox.innerHTML = `
+      <div class="discovery-invite">
+        <div class="discovery-icon">🔬</div>
+        <div class="discovery-content">
+          <strong>Il Neurone Detective è pronto e a riposo!</strong>
+          <p>In questo momento il neurone è in attesa di dati. Clicca su una delle 3 opzioni qui sopra (<strong>${p.levels.total.word}</strong>, <strong>${p.levels.partial.word}</strong> o <strong>${p.levels.none.word}</strong>) per inviare gli stimoli lungo i dendriti e scoprire in autonomia come reagisce il nucleo e se l'assone decide di accendersi!</p>
+        </div>
+      </div>
+    `;
+  }
+}
+
 // Cambio mestiere neurone detective
 function switchDetective(detectiveKey) {
   currentDetectiveKey = detectiveKey;
@@ -544,7 +614,8 @@ function switchDetective(detectiveKey) {
   if (wPartial) wPartial.textContent = p.levels.partial.word;
   if (wNone) wNone.textContent = p.levels.none.word;
 
-  applyDetectiveState('total');
+  // Invece di forzare subito la scelta, lascia che il ragazzo scopra autonomamente
+  setDetectiveStandby();
 }
 
 function initDetectiveEvents() {
@@ -556,8 +627,18 @@ function initDetectiveEvents() {
 
   document.querySelectorAll('.state-choice-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      applyDetectiveState(btn.dataset.level);
+      const targetLevel = btn.dataset.level;
+      if (currentFoodLevel === targetLevel) {
+        // Cliccando di nuovo sullo stesso elemento attivo, ritorna a riposo per esplorare
+        setDetectiveStandby();
+      } else {
+        applyDetectiveState(targetLevel);
+      }
     });
+  });
+
+  document.getElementById('btn-standby-reset')?.addEventListener('click', () => {
+    setDetectiveStandby();
   });
 }
 
