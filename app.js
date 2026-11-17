@@ -3038,12 +3038,12 @@ const quizPools = {
     {
       q: 'Nella prima scheda del "Neurone Detective", se facciamo analizzare la Pizza 🍕 al neurone del cibo, cosa fa il suo canale di uscita (l\'assone)?',
       options: [
-        { text: 'Spara una luminosa scarica verde smeraldo viva al 100%: decisione positiva! ⚡', correct: true },
-        { text: 'Diventa completamente nero e opaco perché il circuito si interrompe 🖤', correct: false },
-        { text: 'Si accende solo a metà con una luce debole e tiepida 🟡', correct: false },
-        { text: 'Inizia a suonare una canzone di buon compleanno 🎂', correct: false }
+        { text: 'Spara una scarica verde smeraldo al 100% di potenza ⚡', correct: true },
+        { text: 'Diventa completamente nero e spento 🖤', correct: false },
+        { text: 'Si accende solo a metà potenza con una debole luce ambrata 🟡', correct: false },
+        { text: 'Inizia a lampeggiare di blu come una sirena 🚨', correct: false }
       ],
-      feedback: 'Esatto! La pizza risponde con un triplo SÌ a tutti i canali d\'ingresso: il nucleo si carica d\'oro e l\'uscita spara verde al 100%!'
+      feedback: 'Esatto! La pizza risponde con un triplo SÌ a tutti i canali d\'ingresso: il nucleo si carica d\'oro e l\'uscita spara verde smeraldo al 100%!'
     },
     {
       q: 'Sempre nel neurone detective del cibo, perché la Forchetta 🍴 riceve un\'uscita solo a metà potenza (55%)?',
@@ -3096,14 +3096,14 @@ const quizPools = {
       feedback: 'Grandioso! È la rotta segreta che unisce la natura degli ingredienti della fattoria fino alla pizza sfornata a tavola!'
     },
     {
-      q: 'Nella scheda dell\'Allenamento (Scheda 3), quale risposta buffa sceglie il neurone al primo tentativo (Epoca 1) per completare «un piatto di...»?',
+      q: 'Nella scheda dell\'Allenamento (Scheda 3), quale parola buffa e fuori tema sceglie il neurone al primo tentativo (Epoca 1) per completare «un piatto di...»?',
       options: [
-        { text: '« Oggi a pranzo ho mangiato un gustoso piatto di... GALASSIA 🌌 »! 😆', correct: true },
-        { text: '« Un piatto di squisiti spaghetti al pomodoro 🍝 »', correct: false },
-        { text: '« Un piatto di calda zuppa di verdure 🍲 »', correct: false },
-        { text: '« Un piatto di caramelle gommose alla frutta 🍬 »', correct: false }
+        { text: 'Galassia 🌌', correct: true },
+        { text: 'Spaghetti 🍝', correct: false },
+        { text: 'Zuppa 🍲', correct: false },
+        { text: 'Caramelle 🍬', correct: false }
       ],
-      feedback: 'Esatto! All\'inizio l\'IA non sa nulla e tira a indovinare a caso nello spazio profondo: un piatto di galassia fa ridere ed è un errore al 100%!'
+      feedback: 'Esatto! All\'inizio l\'IA non sa nulla e punta a caso nello spazio profondo: scegliere "un piatto di Galassia" fa ridere ed è un errore al 100%!'
     },
     {
       q: 'Durante l\'allenamento dell\'IA (Scheda 3), cosa succede alla linea della Loss (l\'Errore) dopo 10 epoche di studio?',
@@ -3128,12 +3128,12 @@ const quizPools = {
     {
       q: 'Nello scenario della Torre del Mago (Scheda 4), «preparò con cura una potente...», quale parola vince l\'accordo di tutti i Giudici?',
       options: [
-        { text: 'Pozione 🧪 (è magica, misteriosa e femminile: "una potente pozione"!) ✨', correct: true },
-        { text: 'Incantesimo 🪄 (è scartata perché è maschile: "un potente incantesimo") ❌', correct: false },
-        { text: 'Tisana 🍵 (è scartata perché non è un oggetto magico da stregoni) ❌', correct: false },
-        { text: 'Sedia 🪑 (non c\'entra assolutamente nulla con la magia antica) ❌', correct: false }
+        { text: 'Pozione 🧪', correct: true },
+        { text: 'Incantesimo 🪄', correct: false },
+        { text: 'Tisana 🍵', correct: false },
+        { text: 'Sedia 🪑', correct: false }
       ],
-      feedback: 'Perfetto! La "Pozione" riceve il consenso unanime: è un\'arte magica, crea l\'atmosfera misteriosa ed è grammaticalmente perfetta!'
+      feedback: 'Perfetto! La "Pozione" riceve il consenso unanime: appartiene al mondo magico, evoca mistero ed è femminile singolare ("una potente pozione")!'
     },
     {
       q: 'Cosa succede a ChatGPT se giriamo la Manopola della Fantasia (Temperatura) al valore massimo (1.6)?',
