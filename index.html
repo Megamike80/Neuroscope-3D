@@ -25,7 +25,7 @@
         </div>
         <button class="quiz-trigger-btn" id="btn-open-quiz">
           <span>🏆</span>
-          <span>Sfida Quiz: Diventa Detective dell'IA!</span>
+          <span>Sfida Quiz: Primaria & Medie!</span>
         </button>
       </div>
 
@@ -687,8 +687,19 @@ Pizza = [
     <div class="quiz-modal-card">
       <div class="quiz-modal-header">
         <div class="quiz-title-group">
-          <span class="quiz-badge">🏆 Sfida Ragazzi</span>
+          <div class="quiz-badge-wrap">
+            <span class="quiz-badge" id="quiz-badge-label">🏆 Sfida Ragazzi</span>
+            <span class="quiz-level-indicator" id="quiz-header-level-indicator">🧒 Livello: Primaria</span>
+          </div>
           <h3>Sei un Campione dei Neuroni?</h3>
+          <div class="quiz-level-selector" role="group" aria-label="Seleziona fascia scolastica">
+            <button type="button" class="quiz-level-btn active" id="btn-quiz-level-primaria" data-level="primaria">
+              🧒 Primaria (8-10 anni)
+            </button>
+            <button type="button" class="quiz-level-btn" id="btn-quiz-level-secondaria" data-level="secondaria">
+              🎓 Medie (11-14 anni)
+            </button>
+          </div>
         </div>
         <button class="quiz-close-btn" id="btn-close-quiz" aria-label="Chiudi Quiz">✖</button>
       </div>

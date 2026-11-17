@@ -3029,76 +3029,331 @@ function setupWordBoxEvents() {
 
 // =========================================================================
 // SFIDA QUIZ DIDATTICO PER RAGAZZI ("SEI UN CAMPIONE DEI NEURONI?")
+// Con differenziazione per fasce: Primaria (8-10 anni) e Medie (11-14 anni)
+// e selezione casuale dinamica di 5 domande per sessione da un pool di 12+12
 // =========================================================================
 
-const kidsQuizData = [
-  {
-    q: '1. Nel neurone artificiale, quale parte fa da "antenna ricevente" per raccogliere gli indizi dall\'esterno?',
-    options: [
-      { text: 'I Dendriti (Canali di Ingresso) 🌿', correct: true },
-      { text: 'L\'Assone (Canale di Uscita) 📤', correct: false },
-      { text: 'Il Cavo di Alimentazione del Computer 🔌', correct: false },
-      { text: 'La Tastiera del Pc ⌨️', correct: false }
-    ],
-    feedback: 'Esatto! I dendriti sono proprio come le antenne o i rami del neurone che captano i dati in arrivo!'
-  },
-  {
-    q: '2. Perché nella frase «scaldarsi con una bella...» i neuroni scartano la parola "Minestrone"?',
-    options: [
-      { text: 'Perché il minestrone è un piatto freddo ❄️', correct: false },
-      { text: 'Perché è MASCHILE ("un bel minestrone") e non concorda con "una bella" ✍️', correct: true },
-      { text: 'Perché all\'Intelligenza Artificiale non piacciono le verdure 🥦', correct: false },
-      { text: 'Perché non è un cibo 🍽️', correct: false }
-    ],
-    feedback: 'Bravissimo! In italiano si dice "un bel minestrone" (maschile). Il Giudice della Grammatica alza un veto rosso!'
-  },
-  {
-    q: '3. Cosa sono davvero i "neuroni" di un\'Intelligenza Artificiale come ChatGPT?',
-    options: [
-      { text: 'Piccole cellule viventi prese da cervelli umani 🧠', correct: false },
-      { text: 'Miliardi di calcoli matematici e moltiplicazioni su chip di silicio ⚡', correct: true },
-      { text: 'Minuscoli robot invisibili dentro il monitor 🤖', correct: false },
-      { text: 'Magia aliena venuta dallo spazio 🛸', correct: false }
-    ],
-    feedback: 'Centro! Non c\'è nulla di vivente: sono velocissime moltiplicazioni di numeri decimali (W · x + b) su chip di silicio!'
-  },
-  {
-    q: '4. Nella sfera 3D dei concetti, perché "Cane" e "Lupo" sono vicinissimi tra loro?',
-    options: [
-      { text: 'Perché iniziano entrambi con lettere simili 🔤', correct: false },
-      { text: 'Perché condividono caratteristiche simili ed appartengono alla stessa famiglia animale 🐾', correct: true },
-      { text: 'È un errore casuale del programmatore 💻', correct: false },
-      { text: 'Perché sono stati scritti lo stesso giorno 📅', correct: false }
-    ],
-    feedback: 'Proprio così! Nello spazio semantico (embedding), parole con significato affine abitano nello stesso quartiere!'
-  },
-  {
-    q: '5. Cosa fa un modello di Intelligenza Artificiale durante l\'"Addestramento"?',
-    options: [
-      { text: 'Fa ginnastica e corre in pista 🏃', correct: false },
-      { text: 'Prova a indovinare, misura l\'errore e corregge le connessioni finché non impara 🎯', correct: true },
-      { text: 'Cancella tutti i dati ogni 10 minuti 🗑️', correct: false },
-      { text: 'Dorme per riposarsi 😴', correct: false }
-    ],
-    feedback: 'Grandioso! L\'IA impara per tentativi ed errori (backpropagation): ad ogni sbaglio corregge le sue antenne!'
-  }
-];
+const quizPools = {
+  primaria: [
+    {
+      q: 'Nel neurone artificiale, quale parte fa da "antenna ricevente" per raccogliere gli indizi dall\'esterno?',
+      options: [
+        { text: 'I Dendriti (Canali di Ingresso) 🌿', correct: true },
+        { text: 'L\'Assone (Canale di Uscita) 📤', correct: false },
+        { text: 'Il Cavo di Alimentazione del Computer 🔌', correct: false },
+        { text: 'La Tastiera del Pc ⌨️', correct: false }
+      ],
+      feedback: 'Esatto! I dendriti sono proprio come le antenne o i rami del neurone che captano i dati in arrivo!'
+    },
+    {
+      q: 'Cosa rappresentano i "Pesi" (le manopole) di un neurone artificiale?',
+      options: [
+        { text: 'L\'importanza e l\'attenzione che il neurone assegna a ciascun indizio ⚖️', correct: true },
+        { text: 'Il peso in chilogrammi del computer sulla bilancia 🏋️', correct: false },
+        { text: 'Quanti programmi e videogiochi sono installati 🎮', correct: false },
+        { text: 'La velocità della connessione Wi-Fi di casa 📶', correct: false }
+      ],
+      feedback: 'Bravissimo! Se un indizio è cruciale (es. "miagola" per riconoscere un gatto), il suo peso sarà altissimo!'
+    },
+    {
+      q: 'Perché nella frase «scaldarsi con una bella...» i neuroni scartano la parola "Minestrone"?',
+      options: [
+        { text: 'Perché è MASCHILE ("un bel minestrone") e non concorda con "una bella" ✍️', correct: true },
+        { text: 'Perché il minestrone è un piatto freddo ❄️', correct: false },
+        { text: 'Perché all\'Intelligenza Artificiale non piacciono le verdure 🥦', correct: false },
+        { text: 'Perché "minestrone" non è una parola della lingua italiana 📖', correct: false }
+      ],
+      feedback: 'Proprio così! In italiano diciamo "un bel minestrone" (maschile). Il Giudice della Grammatica alza un veto rosso!'
+    },
+    {
+      q: 'Cosa sono davvero i "neuroni" di un\'Intelligenza Artificiale come ChatGPT?',
+      options: [
+        { text: 'Miliardi di calcoli matematici e moltiplicazioni eseguiti su chip di silicio ⚡', correct: true },
+        { text: 'Piccole cellule biologiche viventi prelevate da cervelli umani 🧠', correct: false },
+        { text: 'Minuscoli robot invisibili che corrono dentro il monitor 🤖', correct: false },
+        { text: 'Magia aliena arrivata da una galassia lontana 🛸', correct: false }
+      ],
+      feedback: 'Centro! Non c\'è nulla di vivente: sono velocissime formule matematiche (W · x + b) calcolate da processori elettronici!'
+    },
+    {
+      q: 'Nella Mappa 3D dei Concetti (Sfera delle Parole), perché "Cane" e "Lupo" si trovano vicinissimi?',
+      options: [
+        { text: 'Perché condividono caratteristiche simili ed appartengono alla stessa famiglia animale 🐾', correct: true },
+        { text: 'Perché iniziano entrambi con la lettera "C" o "L" 🔤', correct: false },
+        { text: 'È un errore casuale del programmatore 💻', correct: false },
+        { text: 'Perché sono stati digitati nello stesso giorno dell\'anno 📅', correct: false }
+      ],
+      feedback: 'Esatto! Nello spazio semantico (embedding), le parole con significato affine abitano nello stesso quartiere!'
+    },
+    {
+      q: 'Cosa fa un modello di Intelligenza Artificiale durante l\'"Addestramento"?',
+      options: [
+        { text: 'Prova a indovinare, misura l\'errore e corregge le connessioni finché non impara 🎯', correct: true },
+        { text: 'Fa ginnastica e corre in pista con le scarpette 🏃', correct: false },
+        { text: 'Cancella tutti i file del computer per fare pulizia 🗑️', correct: false },
+        { text: 'Dorme per riposarsi dopo una giornata di lavoro 😴', correct: false }
+      ],
+      feedback: 'Grandioso! Proprio come quando impari ad andare in bicicletta: sbagli, correggi l\'equilibrio e alla fine non cadi più!'
+    },
+    {
+      q: 'Cosa succede se giriamo la "Manopola della Fantasia" (Temperatura) al massimo (1.6)?',
+      options: [
+        { text: 'L\'IA diventa super fantasiosa ed esuberante, ma può inventare risposte bizzarre 🤪', correct: true },
+        { text: 'Il computer si surriscalda ed esplode 💥', correct: false },
+        { text: 'L\'IA si blocca e sceglie solo la parola più noiosa ed ovvia 🤖', correct: false },
+        { text: 'Tutta la grafica 3D diventa in bianco e nero 🎨', correct: false }
+      ],
+      feedback: 'Perfetto! Più alzi la temperatura, più l\'IA sceglie parole rare e insolite, adatte per storie creative ma non per calcoli esatti!'
+    },
+    {
+      q: 'Nel gioco del Detective, se cerchiamo la "Pizza", quali indizi devono avere il peso più alto?',
+      options: [
+        { text: 'Pomodoro, Mozzarella e Forno a Legna 🍕', correct: true },
+        { text: 'Coda pelosa, Guinzaglio e Orecchie a punta 🐶', correct: false },
+        { text: 'Razzi, Pianeti e Tuta Spaziale 🚀', correct: false },
+        { text: 'Tastiera, Cavi e Schermo piatto 🖥️', correct: false }
+      ],
+      feedback: 'Ottimo fiuto da detective! Pomodoro, mozzarella e forno fanno scattare al 100% l\'allarme della pizza!'
+    },
+    {
+      q: 'Quale parte del neurone trasmette il verdetto finale agli altri neuroni vicini?',
+      options: [
+        { text: 'L\'Assone (Canale di Uscita) 📤', correct: true },
+        { text: 'I Dendriti (Canali di Ingresso) 🌿', correct: false },
+        { text: 'Il Tappetino del Mouse 🖱️', correct: false },
+        { text: 'La Presa Elettrica a muro 🔌', correct: false }
+      ],
+      feedback: 'Corretto! L\'assone è il lungo cavo di trasmissione che lancia la scintilla elettrica verso i neuroni successivi!'
+    },
+    {
+      q: 'Cosa significa che un neurone "Spara" o si "Accende"?',
+      options: [
+        { text: 'Che la somma degli indizi pesati ha superato la soglia minima di attivazione ⚡', correct: true },
+        { text: 'Che dal computer esce fumo bianco 💨', correct: false },
+        { text: 'Che la stanza è diventata improvvisamente troppo buia 🌑', correct: false },
+        { text: 'Che la batteria del portatile è quasi scarica 🔋', correct: false }
+      ],
+      feedback: 'Benissimo! Quando la carica totale supera la barriera di soglia, il neurone invia il segnale "1" (attivo)!'
+    },
+    {
+      q: 'Cosa accade alla "Loss" (misura dell\'errore) quando l\'IA si allena bene e fa progressi?',
+      options: [
+        { text: 'La Loss diminuisce e si avvicina sempre di più allo zero 📉', correct: true },
+        { text: 'La Loss sale a livelli altissimi verso l\'infinito 📈', correct: false },
+        { text: 'La Loss resta sempre fissa allo stesso valore 100 🛑', correct: false },
+        { text: 'La Loss si trasforma in una melodia musicale 🎵', correct: false }
+      ],
+      feedback: 'Esatto! La Loss conta gli sbagli: meno errori fa l\'IA, più la curva scende verso il successo totale!'
+    },
+    {
+      q: 'Nel nostro neurone, a cosa serve il "Bias" (la Soglia di base)?',
+      options: [
+        { text: 'A decidere quanto il neurone è "diffidente" prima di credere a un indizio e accendersi 🛡️', correct: true },
+        { text: 'A cambiare il colore dei led della tastiera 🌈', correct: false },
+        { text: 'A regolare il volume delle casse acustiche 🔊', correct: false },
+        { text: 'A salvare la partita nel videogioco 💾', correct: false }
+      ],
+      feedback: 'Giustissimo! Un bias negativo crea un ostacolo in salita: servono indizi fortissimi per convincere il neurone a scattare!'
+    }
+  ],
+  secondaria: [
+    {
+      q: 'Qual è l\'equazione algebrica fondamentale che descrive il calcolo interno di un singolo percettrone prima della funzione di attivazione?',
+      options: [
+        { text: 'z = ∑ (wᵢ · xᵢ) + b (Somma pesata degli ingressi con aggiunta del bias) 📐', correct: true },
+        { text: 'z = (w₁ + x₁) · (w₂ + x₂) / b ❌', correct: false },
+        { text: 'z = √(w · x) - b² ❌', correct: false },
+        { text: 'z = log(wᵢ) / sin(xᵢ) ❌', correct: false }
+      ],
+      feedback: 'Esatto! Ciascun input xᵢ viene moltiplicato per il proprio peso sinaptico wᵢ, sommato agli altri e traslato dal bias b.'
+    },
+    {
+      q: 'A cosa serve introdurre una "Funzione di Attivazione" non lineare (come Sigmoide o ReLU) al termine del neurone?',
+      options: [
+        { text: 'Permette alla rete neurale di apprendere relazioni complesse e non lineari tra dati 📈', correct: true },
+        { text: 'Serve a formattare il disco fisso durante l\'avvio 💾', correct: false },
+        { text: 'Impedisce al processore grafico di superare gli 80 °C ❄️', correct: false },
+        { text: 'Ordina alfabeticamente le parole nel dizionario 🔤', correct: false }
+      ],
+      feedback: 'Fondamentale! Senza non-linearità, anche una rete profonda con centinaia di strati collasserebbe in una banale regressione lineare.'
+    },
+    {
+      q: 'Nell\'architettura Transformer dei grandi modelli linguistici (LLM), cosa fa il meccanismo di "Self-Attention"?',
+      options: [
+        { text: 'Calcola la rilevanza contestuale reciproca tra ogni token e tutti gli altri elementi della sequenza 🔍', correct: true },
+        { text: 'Attiva un sistema antivirus per bloccare parole pericolose 🛡️', correct: false },
+        { text: 'Misura quanta memoria RAM consuma l\'applicazione a ogni secondo ⏱️', correct: false },
+        { text: 'Converte automaticamente il testo in voce sintetizzata 🎙️', correct: false }
+      ],
+      feedback: 'Brillante! L\'attenzione usa matrici Query, Key e Value per pesare come ciascuna parola si correla dinamicamente al contesto.'
+    },
+    {
+      q: 'In uno spazio di Word Embedding ad alta dimensionalità, come sono rappresentati i concetti semantici?',
+      options: [
+        { text: 'Come vettori numerici continui (coordinate) in cui la vicinanza geometrica riflette l\'affinità di significato 🌌', correct: true },
+        { text: 'Come semplici file immagine compressi in formato PNG 🖼️', correct: false },
+        { text: 'Come definizioni testuali copiate alla lettera dal vocabolario 📚', correct: false },
+        { text: 'Come numeri interi casuali generati all\'avvio del software 🎲', correct: false }
+      ],
+      feedback: 'Perfetto! Concetti con semantica affine (es. "cane" e "lupo") presentano un angolo ridotto e un\'elevata Cosine Similarity.'
+    },
+    {
+      q: 'Qual è il ruolo matematico della funzione "Softmax" applicata ai logits finali di un modello linguistico?',
+      options: [
+        { text: 'Normalizza i punteggi grezzi (logits) in una distribuzione di probabilità la cui somma totale è esattamente 1.0 (100%) 📊', correct: true },
+        { text: 'Rimuove la punteggiatura e i caratteri speciali dal testo ✂️', correct: false },
+        { text: 'Calcola la radice quadrata del numero di neuroni presenti nel layer 🧮', correct: false },
+        { text: 'Crittografa la risposta dell\'IA con un algoritmo a chiave asimmetrica 🔐', correct: false }
+      ],
+      feedback: 'Ottimo! Softmax eleva a potenza esponenziale ciascun logit e divide per la somma, trasformando numeri arbitrari in probabilità.'
+    },
+    {
+      q: 'Nel processo di Backpropagation (retropropagazione), quale strumento del calcolo matematico guida l\'aggiornamento dei pesi?',
+      options: [
+        { text: 'La discesa del gradiente calcolata con la regola della catena (chain rule) delle derivate parziali 📉', correct: true },
+        { text: 'La generazione puramente casuale di nuovi valori di peso ad ogni errore 🎲', correct: false },
+        { text: 'Il raddoppio automatico di tutti i parametri numerici della rete ✖️', correct: false },
+        { text: 'La sovrascrittura manuale dei file di configurazione da parte dell\'utente ✍️', correct: false }
+      ],
+      feedback: 'Eccellente! Il gradiente indica la direzione di massima crescita della Loss; la rete aggiorna i pesi nella direzione opposta per minimizzare l\'errore.'
+    },
+    {
+      q: 'Nella formula di campionamento P(wᵢ) ∝ exp(zᵢ / T), che effetto produce impostare una Temperatura T molto bassa (es. T = 0.1)?',
+      options: [
+        { text: 'Il campionamento diventa quasi deterministico (greedy), premiando sempre e solo il token con il logit più alto 🎯', correct: true },
+        { text: 'La risposta diventa casuale, incoerente e priva di grammatica 🤪', correct: false },
+        { text: 'Il consumo energetico del processore cala a zero watt ⚡', correct: false },
+        { text: 'Il modello comincia a generare risposte in lingue sconosciute 🌐', correct: false }
+      ],
+      feedback: 'Corretto! Con T prossimo a zero le piccole differenze tra logits vengono amplificate, portando alla selezione quasi certa del candidato top.'
+    },
+    {
+      q: 'In un neurone artificiale, qual è l\'effetto geometrico del Bias (b) rispetto all\'iperpiano di separazione?',
+      options: [
+        { text: 'Trasla l\'iperpiano di decisione rispetto all\'origine nello spazio degli input 📐', correct: true },
+        { text: 'Modifica la risoluzione grafica dei pixel visualizzati a schermo 🖥️', correct: false },
+        { text: 'Inverte l\'ordine cronologico delle epoche di addestramento ⏳', correct: false },
+        { text: 'Elimina tutti i collegamenti sinaptici con gli input nulli ✂️', correct: false }
+      ],
+      feedback: 'Proprio così! Senza bias, la superficie di decisione sarebbe vincolata a passare sempre per l\'origine (0, 0, ..., 0).'
+    },
+    {
+      q: 'Quale fondamentale differenza distingue i circuiti digitali GPU dalle reti neuronali biologiche del cervello umano?',
+      options: [
+        { text: 'Le GPU operano con calcoli digitali matriciali sincroni ad altissima frequenza; il cervello usa segnali elettrochimici analogici a impulsi (spikes) altamente asincroni e plastici 🧠⚡', correct: true },
+        { text: 'I neuroni biologici funzionano a 220 Volt mentre le GPU usano solo batterie solari ☀️', correct: false },
+        { text: 'I chip di silicio provano sensazioni coscienti e dolore fisico 🤖', correct: false },
+        { text: 'Non c\'è alcuna differenza: la biochimica e il silicio semiconduttore sono identici 🧪', correct: false }
+      ],
+      feedback: 'Esatto! Le reti neurali artificiali sono astrazioni matematiche ispirate alla neurobiologia, ma l\'architettura fisica sottostante è radicalmente diversa.'
+    },
+    {
+      q: 'Cosa si intende per "Overfitting" (sovradattamento) durante l\'addestramento di un modello di Machine Learning?',
+      options: [
+        { text: 'Il modello memorizza il rumore e i dettagli specifici del training set, perdendo la capacità di generalizzare su dati mai visti 🛑', correct: true },
+        { text: 'La scheda grafica si surriscalda oltre la temperatura consentita dal produttore 🔥', correct: false },
+        { text: 'Il dataset di addestramento contiene troppi dati corretti e completi 📚', correct: false },
+        { text: 'La rete neurale ha terminato la memoria virtuale sul disco fisso 💾', correct: false }
+      ],
+      feedback: 'Bravissimo! In overfitting, la loss sul training set scende quasi a zero, ma sui dati di test (validation set) l\'errore risale vistosamente.'
+    },
+    {
+      q: 'Che cosa misura la metrica di "Cosine Similarity" (similarità del coseno) tra due vettori di embedding?',
+      options: [
+        { text: 'Il coseno dell\'angolo tra i due vettori: vale 1 se puntano nella stessa direzione, 0 se ortogonali (indipendenti) 📐', correct: true },
+        { text: 'La distanza in millimetri tra i tasti della tastiera del computer ⌨️', correct: false },
+        { text: 'Quanti byte di memoria occupa la stringa di testo compressa 📦', correct: false },
+        { text: 'Il tempo in millisecondi impiegato dalla scheda di rete per trasmettere il pacchetto 📶', correct: false }
+      ],
+      feedback: 'Formula esatta: cos(θ) = (u · v) / (||u|| ||v||). Valuta l\'orientamento concettuale nello spazio vettoriale a prescindere dalla magnitudo!'
+    },
+    {
+      q: 'Cosa sono i "Logits" prodotti dallo strato di uscita di una rete neurale per la classificazione o il linguaggio?',
+      options: [
+        { text: 'I punteggi numerici grezzi (non vincolati tra 0 e 1) generati dall\'ultimo layer lineare prima della normalizzazione probabilistica 🔢', correct: true },
+        { text: 'I file di log degli errori salvati dal sistema operativo nella cartella di sistema 🗂️', correct: false },
+        { text: 'Le credenziali di login crittografate per autenticarsi al server 🔑', correct: false },
+        { text: 'Il conteggio totale delle parole contenute nell\'intero dizionario 📖', correct: false }
+      ],
+      feedback: 'Precisissimo! I logits rappresentano le evidenze grezze (da -∞ a +∞) calcolate dalla rete prima che la Softmax le traduca in percentuali.'
+    }
+  ]
+};
 
+let quizSelectedLevel = 'primaria';
+let quizSessionQuestions = [];
 let quizCurrentIndex = 0;
 let quizScore = 0;
 let quizAnswered = false;
+
+// Utilità per rimescolare un array (Fisher-Yates)
+function shuffleQuizArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// Avvia una nuova sessione di 5 domande a sorpresa per il livello indicato
+function startQuizSession(level) {
+  if (level && quizPools[level]) {
+    quizSelectedLevel = level;
+  }
+
+  // Aggiorna bottoni di selezione fascia
+  document.querySelectorAll('.quiz-level-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.level === quizSelectedLevel);
+  });
+
+  // Aggiorna indicatore nel badge
+  const indicator = document.getElementById('quiz-header-level-indicator');
+  if (indicator) {
+    indicator.textContent = quizSelectedLevel === 'primaria'
+      ? '🧒 Fascia: Primaria (8-10 anni)'
+      : '🎓 Fascia: Medie (11-14 anni)';
+  }
+
+  // Estrae casualmente 5 domande dal pool del livello corrente
+  const pool = quizPools[quizSelectedLevel] || quizPools.primaria;
+  const shuffledPool = shuffleQuizArray(pool);
+  const picked = shuffledPool.slice(0, 5);
+
+  // Rimescola anche l'ordine delle 4 opzioni per ogni domanda
+  quizSessionQuestions = picked.map(item => {
+    return {
+      q: item.q,
+      feedback: item.feedback,
+      options: shuffleQuizArray(item.options.map(opt => ({ ...opt })))
+    };
+  });
+
+  quizCurrentIndex = 0;
+  quizScore = 0;
+  quizAnswered = false;
+  renderQuizQuestion();
+}
 
 function initQuizModal() {
   const modal = document.getElementById('quiz-modal');
   const btnOpen = document.getElementById('btn-open-quiz');
   const btnClose = document.getElementById('btn-close-quiz');
 
+  // Gestione pulsanti selezione fascia (Primaria / Medie)
+  document.querySelectorAll('.quiz-level-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetLevel = btn.dataset.level;
+      if (targetLevel) {
+        startQuizSession(targetLevel);
+      }
+    });
+  });
+
   if (btnOpen && modal) {
     btnOpen.addEventListener('click', () => {
-      quizCurrentIndex = 0;
-      quizScore = 0;
       modal.style.display = 'flex';
-      renderQuizQuestion();
+      startQuizSession(quizSelectedLevel);
     });
   }
 
@@ -3117,24 +3372,35 @@ function renderQuizQuestion() {
   const container = document.getElementById('quiz-body');
   if (!container) return;
 
-  if (quizCurrentIndex >= kidsQuizData.length) {
+  if (!quizSessionQuestions || quizSessionQuestions.length === 0) {
+    startQuizSession(quizSelectedLevel);
+    return;
+  }
+
+  if (quizCurrentIndex >= quizSessionQuestions.length) {
     renderQuizFinalScreen();
     return;
   }
 
   quizAnswered = false;
-  const qData = kidsQuizData[quizCurrentIndex];
-  const progressPct = ((quizCurrentIndex) / kidsQuizData.length) * 100;
+  const qData = quizSessionQuestions[quizCurrentIndex];
+  const total = quizSessionQuestions.length;
+  const progressPct = ((quizCurrentIndex) / total) * 100;
+  const isMedie = quizSelectedLevel === 'secondaria';
 
   container.innerHTML = `
     <div class="quiz-progress-bar">
       <div class="quiz-progress-fill" style="width: ${progressPct}%;"></div>
     </div>
-    <div class="quiz-q-num">Domanda ${quizCurrentIndex + 1} di ${kidsQuizData.length}</div>
+    <div class="quiz-q-num">
+      <span>Domanda ${quizCurrentIndex + 1} di ${total}</span>
+      <span style="opacity: 0.6;">•</span>
+      <span>${isMedie ? '🎓 Livello Medie' : '🧒 Livello Primaria'}</span>
+    </div>
     <div class="quiz-q-title">${qData.q}</div>
     <div class="quiz-options-list" id="quiz-opt-list">
       ${qData.options.map((opt, idx) => `
-        <button class="quiz-opt-btn" data-opt-idx="${idx}">${opt.text}</button>
+        <button type="button" class="quiz-opt-btn" data-opt-idx="${idx}">${opt.text}</button>
       `).join('')}
     </div>
     <div id="quiz-feedback-area"></div>
@@ -3144,7 +3410,7 @@ function renderQuizQuestion() {
     btn.addEventListener('click', () => {
       if (quizAnswered) return;
       quizAnswered = true;
-      const idx = parseInt(btn.dataset.optIdx);
+      const idx = parseInt(btn.dataset.optIdx, 10);
       const isCorrect = qData.options[idx].correct;
 
       if (isCorrect) quizScore++;
@@ -3162,11 +3428,11 @@ function renderQuizQuestion() {
       if (fbArea) {
         fbArea.innerHTML = `
           <div class="quiz-feedback-box ${isCorrect ? 'correct' : 'wrong'}">
-            <strong>${isCorrect ? '🎉 Risposta Esatta!' : '❌ Ops, non proprio!'}</strong><br>
+            <strong>${isCorrect ? '🎉 Risposta Esatta!' : '❌ Ops, non esattamente!'}</strong><br>
             ${qData.feedback}
           </div>
-          <button class="quiz-next-btn" id="btn-quiz-next">
-            ${quizCurrentIndex + 1 < kidsQuizData.length ? 'Domanda Successiva ➔' : 'Vedi Risultato Finale 🏆'}
+          <button type="button" class="quiz-next-btn" id="btn-quiz-next">
+            ${quizCurrentIndex + 1 < total ? 'Domanda Successiva ➔' : 'Vedi Risultato Finale 🏆'}
           </button>
         `;
 
@@ -3183,34 +3449,54 @@ function renderQuizFinalScreen() {
   const container = document.getElementById('quiz-body');
   if (!container) return;
 
+  const total = quizSessionQuestions.length || 5;
+  const isMedie = quizSelectedLevel === 'secondaria';
+
   let medal = '🥇';
-  let badgeTitle = 'Maestro Supremo dei Neuroni!';
-  let praise = 'Incredibile! Hai capito alla perfezione come ragiona l\'Intelligenza Artificiale, dai singoli neuroni fino all\'orchestra di ChatGPT!';
+  let badgeTitle = isMedie ? 'Architetto dei Sistemi Neurali!' : 'Maestro Supremo dei Neuroni!';
+  let praise = isMedie 
+    ? 'Impressionante! Hai una solida comprensione di algebra lineare, softmax, backpropagation e meccanismi di attenzione degli LLM moderni!' 
+    : 'Incredibile! Hai capito alla perfezione come ragiona l\'Intelligenza Artificiale, dai singoli neuroni detective fino a ChatGPT!';
 
   if (quizScore <= 2) {
     medal = '🥉';
-    badgeTitle = 'Apprendista Esploratore dell\'IA';
-    praise = 'Buon inizio! Rivedi le schede 3D e riprova il quiz per conquistare la medaglia d\'oro!';
+    badgeTitle = isMedie ? 'Studente di Intelligenza Artificiale' : 'Apprendista Esploratore dell\'IA';
+    praise = isMedie
+      ? 'Buon punto di partenza! Rivedi le schede matematiche 3D e i grafici della loss per affinare i concetti tecnici e riprovare!'
+      : 'Buon inizio! Rivedi le schede 3D e riprova con altre 5 domande a sorpresa per conquistare la medaglia d\'oro!';
   } else if (quizScore <= 4) {
     medal = '🥈';
-    badgeTitle = 'Tecnico dei Neuroni Digitali!';
-    praise = 'Ottimo punteggio! Conosci molto bene i segreti dell\'IA e dei modelli di linguaggio!';
+    badgeTitle = isMedie ? 'Data Scientist in Erba!' : 'Tecnico dei Neuroni Digitali!';
+    praise = isMedie
+      ? 'Ottimo risultato! Conosci approfonditamente la teoria degli spazi vettoriali, la temperatura e i meccanismi di previsione!'
+      : 'Ottimo punteggio! Conosci molto bene i segreti dell\'IA e dei modelli di linguaggio!';
   }
 
   container.innerHTML = `
     <div class="quiz-final-score">
       <div class="quiz-medal">${medal}</div>
-      <div class="quiz-score-num">${quizScore} su ${kidsQuizData.length} Corrette!</div>
+      <div class="quiz-score-num">${quizScore} su ${total} Corrette!</div>
       <div class="quiz-badge-title">${badgeTitle}</div>
       <p class="quiz-praise-text">${praise}</p>
-      <button class="quiz-restart-btn" id="btn-restart-quiz">🔄 Gioca di Nuovo</button>
+      
+      <div class="quiz-actions-row">
+        <button type="button" class="quiz-restart-btn" id="btn-restart-quiz">
+          🔄 Altre 5 Domande a Sorpresa (${isMedie ? 'Medie' : 'Primaria'})
+        </button>
+        <button type="button" class="quiz-switch-level-btn" id="btn-switch-quiz-level">
+          ${isMedie ? '🧒 Mettiti alla Prova con la Primaria (8-10)' : '🎓 Sfida il Livello Medie (11-14 anni)'}
+        </button>
+      </div>
     </div>
   `;
 
   document.getElementById('btn-restart-quiz')?.addEventListener('click', () => {
-    quizCurrentIndex = 0;
-    quizScore = 0;
-    renderQuizQuestion();
+    startQuizSession(quizSelectedLevel);
+  });
+
+  document.getElementById('btn-switch-quiz-level')?.addEventListener('click', () => {
+    const nextLevel = quizSelectedLevel === 'primaria' ? 'secondaria' : 'primaria';
+    startQuizSession(nextLevel);
   });
 }
 

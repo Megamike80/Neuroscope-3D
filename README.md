@@ -54,11 +54,12 @@ I 3 Super-Giudici valutano in diretta le parole attraverso laser 3D sequenziali:
 - ⚽ **La Partita Decisiva:** «Al novantesimo minuto il capitano calciò forte segnando una splendida [ ... ]» (Giudice Azione Gol ⚽, Vittoria 🏆, Grammatica 🔵)
 - 🎛️ **Manopola della Fantasia (Temperatura dell'IA):** da Robot Rigido (0.1) a Naturale (0.7) fino a Testa fra le Nuvole / Allucinazioni (1.6)!
 
-### 5. 🏆 Sfida Quiz per Ragazzi ("Sei un Campione dei Neuroni?")
-Un mini-quiz interattivo a schede con 5 domande a risposta multipla, spiegazione didattica dopo ogni click e verdetto finale con trofei virtuali:
-- 🥇 *Maestro Supremo dei Neuroni* (5/5)
-- 🥈 *Tecnico dei Neuroni Digitali* (3-4/5)
-- 🥉 *Apprendista Esploratore dell'IA* (1-2/5)
+### 5. 🏆 Sfida Quiz Differenziata per Fasce & a Domande Dinamiche
+Il quiz didattico è ora suddiviso in due livelli calibrati per età e competenze, con un motore di generazione dinamico a rotazione:
+- 🧒 **Scuola Primaria (8–10 anni):** pool di 12 domande con metafore intuitive e giocose (dendriti come antenne, pesi come manopole d'importanza, bias come diffidenza del neurone, detective della pizza, allenamento come imparare ad andare in bici, manopola della fantasia).
+- 🎓 **Scuola Secondaria di I Grado / Medie (11–14 anni):** pool di 12 domande a maggior rigore matematico e concettuale (somma pesata $z = \sum w_i x_i + b$, bias come traslazione dell'iperpiano, funzioni di attivazione e non-linearità, normalizzazione Softmax e logits, spazi di embedding ad alta dimensionalità e cosine similarity, retropropagazione e discesa del gradiente, meccanismo di Self-Attention, temperatura e campionamento probabilistico).
+- 🎲 **Randomizzazione & Replay Infinito:** ogni sessione estrae casualmente 5 domande dal pool del livello prescelto e mescola le 4 opzioni di risposta, garantendo test sempre diversi ad ogni tentativo.
+- 🔄 **Cambio Livello Immediato:** selettore di fascia sempre visibile nell'intestazione e pulsante di sfida incrociata nella schermata finale con medaglie e badge personalizzati (*Maestro Supremo / Architetto dei Sistemi Neurali*).
 
 ---
 
