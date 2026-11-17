@@ -3036,246 +3036,246 @@ function setupWordBoxEvents() {
 const quizPools = {
   primaria: [
     {
-      q: 'Nella prima scheda del "Neurone Detective", se facciamo analizzare la Pizza 🍕 al neurone del cibo, cosa fa il suo canale di uscita (l\'assone)?',
+      q: 'Un\'Intelligenza Artificiale come ChatGPT prova emozioni o ha pensieri propri come una persona?',
       options: [
-        { text: 'Spara una scarica verde smeraldo al 100% di potenza ⚡', correct: true },
-        { text: 'Diventa completamente nero e spento 🖤', correct: false },
-        { text: 'Si accende solo a metà potenza con una debole luce ambrata 🟡', correct: false },
-        { text: 'Inizia a lampeggiare di blu come una sirena 🚨', correct: false }
+        { text: 'No: è un programma che fa calcoli con i numeri, non prova sentimenti né ha una vera mente 💻', correct: true },
+        { text: 'Sì: è come una personcina simpatica e invisibile che vive dentro a internet 👤', correct: false },
+        { text: 'Sì: se non la usi per qualche giorno si offende e piange da sola 😢', correct: false },
+        { text: 'Ha un piccolo cervello animale conservato dentro al computer 🐾', correct: false }
       ],
-      feedback: 'Esatto! La pizza risponde con un triplo SÌ a tutti i canali d\'ingresso: il nucleo si carica d\'oro e l\'uscita spara verde smeraldo al 100%!'
+      feedback: 'L\'Intelligenza Artificiale non è un essere vivente e non ha coscienza: è un software matematico creato da programmatori umani per analizzare dati e fare calcoli.'
     },
     {
-      q: 'Sempre nel neurone detective del cibo, perché la Forchetta 🍴 riceve un\'uscita solo a metà potenza (55%)?',
+      q: 'Cosa c\'è in realtà all\'interno dei "neuroni" di un computer?',
       options: [
-        { text: 'Perché sta a tavola e serve per mangiare, ma non è commestibile né nutre! 🍴', correct: true },
-        { text: 'Perché la forchetta è caduta dal tavolo ed è sporca 🥄', correct: false },
-        { text: 'Perché al neurone artificiale non piacciono gli oggetti di metallo ⚙️', correct: false },
-        { text: 'Perché le forchette si possono usare solo a cena e non a pranzo 🌙', correct: false }
+        { text: 'Operazioni matematiche veloci (addizioni e moltiplicazioni) calcolate dai microchip ⚡', correct: true },
+        { text: 'Vere cellule biologiche collegate con fili elettrici e provette 🧫', correct: false },
+        { text: 'Minuscoli ingranaggi a molla come nei vecchi orologi da taschino ⚙️', correct: false },
+        { text: 'Una bacchetta magica che conosce tutte le risposte del mondo 🪄', correct: false }
       ],
-      feedback: 'Proprio così! Solo il canale "Sta a tavola" si attiva; gli altri due dicono NO, quindi il legame con il cibo è solo parziale!'
+      feedback: 'I "neuroni artificiali" sono formule matematiche: si ispirano al cervello biologico, ma nei computer sono solo numeri moltiplicati a tutta velocità dai microprocessori.'
     },
     {
-      q: 'Nel neurone specialista dei Cuccioli 🐶, perché il Peluche 🧸 prende solo il 50% di punteggio rispetto al Cane vero?',
+      q: 'Come fa un\'Intelligenza Artificiale a imparare a riconoscere un animale o un oggetto?',
       options: [
-        { text: 'Perché ha il pelo morbido e la forma da animale, ma è un giocattolo finto che non respira né mangia! 🧸', correct: true },
-        { text: 'Perché è un cane troppo piccolo per riuscire ad abbaiare 🐾', correct: false },
-        { text: 'Perché è scappato dal recinto del giardino 🐕', correct: false },
-        { text: 'Perché costa meno di un cane vero nel negozio di animali 🪙', correct: false }
+        { text: 'Guarda tantissimi esempi, fa tentativi, misura gli errori e corregge i suoi calcoli 🎯', correct: true },
+        { text: 'Un programmatore scrive a mano sul computer la risposta a ogni singola domanda ✍️', correct: false },
+        { text: 'Va a scuola di notte mentre lo schermo del computer è spento 🎒', correct: false },
+        { text: 'Sa già tutto fin dal momento in cui viene accesa la prima volta 🔌', correct: false }
       ],
-      feedback: 'Perfetto! Il peluche ha la forma di un cucciolo, ma non è un essere vivente: il neurone nota la differenza e si illumina solo a metà!'
+      feedback: 'Nel Machine Learning non si programma ogni risposta a mano: il computer impara osservando milioni di esempi, provando a indovinare e correggendosi quando sbaglia.'
     },
     {
-      q: 'A cosa servono i Dendriti (i canali d\'ingresso azzurri con le ramificazioni) nel nostro neurone 3D?',
+      q: 'Nel neurone dell\'IA, cosa rappresenta il "peso" o l\'importanza di un indizio?',
       options: [
-        { text: 'A catturare gli indizi e le caratteristiche del mondo esterno 🌿', correct: true },
-        { text: 'A fargli ascoltare la musica preferita alla radio 📻', correct: false },
-        { text: 'A collegare il computer a una presa di corrente a muro 🔌', correct: false },
-        { text: 'A pulire lo schermo del monitor dalla polvere 🧹', correct: false }
+        { text: 'Un valore numerico che stabilisce quanto quell\'indizio è decisivo per la risposta ⚖️', correct: true },
+        { text: 'Quanto pesa la tastiera del computer sulla bilancia di casa 🏋️', correct: false },
+        { text: 'I minuti di attesa prima che il computer risponda all\'utente ⏱️', correct: false },
+        { text: 'Il numero di programmi o videogiochi installati sul disco fisso 🎮', correct: false }
       ],
-      feedback: 'Bravissimo! I dendriti sono i canali di ingresso del neurone: funzionano come antenne che raccolgono tutti i dati in arrivo!'
+      feedback: 'I pesi servono a dare la giusta importanza a ogni dettaglio: se un indizio è cruciale (come "abbaia" per un cane), il neurone gli assegna un peso molto alto.'
     },
     {
-      q: 'Nella grande Sfera 3D delle parole (Scheda 2), perché Cane 🐶 e Gatto 🐱 si trovano vicini nel polo rosso?',
+      q: 'Cosa significa che un neurone artificiale "prende una decisione"?',
       options: [
-        { text: 'Perché appartengono entrambi al tema della natura e degli animali a quattro zampe 🐾', correct: true },
-        { text: 'Perché litigano sempre come nei cartoni animati in TV 📺', correct: false },
-        { text: 'Perché iniziano entrambi con la stessa lettera dell\'alfabeto 🔤', correct: false },
-        { text: 'Perché sono parole corte formate da sole quattro o cinque lettere ✏️', correct: false }
+        { text: 'Raccoglie tutti gli indizi pesati e si attiva solo se la loro somma supera una certa soglia ⚡', correct: true },
+        { text: 'Lancia una monetina per decidere a caso se dire sì o no 🪙', correct: false },
+        { text: 'Chiede un consiglio a voce alta allo schermo del computer 🗣️', correct: false },
+        { text: 'Aspetta che la stanza diventi completamente buia prima di rispondere 🌑', correct: false }
       ],
-      feedback: 'Centro! Nella mappa 3D dell\'IA le parole con significato simile o che appartengono allo stesso tema vivono nello stesso quartiere!'
+      feedback: 'Un neurone artificiale fa una somma di tutti gli ingressi: se la carica totale supera la barriera di soglia (bias), si accende e trasmette il segnale positivo.'
     },
     {
-      q: 'Nella Caccia al Tesoro della Mappa 3D, quale percorso segue la rotta «Dalla Fattoria alla Pizza»?',
+      q: 'Come fa l\'IA a sapere che le parole "cane" e "gatto" hanno significati simili?',
       options: [
-        { text: 'Pascolo 🐄 ➔ Latte 🥛 ➔ Ciotola 🥣 ➔ Farina 🥣 ➔ Pizza 🍕', correct: true },
-        { text: 'Razzo 🚀 ➔ Computer 💻 ➔ Robot 🤖 ➔ Pizza 🍕', correct: false },
-        { text: 'Lupo 🐺 ➔ Albero 🌳 ➔ Bosco 🌲 ➔ Pizza 🍕', correct: false },
-        { text: 'Cinema 🎬 ➔ Teatro 🎭 ➔ Musica 🎵 ➔ Pizza 🍕', correct: false }
+        { text: 'Ha notato che nei testi queste parole compaiono spesso nelle stesse situazioni (animali, zampe, casa) 🐾', correct: true },
+        { text: 'Perché l\'IA ha gli occhi veri e li vede giocare fuori dalla finestra 🪟', correct: false },
+        { text: 'Perché iniziano entrambe con lettere dell\'alfabeto che piacciono al computer 🔤', correct: false },
+        { text: 'È stata una supposizione casuale inventata per caso dal monitor 💻', correct: false }
       ],
-      feedback: 'Grandioso! È la rotta segreta che unisce la natura degli ingredienti della fattoria fino alla pizza sfornata a tavola!'
+      feedback: 'L\'IA non conosce il mondo reale con i sensi: analizza miliardi di frasi e scopre che parole usate negli stessi contesti hanno significati affini (spazio semantico).'
     },
     {
-      q: 'Nella scheda dell\'Allenamento (Scheda 3), quale parola buffa e fuori tema sceglie il neurone al primo tentativo (Epoca 1) per completare «un piatto di...»?',
+      q: 'Quando ChatGPT scrive una risposta, come sceglie quale parola mettere dopo?',
       options: [
-        { text: 'Galassia 🌌', correct: true },
-        { text: 'Spaghetti 🍝', correct: false },
-        { text: 'Zuppa 🍲', correct: false },
-        { text: 'Caramelle 🍬', correct: false }
+        { text: 'Calcola quale parola è più probabile e adatta in base a tutto ciò che ha scritto prima 📊', correct: true },
+        { text: 'Ha un elenco di frasi già pronte e copia sempre la stessa risposta a memoria 📖', correct: false },
+        { text: 'C\'è una persona reale collegata in segreto su internet che digita velocemente per noi 🧑‍💻', correct: false },
+        { text: 'Sceglie sempre la parola più corta per fare prima e risparmiare spazio ✂️', correct: false }
       ],
-      feedback: 'Esatto! All\'inizio l\'IA non sa nulla e punta a caso nello spazio profondo: scegliere "un piatto di Galassia" fa ridere ed è un errore al 100%!'
+      feedback: 'I modelli di linguaggio come ChatGPT funzionano come un avanzatissimo completamento automatico: prevedono la parola successiva più probabile e coerente con il contesto.'
     },
     {
-      q: 'Durante l\'allenamento dell\'IA (Scheda 3), cosa succede alla linea della Loss (l\'Errore) dopo 10 epoche di studio?',
+      q: 'Cosa accade se regoliamo l\'IA per essere "troppo fantasiosa" (temperatura molto alta)?',
       options: [
-        { text: 'La linea scende dal 100% fino a toccare quasi lo 0%, perché l\'IA ha imparato la risposta giusta! 📉', correct: true },
-        { text: 'La linea sale sempre più in alto verso un milione di errori 📈', correct: false },
-        { text: 'La linea cambia forma e diventa un cerchio perfetto 🔴', correct: false },
-        { text: 'La linea rimane immobile e bloccata per sempre al 100% 🛑', correct: false }
+        { text: 'Inventa risposte molto originali, ma rischia di dire cose bizzarre o completamente inventate 🤪', correct: true },
+        { text: 'Il computer diventa caldissimo ed esce fumo dalla ventola 🔥', correct: false },
+        { text: 'L\'IA si blocca, chiude internet e non risponde più 💤', correct: false },
+        { text: 'Tutte le scritte sullo schermo diventano improvvisamente invisibili 👻', correct: false }
       ],
-      feedback: 'Super! La Loss misura quanti sbagli fa la rete: allenandosi per tentativi ed errori, l\'errore scende al minimo e il neurone diventa bravissimo!'
+      feedback: 'Aumentando la temperatura o fantasia, l\'IA sceglie parole meno prevedibili: è divertente per inventare fiabe, ma può generare le cosiddette "allucinazioni" (fatti falsi).'
     },
     {
-      q: 'Nella frase «scaldarsi con una bella...» (Scheda 4), perché il Giudice della Grammatica alza un veto rosso contro "Minestrone 🥣"?',
+      q: 'Perché un\'Intelligenza Artificiale può sbagliare anche quando sembra sicurissima di ciò che dice?',
       options: [
-        { text: 'Perché "minestrone" è MASCHILE ("un bel minestrone") e non si accorda con "una bella"! ✍️', correct: true },
-        { text: 'Perché il minestrone è una pietanza che si mangia solo d\'estate col caldo ☀️', correct: false },
-        { text: 'Perché all\'Intelligenza Artificiale non piacciono le verdure cotte 🥦', correct: false },
-        { text: 'Perché il minestrone è un piatto troppo liquido per essere mangiato 🥄', correct: false }
+        { text: 'Perché non capisce il significato di ciò che scrive: unisce solo parole che suonano bene insieme 🤖', correct: true },
+        { text: 'Perché si diverte a fare scherzi agli umani per vedere se se ne accorgono 🃏', correct: false },
+        { text: 'Perché non vede bene i tasti della tastiera del computer 👓', correct: false },
+        { text: 'Perché ha sonno dopo aver scritto più di tre frasi di seguito 😴', correct: false }
       ],
-      feedback: 'Bravissimo! I giudici dell\'IA controllano anche la grammatica italiana: "una bella" richiede obbligatoriamente una parola femminile singolare come "Zuppa"!'
+      feedback: 'L\'IA non possiede buon senso né comprensione reale: costruisce frasi che hanno una forma elegante e convincente, ma che possono contenere errori logici o informazioni inventate.'
     },
     {
-      q: 'Nello scenario della Torre del Mago (Scheda 4), «preparò con cura una potente...», quale parola vince l\'accordo di tutti i Giudici?',
+      q: 'Cosa succede se addestriamo un\'IA mostrandole solo esempi pieni di errori o notizie false?',
       options: [
-        { text: 'Pozione 🧪', correct: true },
-        { text: 'Incantesimo 🪄', correct: false },
-        { text: 'Tisana 🍵', correct: false },
-        { text: 'Sedia 🪑', correct: false }
+        { text: 'L\'IA imparerà quegli errori e darà risposte sbagliate, perché sa solo ciò che ha visto negli esempi ⚠️', correct: true },
+        { text: 'L\'IA capirà subito la bugia grazie al suo cuore e correggerà gli errori da sola 💖', correct: false },
+        { text: 'Il computer si rifiuterà di accendersi per non dire bugie agli utenti 🚫', correct: false },
+        { text: 'Non cambia nulla, perché l\'IA conosce già tutta la verità fin dall\'inizio 🌟', correct: false }
       ],
-      feedback: 'Perfetto! La "Pozione" riceve il consenso unanime: appartiene al mondo magico, evoca mistero ed è femminile singolare ("una potente pozione")!'
+      feedback: 'L\'IA dipende interamente dalla qualità dei dati con cui viene educata: se i dati contengono errori o pregiudizi, l\'algoritmo ripeterà fedelmente quegli stessi sbagli.'
     },
     {
-      q: 'Cosa succede a ChatGPT se giriamo la Manopola della Fantasia (Temperatura) al valore massimo (1.6)?',
+      q: 'L\'Intelligenza Artificiale è "più intelligente" degli esseri umani?',
       options: [
-        { text: 'Diventa stravagante e inventa parole bizzarre o curiose, con la "testa fra le nuvole"! 🤪', correct: true },
-        { text: 'Il computer prende fuoco e fonde la scheda madre 🔥', correct: false },
-        { text: 'L\'IA si blocca e sceglie solo la parola più noiosa ed evidente 🤖', correct: false },
-        { text: 'Cancella per sbaglio tutta la memoria di internet 💾', correct: false }
+        { text: 'No: fa calcoli ed elabora dati molto più velocemente, ma non ha coscienza, sentimenti né vero buon senso 🧠', correct: true },
+        { text: 'Sì: sa tutto del passato e del futuro e non commette mai nessuno sbaglio 🔮', correct: false },
+        { text: 'Sì: è una forma di vita superiore che presto sostituirà tutte le persone 🌍', correct: false },
+        { text: 'È intelligente esattamente come un cucciolo di cane o di gatto 🐶', correct: false }
       ],
-      feedback: 'Giustissimo! A temperatura 1.6 l\'IA osa tantissimo e usa parole rare e fantasiose, divertenti per inventare favole ma rischiose per i compiti precisi!'
+      feedback: 'L\'IA è un potentissimo strumento per fare calcoli e trovare schemi nei dati, ma l\'intelligenza umana (con empatia, intuizione, etica e coscienza) è profondamente diversa.'
     },
     {
-      q: 'L\'Intelligenza Artificiale di NeuroScope ha un vero cervello biologico vivente dentro allo schermo?',
+      q: 'Chi decide le regole di comportamento di un\'IA e chi è responsabile se commette un errore?',
       options: [
-        { text: 'No! È fatta di formule matematiche e calcoli numerici velocissimi eseguiti su chip elettronici 💻⚡', correct: true },
-        { text: 'Sì, c\'è una minuscola creatura viva rinchiusa nella tastiera del PC 🐾', correct: false },
-        { text: 'Sì, è un vero robot umanoide con ossa e sangue di metallo 🤖', correct: false },
-        { text: 'No, funziona a molla come gli antichi orologi da taschino 🕰️', correct: false }
+        { text: 'Gli esseri umani che la programmano, la addestrano e scelgono come utilizzarla nel mondo 👥', correct: true },
+        { text: 'Il computer da solo, perché è una creatura autonoma e indipendente 🖥️', correct: false },
+        { text: 'Il cavo della corrente elettrica che alimenta il computer 🔌', correct: false },
+        { text: 'Nessuno, perché l\'IA è un fenomeno della natura come il vento o la pioggia 🌧️', correct: false }
       ],
-      feedback: 'Centro! Non c\'è nulla di vivente né di magico: sono milioni di moltiplicazioni ed addizioni calcolate in millesimi di secondo dai microprocessori!'
+      feedback: 'L\'Intelligenza Artificiale è una creazione dell\'uomo: la responsabilità etica, morale e pratica delle sue azioni ricade sempre sulle persone che la progettano e la impiegano.'
     }
   ],
   secondaria: [
     {
-      q: 'Nella prima scheda del Neurone 3D, cosa rappresentano i cursori dei Pesi Sinaptici (Canale A, B, C)?',
+      q: 'Perché gli scienziati descrivono modelli come ChatGPT come "generatori probabilistici" anziché menti pensanti?',
       options: [
-        { text: 'Moltiplicatori numerici che determinano quanta importanza il neurone assegna a ciascun segnale d\'ingresso ⚖️', correct: true },
-        { text: 'Il peso in chilogrammi dell\'alimentatore e del monitor del computer 🏋️', correct: false },
-        { text: 'I gigabyte di memoria RAM consumati dalla scheda grafica durante il rendering 💾', correct: false },
-        { text: 'La velocità in giri al minuto della ventola del processore 🌪️', correct: false }
+        { text: 'Perché calcolano statisticamente quale parola è più probabile dopo le precedenti, senza una reale comprensione semantica 📊', correct: true },
+        { text: 'Perché consultano in tempo reale archivi segreti di risposte già scritte a mano da esseri umani 📚', correct: false },
+        { text: 'Perché simulano onde cerebrali biologiche attraverso impulsi chimici all\'interno del silicio 🧠', correct: false },
+        { text: 'Perché generano risposte estraendo lettere a sorte come in una lotteria 🎰', correct: false }
       ],
-      feedback: 'Esatto! Ciascun canale d\'ingresso viene moltiplicato per il proprio peso: una caratteristica decisiva riceve un peso alto, un\'informazione inutile riceve un peso vicino a zero.'
+      feedback: 'I Large Language Model (LLM) non possiedono una coscienza né un modello mentale del mondo: operano su distribuzioni statistiche di parole apprese durante la fase di training.'
     },
     {
-      q: 'Cosa accade nel neurone artificiale se spostiamo il cursore del Bias / Soglia verso un valore molto negativo (es. -0.8)?',
+      q: 'Qual è il cambio di paradigma fondamentale tra un algoritmo tradizionale (es. in Scratch o Python) e il Machine Learning?',
       options: [
-        { text: 'Il neurone diventa diffidente: la somma pesata degli ingressi deve essere altissima per superare la soglia e attivare l\'uscita! 🛡️', correct: true },
-        { text: 'L\'assone di uscita spara sempre luce verde anche se non c\'è nessun dato in ingresso 🟢', correct: false },
-        { text: 'I dendriti invertono la loro posizione collegandosi al monitor 🔄', correct: false },
-        { text: 'Il computer spegne automaticamente lo schermo per risparmiare energia 💡', correct: false }
+        { text: 'Nel codice tradizionale l\'umano scrive regole logiche fisse; nel Machine Learning il computer ricava le regole analizzando dati ed esempi 🧩', correct: true },
+        { text: 'Il codice tradizionale funziona solo offline, mentre il Machine Learning richiede computer quantistici 🚀', correct: false },
+        { text: 'Non esiste alcuna differenza: sono due parole diverse per indicare esattamente lo stesso codice sorgente 🔄', correct: false },
+        { text: 'Il Machine Learning elimina completamente l\'uso della matematica e dei numeri 🧮', correct: false }
       ],
-      feedback: 'Corretto! Un bias negativo crea una barriera di attivazione in salita: serve una carica positiva combinata molto forte per far scattare la scintilla di output.'
+      feedback: 'Nel Machine Learning non diciamo al computer cosa fare passaggio per passaggio; forniamo un modello matematico e milioni di dati, lasciando che ottimizzi da solo le proprie connessioni.'
     },
     {
-      q: 'Nello "Schermo della Realtà - Dentro la Macchina" (Scheda 2), come sono rappresentati i concetti per il computer?',
+      q: 'In che modo un computer riesce a confrontare e misurare la somiglianza tra concetti astratti (Word Embeddings)?',
       options: [
-        { text: 'Come vettori di coordinate numeriche decimali ad alta dimensionalità [dim_0001: +0.8412, ...] 🌌', correct: true },
-        { text: 'Come immagini fotografiche a colori compresse in formato JPEG 🖼️', correct: false },
-        { text: 'Come registrazioni vocali lette a voce alta da un microfono 🎙️', correct: false },
-        { text: 'Come semplici elenchi di lettere dell\'alfabeto memorizzate a caso 🔤', correct: false }
+        { text: 'Mappando ogni parola come un vettore di coordinate numeriche in uno spazio geometrico multidimensionale 🌌', correct: true },
+        { text: 'Memorizzando registrazioni audio delle parole pronunciate in tutte le lingue del pianeta 🎙️', correct: false },
+        { text: 'Contando semplicemente il numero di lettere e sillabe che compongono ciascun termine 🔤', correct: false },
+        { text: 'Assegnando a caso un colore diverso a ogni pagina di testo analizzata 🎨', correct: false }
       ],
-      feedback: 'Brillante! Per l\'IA le parole non sono lettere grafiche ma vettori numerici: due concetti sono simili quando le loro coordinate puntano nella stessa direzione geometrica.'
+      feedback: 'Gli embedding traducono la semantica in geometria: parole usate in contesti affini avranno vettori orientati nella stessa direzione nello spazio matematico.'
     },
     {
-      q: 'Nella grande Sfera 3D dei 54 concetti, perché Computer 💻, Software 💾, Algoritmo ⚙️ e Robot 🤖 si trovano raggruppati nel polo ciano?',
+      q: 'Cosa avviene concretamente all\'interno di una rete neurale durante l\'addestramento quando commette un errore?',
       options: [
-        { text: 'Perché appartengono allo stesso campo semantico legato alla tecnologia e all\'elettronica digitale ⚡', correct: true },
-        { text: 'Perché sono le parole più lunghe e complesse del dizionario italiano 📖', correct: false },
-        { text: 'Perché sono state coniate tutte nello stesso anno dallo stesso inventore 📜', correct: false },
-        { text: 'Perché è un errore casuale causato da un difetto di rendering della scheda video 🐛', correct: false }
+        { text: 'Calcola la differenza tra la risposta prodotta e quella corretta (Loss) e modifica leggermente i pesi per ridurre l\'errore 🎯', correct: true },
+        { text: 'Cancella l\'intera memoria del sistema operativo e riavvia il computer da zero 🗑️', correct: false },
+        { text: 'Invia un messaggio di allarme all\'utente e interrompe il funzionamento 🛑', correct: false },
+        { text: 'Aumenta la frequenza della corrente elettrica per forzare una risposta corretta ⚡', correct: false }
       ],
-      feedback: 'Perfetto! L\'algoritmo di embedding raggruppa nello stesso quartiere dello spazio tridimensionale i termini che nei testi compaiono nei medesimi contesti.'
+      feedback: 'L\'addestramento è un processo di ottimizzazione numerica: la rete calcola l\'errore (funzione di Loss) e corregge i pesi sinaptici mediante algoritmi di discesa del gradiente.'
     },
     {
-      q: 'Nella rotta segreta «Dal Microchip al Cane Robot» (Scheda 2), come si collegano la tecnologia e il mondo animale?',
+      q: 'Cosa si intende con il termine "Overfitting" (sovradattamento) durante l\'allenamento di un\'IA?',
       options: [
-        { text: 'Attraverso il corridoio verde bio-tecnologico: Chip ⚡ ➔ Software 💾 ➔ Robot 🤖 ➔ Cane Robot 🦾🐕', correct: true },
-        { text: 'Attraverso il corridoio del cibo: Chip ⚡ ➔ Pizza 🍕 ➔ Forchetta 🍴 ➔ Cane Robot 🦾🐕', correct: false },
-        { text: 'Saltando a caso nello spazio vuoto senza alcuna connessione logica 🌌', correct: false },
-        { text: 'Cancellando tutti i dati del percorso per ripartire da zero 🗑️', correct: false }
+        { text: 'Il modello impara a memoria i dati di addestramento, perdendo la capacità di generalizzare su situazioni o quesiti nuovi 🛑', correct: true },
+        { text: 'Il processore della scheda video raggiunge una temperatura troppo elevata e fonde i circuiti 🔥', correct: false },
+        { text: 'La rete neurale ha terminato lo spazio disponibile sul disco rigido del server 💾', correct: false },
+        { text: 'L\'IA ha superato le capacità intellettive di tutti i programmatori umani 🎓', correct: false }
       ],
-      feedback: 'Grandioso! Mostra visivamente come concetti all\'apparenza distanti (un microchip di silicio e un cane) trovino un ponte concettuale attraverso la robotica!'
+      feedback: 'L\'overfitting è l\'equivalente di uno studente che impara a memoria i numeri di un esercizio: se il professore cambia i dati del problema, lo studente non sa come risolverlo.'
     },
     {
-      q: 'Nell\'avventura di addestramento su Marte (Scheda 3), l\'IA passa da "Forchetta 🍴" a "Marte 🔴" in 10 epoche. Come ha imparato?',
+      q: 'Da dove nasce il fenomeno delle "allucinazioni", in cui l\'IA afferma con sicurezza fatti totalmente inesistenti?',
       options: [
-        { text: 'Ha misurato l\'errore (Loss) commesso a ogni tentativo e ha corretto gradualmente i pesi delle proprie connessioni 🎯', correct: true },
-        { text: 'Ha cancellato il programma e ha scaricato un testo già pronto da un motore di ricerca 🌐', correct: false },
-        { text: 'Ha copiato la soluzione da Wikipedia dopo aver chiesto aiuto a un utente umano 📋', correct: false },
-        { text: 'Il computer ha tirato a indovinare a caso finché per pura fortuna non ha azzeccato 🎲', correct: false }
+        { text: 'Dalla natura probabilistica dell\'IA: privilegia la coerenza e fluidità della frase, anche quando i contenuti non corrispondono alla realtà 🎭', correct: true },
+        { text: 'Da un virus informatico che modifica i file di testo durante la notte 🦠', correct: false },
+        { text: 'Dal fatto che la memoria RAM del computer si svuota quando ci sono troppi utenti collegati 🧠', correct: false },
+        { text: 'Da un tentativo deliberato del software di ingannare l\'utente per divertimento 🃏', correct: false }
       ],
-      feedback: 'Esatto! Il Machine Learning consiste proprio nell\'apprendimento automatico: la rete corregge i propri parametri matematici per minimizzare l\'errore a ogni passaggio.'
+      feedback: 'I modelli linguistici non verificano la verità fattuale nel mondo reale: selezionano parole che suonano plausibili e coerenti con il contesto linguistico, creando talvolta falsità convincenti.'
     },
     {
-      q: 'Cosa succederebbe se un modello di IA si addestrasse per milioni di epoche solo ed esclusivamente sulle 3 frasi di NeuroScope?',
+      q: 'Perché il principio "Garbage in, Garbage out" (Se entra spazzatura, esce spazzatura) è fondamentale nell\'Intelligenza Artificiale?',
       options: [
-        { text: 'Rischio di Overfitting: memorizzerebbe quelle 3 frasi alla lettera, ma andrebbe in totale confusione su qualsiasi frase nuova! 🛑', correct: true },
-        { text: 'Diventerebbe istantaneamente capace di comprendere qualsiasi lingua dell\'universo 🪐', correct: false },
-        { text: 'I circuiti del computer si trasformerebbero in un vero cervello biologico umano 🧠', correct: false },
-        { text: 'La velocità di calcolo della scheda video raddoppierebbe automaticamente ⚡', correct: false }
+        { text: 'Perché se addestriamo una rete con dati pieni di errori, falsità o pregiudizi, l\'IA replicherà e amplificherà quegli stessi difetti ⚠️', correct: true },
+        { text: 'Perché i componenti fisici dei computer si sporcano di polvere con l\'uso prolungato 🧹', correct: false },
+        { text: 'Perché i file digitali non utilizzati per mesi si degradano come gli alimenti scaduti 🥛', correct: false },
+        { text: 'Perché l\'IA cancella automaticamente tutti i file che considera inutili 🗑️', correct: false }
       ],
-      feedback: 'Fondamentale! L\'overfitting (sovradattamento) accade quando una rete impara a memoria i dati di esercizio senza cogliere la regola generale, perdendo la capacità di generalizzare.'
+      feedback: 'Un\'IA non possiede un senso morale innato né una conoscenza autonoma: riflette con precisione matematica i pregi, i limiti e i difetti del dataset con cui è stata addestrata.'
     },
     {
-      q: 'Nello scenario sportivo dell\'Orchestra (Scheda 4), perché la parola "Gol ⚽" viene scartata dal Giudice della Grammatica?',
+      q: 'Cosa si intende per "Bias algoritmico" (pregiudizio) nei sistemi di Intelligenza Artificiale?',
       options: [
-        { text: 'Perché la frase dice «una splendida...» (femminile), mentre "gol" richiede l\'articolo maschile «uno splendido gol»! ✍️', correct: true },
-        { text: 'Perché segnare un gol all\'ultimo minuto non fa esultare i tifosi allo stadio 🏟️', correct: false },
-        { text: 'Perché la parola "gol" non viene mai usata nelle cronache sportive del calcio 🥅', correct: false },
-        { text: 'Perché l\'arbitro ha fischiato un fuorigioco prima del tiro in porta ⚽', correct: false }
+        { text: 'La tendenza del sistema a favorire o discriminare ingiustamente certi gruppi a causa di squilibri presenti nei dati storici ⚖️', correct: true },
+        { text: 'La velocità in gigahertz con cui il microprocessore esegue le moltiplicazioni numeriche ⚡', correct: false },
+        { text: 'La marca del sistema operativo installato sui computer degli utenti 💻', correct: false },
+        { text: 'Un tipo speciale di carattere tipografico usato nelle pagine web 🔤', correct: false }
       ],
-      feedback: 'Esattamente! Come mostra il fascio laser blu di NeuroScope, un modello linguistico deve combinare contesto narrativo, emozione e concordanza grammaticale.'
+      feedback: 'Se un algoritmo viene addestrato su dati storici che contengono disparità sociali o stereotipi, il sistema apprenderà e perpetuerà tali disuguaglianze nelle sue decisioni future.'
     },
     {
-      q: 'Come fa ChatGPT a decidere quale parola scegliere per completare una frase?',
+      q: 'Qual è l\'effetto matematico del parametro "Temperatura" nella generazione del testo da parte di un LLM?',
       options: [
-        { text: 'Calcola una graduatoria di probabilità combinando significato, contesto e grammatica, scegliendo la più idonea 📊', correct: true },
-        { text: 'Lancia un dado virtuale a sei facce per ogni sillaba generata 🎲', correct: false },
-        { text: 'Chiede conferma telefonica all\'utente prima di scrivere ogni singola parola ❓', correct: false },
-        { text: 'Sceglie sempre la parola che occupa meno lettere per risparmiare tempo ⌨️', correct: false }
+        { text: 'Modifica la distribuzione probabilistica: a valori bassi sceglie le parole più prevedibili, a valori alti aumenta l\'esplorazione e la varietà 🎛️', correct: true },
+        { text: 'Misura la temperatura fisica in gradi centigradi dei semiconduttori della scheda madre 🔥', correct: false },
+        { text: 'Aumenta la frequenza di aggiornamento e la risoluzione grafica dei monitor 🖥️', correct: false },
+        { text: 'Traduce istantaneamente il testo in una lingua diversa da quella originale 🌐', correct: false }
       ],
-      feedback: 'Proprio così! I modelli linguistici non copiano testi fissi a memoria, ma calcolano una distribuzione di probabilità in base a tutte le parole precedenti nella frase.'
+      feedback: 'La temperatura controlla la dispersione statistica: valori bassi prediligono risposte conservative e certe, valori alti incoraggiano scelte lessicali inattese e fantasiose.'
     },
     {
-      q: 'In NeuroScope, se regoliamo la Temperatura di ChatGPT da 0.1 (Robot Rigido) a 0.7 (Naturale), che effetto osserviamo?',
+      q: 'Quando un\'IA generativa compone una musica, una poesia o un\'illustrazione, cosa sta facendo realmente?',
       options: [
-        { text: 'A 0.1 sceglie sempre e solo la parola più ovvia e rigida; a 0.7 il testo diventa fluido, espressivo e bilanciato ✨', correct: true },
-        { text: 'A 0.7 la scena 3D comincia a ruotare a velocità ultrasonica creando vortici 🌀', correct: false },
-        { text: 'A 0.1 il computer disattiva i chip grafici per risparmiare corrente elettrica 💤', correct: false },
-        { text: 'Non cambia assolutamente nulla nel testo o nei colori dei fasci laser 🔄', correct: false }
+        { text: 'Ricompatta e ricombina schemi, stili e strutture matematiche apprese da milioni di opere umane, senza intenzione artistica né emozioni 🎨', correct: true },
+        { text: 'Esprime un proprio vissuto interiore, sentimenti e desideri maturati nel tempo 💭', correct: false },
+        { text: 'Copia alla lettera un\'unica opera d\'arte già esistente modificando un solo pixel 🖼️', correct: false },
+        { text: 'Riceve ispirazioni telepatiche da esseri viventi attraverso le onde radio 🛸', correct: false }
       ],
-      feedback: 'Bravissimo! La temperatura regola il campionamento probabilistico: valori bassi prediligono la certezza assoluta, valori medi rendono il linguaggio naturale e umano.'
+      feedback: 'L\'IA è uno straordinario sintetizzatore di forme e schemi umani, ma non possiede interiorità, urgenza espressiva né coscienza del significato dell\'opera creata.'
     },
     {
-      q: 'Se addestriamo una rete neurale fornendole dati con etichette errate (es. foto di gatti etichettate come "cane"), cosa accadrà?',
+      q: 'Perché un\'IA può eccellere in compiti linguistici complessi ma fallire in problemi elementari di fisica o logica comune?',
       options: [
-        { text: 'L\'IA imparerà l\'errore e chiamerà "cane" ogni gatto: la qualità dei dati è il fattore più critico ("Garbage in, Garbage out") ⚠️', correct: true },
-        { text: 'L\'IA correggerà da sola l\'errore perché i computer possiedono buon senso naturale 🧠', correct: false },
-        { text: 'Non cambia nulla, perché le reti neurali riconoscono la verità in modo magico 🪄', correct: false },
-        { text: 'La scheda madre del computer emetterà un fischio di allarme sonoro 🚨', correct: false }
+        { text: 'Perché eccelle nel riconoscimento di schemi di parole, ma non ha un modello causale del mondo fisico né esperienza corporea 🧩', correct: true },
+        { text: 'Perché le leggi della fisica sono troppo semplici per i suoi algoritmi sofisticati ⚙️', correct: false },
+        { text: 'Perché i programmatori non hanno inserito le formule della logica nel codice 📁', correct: false },
+        { text: 'Perché l\'IA è specializzata unicamente nelle materie umanistiche e non in quelle scientifiche 📚', correct: false }
       ],
-      feedback: 'Regola cardine dell\'informatica: "Garbage In, Garbage Out". L\'IA non ha una coscienza autonoma del mondo: apprende fedelmente ciò che le viene mostrato nei dati!'
+      feedback: 'I modelli di linguaggio elaborano sequenze simboliche senza aver mai toccato un oggetto, vissuto nello spazio o sperimentato la causa-effetto: il loro è un sapere statistico, non corporeo.'
     },
     {
-      q: 'Che differenza fondamentale c\'è tra un algoritmo tradizionale (come in Scratch) e la rete neurale di NeuroScope?',
+      q: 'Qual è l\'approccio più consapevole e critico che uno studente dovrebbe adottare nell\'uso dell\'IA?',
       options: [
-        { text: 'In Scratch stabiliamo noi tutte le regole passo per passo; la rete neurale impara le regole da sola regolando i pesi sugli esempi 🧩', correct: true },
-        { text: 'In Scratch si possono programmare solo videogiochi, mentre le reti neurali servono solo per la matematica 🎮', correct: false },
-        { text: 'Non c\'è alcuna differenza: usano esattamente le stesse identiche istruzioni a blocchi 🔄', correct: false },
-        { text: 'I programmi Scratch funzionano solo sui tablet, le reti neurali solo nei satelliti spaziali 🛰️', correct: false }
+        { text: 'Usarla come assistente di supporto per esplorare idee, verificando sempre le fonti e mantenendo il controllo del proprio pensiero 💡', correct: true },
+        { text: 'Copiare e incollare passivamente i testi generati senza rileggerli né comprenderli 📋', correct: false },
+        { text: 'Credere ciecamente a ogni affermazione dell\'IA perché i computer non sbagliano mai 🤖', correct: false },
+        { text: 'Rifiutare a priori ogni strumento digitale per timore di essere manipolati 🚫', correct: false }
       ],
-      feedback: 'Splendido! Questa è l\'essenza del Machine Learning: passare dalla programmazione esplicita (dare regole rigide) all\'apprendimento automatico guidato dai dati!'
+      feedback: 'L\'IA è un potente amplificatore delle capacità umane: il vero valore risiede nella capacità della persona di formulare buone domande, verificare le risposte e applicare il pensiero critico.'
     }
   ]
 };

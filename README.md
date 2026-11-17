@@ -54,12 +54,12 @@ I 3 Super-Giudici valutano in diretta le parole attraverso laser 3D sequenziali:
 - ⚽ **La Partita Decisiva:** «Al novantesimo minuto il capitano calciò forte segnando una splendida [ ... ]» (Giudice Azione Gol ⚽, Vittoria 🏆, Grammatica 🔵)
 - 🎛️ **Manopola della Fantasia (Temperatura dell'IA):** da Robot Rigido (0.1) a Naturale (0.7) fino a Testa fra le Nuvole / Allucinazioni (1.6)!
 
-### 5. 🏆 Sfida Quiz Differenziata per Fasce & a Domande Dinamiche
-Il quiz didattico è ora suddiviso in due livelli calibrati per età e competenze, con un motore di generazione dinamico a rotazione:
-- 🧒 **Scuola Primaria (8–10 anni):** pool di 12 domande con metafore intuitive e giocose (dendriti come antenne, pesi come manopole d'importanza, bias come diffidenza del neurone, detective della pizza, allenamento come imparare ad andare in bici, manopola della fantasia).
-- 🎓 **Scuola Secondaria di I Grado / Medie (11–14 anni):** pool di 12 domande calibrate sulla logica, scienze e tecnologia delle medie (differenza tra codice tradizionale come in Scratch e Machine Learning, come ChatGPT calcola statisticamente la parola successiva, cosa sono i pesi numerici e la soglia, perché l'IA non ha sentimenti né coscienza, come influisce la temperatura sulla creatività, la qualità dei dati con il principio "Garbage in, Garbage out", e l'overfitting come studiare a memoria senza capire).
+### 5. 🏆 Sfida Quiz sulla Vera Natura dell'Intelligenza Artificiale
+Il quiz didattico è strutturato non come un banale test nozionistico sulla memoria di singole schermate, ma per **far comprendere a fondo la vera natura, i limiti, i meccanismi e l'etica dell'Intelligenza Artificiale**:
+- 🧒 **Scuola Primaria (8–10 anni):** 12 domande concettuali sui fondamenti dell'IA (l'IA non ha coscienza né sentimenti; calcoli matematici al posto della magia; apprendimento per tentativi ed errori anziché risposte programmate a mano; come sceglie le parole; perché può sbagliare o inventare fatti; la responsabilità etica che appartiene sempre agli esseri umani).
+- 🎓 **Scuola Secondaria di I Grado / Medie (11–14 anni):** 12 domande sui meccanismi, la logica e l'impatto sociale dell'IA moderna (la natura probabilistica degli LLM e l'assenza di vera comprensione; la transizione dal codice deterministico al Machine Learning; la rappresentazione geometrica dei concetti tramite vettori; il fenomeno delle allucinazioni; la qualità dei dati e il rischio del bias algoritmico; l'overfitting; l'uso critico e consapevole delle tecnologie generative nello studio).
 - 🎲 **Randomizzazione & Replay Infinito:** ogni sessione estrae casualmente 5 domande dal pool del livello prescelto e mescola le 4 opzioni di risposta, garantendo test sempre diversi ad ogni tentativo.
-- 🔄 **Cambio Livello Immediato:** selettore di fascia sempre visibile nell'intestazione e pulsante di sfida incrociata nella schermata finale con medaglie e badge personalizzati (*Maestro Supremo / Architetto dei Sistemi Neurali*).
+- 🔄 **Cambio Livello Immediato:** selettore di fascia sempre visibile nell'intestazione e pulsante di sfida incrociata nella schermata finale con medaglie e badge personalizzati (*Maestro Detective / Campione delle Medie dell'IA*).
 
 ---
 
